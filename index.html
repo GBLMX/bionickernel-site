@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bionickernel.com</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --accent: #58a6ff;
+      --dim: #8b949e;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    main { text-align: center; padding: 2rem; }
+    .domain {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+    .tagline {
+      margin-top: 1rem;
+      color: var(--dim);
+      font-size: 1.05rem;
+    }
+    .links { margin-top: 2.5rem; }
+    .links a {
+      display: inline-block;
+      margin: 0 0.5rem;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: border-color .15s, color .15s;
+    }
+    .links a:hover { border-color: var(--accent); color: var(--accent); }
+    footer {
+      position: fixed;
+      bottom: 1.5rem;
+      width: 100%;
+      text-align: center;
+      color: var(--dim);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="domain">bionickernel.com</div>
+    <p class="tagline">网站建设中 · Site under construction</p>
+    <div class="links">
+      <a href="https://github.com/GBLMX" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </main>
+  <footer>Hosted on Vercel</footer>
+</body>
+</html>
