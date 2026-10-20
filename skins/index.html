@@ -95,11 +95,14 @@
         color: var(--fg);
         border-color: currentColor;
       }
-      .bar-in .tag {
-        color: var(--dim);
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        font-size: 0.72rem;
+      .bar-nav {
+        display: flex;
+        align-items: center;
+        gap: 1.15rem;
+      }
+      .bar-nav a[aria-current="page"] {
+        color: var(--fg);
+        border-color: currentColor;
       }
       main {
         flex: 1;
@@ -211,7 +214,11 @@
     <div class="bar">
       <div class="bar-in">
         <a href="/">← bionickernel.com</a>
-        <span class="tag">Skin renders</span>
+        <nav class="bar-nav" aria-label="站内导航">
+          <a href="/books/">书籍</a>
+          <a href="/skins/" aria-current="page">皮肤</a>
+          <a href="/#contact">联系</a>
+        </nav>
       </div>
     </div>
 
