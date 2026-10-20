@@ -79,7 +79,7 @@ the `www` redirect, HSTS, CSP and the other security headers, a one-hour cache f
 - `public/assets/books.js` — books filter: topic chips + live search, progressive
   enhancement.
 - `public/assets/fluid.js` — hero art: WebGL2 domain-warped noise; still frame under
-  reduced motion, CSS gradient without WebGL2.
+  reduced motion, CSS gradient without WebGL2, and recovers after WebGL context loss.
 - `public/assets/skinview3d.bundle.js` — skinview3d 3.4.2 bundle (MIT).
 
 Skins are original artwork by the site author; source files and the generation tool

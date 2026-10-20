@@ -37,6 +37,8 @@ const {
   ogType={ogType}
   active={active}
 >
+  <Fragment slot="head"><slot name="head" /></Fragment>
+  <Fragment slot="scripts"><slot name="scripts" /></Fragment>
   <header class="page-head">
     <p class="mono">{eyebrow}</p>
     <h1>{heading}</h1>

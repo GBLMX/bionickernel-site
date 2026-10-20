@@ -94,38 +94,48 @@
     return s;
   }
 
-  var prog;
-  try {
-    prog = gl.createProgram();
-    gl.attachShader(prog, shader(gl.VERTEX_SHADER, vsSrc));
-    gl.attachShader(prog, shader(gl.FRAGMENT_SHADER, fsSrc));
-    gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-      throw new Error(gl.getProgramInfoLog(prog) || "program link failed");
+  var prog, buf, loc;
+  var u = {};
+  var lost = false;
+
+  function setup() {
+    try {
+      prog = gl.createProgram();
+      gl.attachShader(prog, shader(gl.VERTEX_SHADER, vsSrc));
+      gl.attachShader(prog, shader(gl.FRAGMENT_SHADER, fsSrc));
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+        throw new Error(gl.getProgramInfoLog(prog) || "program link failed");
+      }
+    } catch (err) {
+      return false;
     }
-  } catch (err) {
+    gl.useProgram(prog);
+
+    buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    loc = gl.getAttribLocation(prog, "a_pos");
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    u = {
+      res: gl.getUniformLocation(prog, "u_res"),
+      time: gl.getUniformLocation(prog, "u_time"),
+      pointer: gl.getUniformLocation(prog, "u_pointer"),
+      amt: gl.getUniformLocation(prog, "u_amt"),
+      c1: gl.getUniformLocation(prog, "u_c1"),
+      c2: gl.getUniformLocation(prog, "u_c2"),
+      c3: gl.getUniformLocation(prog, "u_c3"),
+      c4: gl.getUniformLocation(prog, "u_c4"),
+    };
+    return true;
+  }
+
+  if (!setup()) {
     host.classList.add("no-webgl");
     return;
   }
-  gl.useProgram(prog);
-
-  var buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-  var loc = gl.getAttribLocation(prog, "a_pos");
-  gl.enableVertexAttribArray(loc);
-  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-
-  var u = {
-    res: gl.getUniformLocation(prog, "u_res"),
-    time: gl.getUniformLocation(prog, "u_time"),
-    pointer: gl.getUniformLocation(prog, "u_pointer"),
-    amt: gl.getUniformLocation(prog, "u_amt"),
-    c1: gl.getUniformLocation(prog, "u_c1"),
-    c2: gl.getUniformLocation(prog, "u_c2"),
-    c3: gl.getUniformLocation(prog, "u_c3"),
-    c4: gl.getUniformLocation(prog, "u_c4"),
-  };
 
   function rgb(name) {
     var v = getComputedStyle(host).getPropertyValue(name).trim();
@@ -140,6 +150,7 @@
   }
 
   function paintColors() {
+    if (lost || !u.c1) return;
     gl.uniform3fv(u.c1, rgb("--art-1"));
     gl.uniform3fv(u.c2, rgb("--art-2"));
     gl.uniform3fv(u.c3, rgb("--art-3"));
@@ -153,6 +164,7 @@
   var onScreen = true;
 
   function layout() {
+    if (lost) return;
     var r = host.getBoundingClientRect();
     var dpr = Math.min(window.devicePixelRatio || 1, 1.5) * 0.62;
     if (r.width * dpr > 1600) dpr = 1600 / Math.max(1, r.width);
@@ -161,12 +173,13 @@
     if (canvas.width !== w || canvas.height !== h) {
       canvas.width = w;
       canvas.height = h;
-      gl.viewport(0, 0, w, h);
     }
+    gl.viewport(0, 0, w, h);
     gl.uniform2f(u.res, w, h);
   }
 
   function draw(time, amt, px, py) {
+    if (lost) return;
     gl.uniform1f(u.time, time);
     gl.uniform2f(u.pointer, px, py);
     gl.uniform1f(u.amt, amt);
@@ -208,10 +221,37 @@
     { passive: true }
   );
 
+  canvas.addEventListener("webglcontextlost", function (e) {
+    e.preventDefault();
+    lost = true;
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+    host.classList.add("no-webgl");
+  });
+
+  canvas.addEventListener("webglcontextrestored", function () {
+    host.classList.remove("no-webgl");
+    if (!setup()) return;
+    lost = false;
+    paintColors();
+    layout();
+    play();
+  });
+
   window.addEventListener("resize", function () {
     layout();
     if (reduce.matches) still();
   });
+
+  var resMQ = null;
+  function watchResolution() {
+    if (resMQ && resMQ.removeEventListener) resMQ.removeEventListener("change", watchResolution);
+    resMQ = window.matchMedia("(resolution: " + (window.devicePixelRatio || 1) + "dppx)");
+    if (resMQ.addEventListener) resMQ.addEventListener("change", watchResolution);
+    layout();
+    if (reduce.matches) still();
+  }
+  watchResolution();
 
   var mq = window.matchMedia("(prefers-color-scheme: dark)");
   var onScheme = function () {
