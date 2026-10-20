@@ -209,6 +209,11 @@
             viewer.controls.enablePan = false;
             viewer.controls.minDistance = 25;
             viewer.controls.maxDistance = 90;
+            if (window.ResizeObserver) {
+              new ResizeObserver(function () {
+                viewer.setSize(stage.clientWidth, stage.clientHeight);
+              }).observe(stage);
+            }
             fallback.style.display = "none";
           } catch (err) {
             /* keep the static preview */
