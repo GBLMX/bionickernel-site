@@ -6,6 +6,7 @@ Static site served by nginx on Alibaba Cloud ECS (116.62.81.128) over the
 ## Pages
 
 - `/index.html` — landing page (KDE palette: CachyOS Nord dark, Breeze Light light).
+- `/books/` — recommended-books page: inclusion criteria, topics, entry format.
 - `/skins/` — interactive Minecraft skin renders, 3D via vendored `skinview3d`.
 
 ## Assets
