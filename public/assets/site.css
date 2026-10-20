@@ -102,10 +102,16 @@ a {
   display: flex;
   align-items: center;
   gap: 0.65rem;
+  min-width: 0;
   text-decoration: none;
   font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+}
+
+.sb-brand div {
+  min-width: 0;
+  overflow: hidden;
 }
 
 .sb-brand img {
@@ -556,15 +562,18 @@ section {
   .js .sb-toggle {
     display: flex;
   }
+  .js .sb-brand {
+    padding-right: 2.2rem;
+  }
   .sb-collapsed body {
     grid-template-columns: 78px minmax(0, 1fr);
   }
   .sb-collapsed .sidebar {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding: 3.4rem 0.5rem 1.5rem;
   }
   .sb-collapsed .sb-brand {
     justify-content: center;
+    padding-right: 0;
   }
   .sb-collapsed .sb-brand div,
   .sb-collapsed .sb-label,
