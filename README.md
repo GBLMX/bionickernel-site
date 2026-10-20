@@ -109,6 +109,8 @@ draft: false
 - `src/pages/research/index.astro` — research timeline, merged from notes and
   standalone projects.
 - `src/pages/research/notes/[...slug].astro` — Markdown note renderer.
+- `src/pages/research/sta/index.astro` — spacetime-algebra animations (Wolfram
+  computations, manimgl renders, verification table).
 - `src/pages/research/ga/index.astro` — geometric-algebra fine-tuning results
   (condensed conclusions, interactive SVG charts).
 - `src/pages/404.astro` — branded not-found page.

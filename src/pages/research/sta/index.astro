@@ -1,0 +1,246 @@
+---
+import SubpageLayout from "../../../layouts/SubpageLayout.astro";
+---
+
+<SubpageLayout
+  title="时空代数动画 — bionickernel.com"
+  description="用 Wolfram 计算 Cl(1,3) 的 boost 转子、reversion 与极分解，manimgl 渲染两条 1080p 动画：Lorentz 收缩与 Wigner 旋转。"
+  canonical="https://bionickernel.com/research/sta/"
+  active="research"
+  eyebrow="Research · 2026-10-20"
+  heading="时空代数动画"
+  lede="两个垂直 boost 复合后，空间部分做极分解 A = R_W S：S 是收缩，R_W 是 Wigner 旋转。数值全部来自 Wolfram Language 15，动画只做插值。"
+  ogTitle="时空代数动画 | bionickernel.com"
+  ogDescription="Cl(1,3) boost 转子、reversion 与极分解；两条 1080p 动画演示 Lorentz 收缩与 Wigner 旋转。"
+  ogType="article"
+>
+<style is:global>
+  .sta-meta {
+    margin-top: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.8rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+    color: var(--faint);
+  }
+
+  .sta-intro {
+    margin-top: 1.5rem;
+    max-width: 42rem;
+    color: var(--dim);
+    font-size: 0.94rem;
+    line-height: 1.85;
+    text-wrap: pretty;
+  }
+  .sta-intro code {
+    padding: 0.1rem 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--bg-elev);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85em;
+    color: var(--fg);
+  }
+
+  .sta-sec {
+    padding: 1.8rem 0 0.2rem;
+  }
+  .sta-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    margin-bottom: 0.35rem;
+  }
+  .sta-head .idx {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--accent-text);
+  }
+  .sta-head h2 {
+    font-size: 1.12rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    color: var(--fg);
+  }
+  .sta-sec p {
+    max-width: 42rem;
+    color: var(--dim);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    text-wrap: pretty;
+  }
+
+  .sta-fig {
+    margin-top: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #1b1b1b;
+    overflow: hidden;
+  }
+  .sta-fig video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: #1b1b1b;
+  }
+  .sta-fig figcaption {
+    padding: 0.6rem 0.9rem 0.7rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+    line-height: 1.7;
+    color: #9aa1a6;
+  }
+
+  .sta-checks {
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 42rem;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+  }
+  .sta-checks th,
+  .sta-checks td {
+    padding: 0.5rem 0.65rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+  .sta-checks th {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+  }
+  .sta-checks td:last-child {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.78rem;
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sta-note {
+    margin-top: 1.6rem;
+    max-width: 42rem;
+    padding: 0.85rem 1rem;
+    border-left: 2px solid var(--accent);
+    background: color-mix(in srgb, var(--bg-elev) 72%, transparent);
+    color: var(--dim);
+    font-size: 0.84rem;
+    line-height: 1.8;
+  }
+  .sta-note code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85em;
+    color: var(--fg);
+  }
+
+  .sta-back {
+    margin-top: 1.8rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+  }
+  .sta-back a {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+    color: var(--faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .sta-back a:hover {
+    color: var(--fg);
+    border-color: currentColor;
+  }
+
+  @media (max-width: 640px) {
+    .sta-fig { border-radius: 10px; }
+    .sta-fig figcaption { padding: 0.5rem 0.7rem 0.6rem; }
+  }
+</style>
+
+<p slot="meta" class="sta-meta">
+  <span>2026-10-20</span>
+  <span>已完成</span>
+  <span>Wolfram Language 15</span>
+  <span>manimgl 1.7.2</span>
+</p>
+
+<p class="sta-intro">
+  STA 取 <code>Cl(1,3)</code>，生成元满足 γ₀² = 1、γ₁² = γ₂² = γ₃² = −1。
+  boost 转子 <code>R = e^(−φ γ₀γ₁ / 2)</code> 通过夹心变换
+  <code>v′ = R v R̃</code> 作用在几何上；空间长度按 <code>1 / cosh φ</code> 收缩。
+  两个垂直 boost 的复合再做极分解，旋转部分即 Wigner/Thomas 旋转。
+</p>
+
+<section class="sta-sec">
+  <div class="sta-head">
+    <span class="idx">01</span>
+    <h2>时空图：夹心变换与尺缩</h2>
+  </div>
+  <p>黄色箭头是 γ₁ 的像，沿双曲线 x² − t² = 1 运动；绿色杆按 1 / cosh φ 实时收缩。</p>
+  <figure class="sta-fig">
+    <video
+      controls
+      playsinline
+      preload="metadata"
+      poster="/assets/research/sta/staspacetime-poster.jpg"
+      aria-label="时空代数 boost 动画：转子夹心变换、双曲线轨迹与尺缩"
+    >
+      <source src="/assets/research/sta/STASpacetime.mp4" type="video/mp4" />
+    </video>
+    <figcaption>Cl(1,3) boost · φ: 0 → 1.6 · cosh φ 最大 2.58 · 1920×1080 / 18.9 s</figcaption>
+  </figure>
+</section>
+
+<section class="sta-sec">
+  <div class="sta-head">
+    <span class="idx">02</span>
+    <h2>三维：收缩与 Wigner 旋转</h2>
+  </div>
+  <p>前段让立方体沿 γ₁ 收缩；后段显示 R₂R₁ 的空间旋转，轴为 z，角度从 0 到 78.7°。</p>
+  <figure class="sta-fig">
+    <video
+      controls
+      playsinline
+      preload="metadata"
+      poster="/assets/research/sta/stagraphics-poster.jpg"
+      aria-label="时空代数三维动画：线框立方体的 Lorentz 收缩与 Wigner 旋转"
+    >
+      <source src="/assets/research/sta/STAGraphics.mp4" type="video/mp4" />
+    </video>
+    <figcaption>R₂R₁ = boost · rotation · R_W 轴为 z · 1920×1080 / 18.9 s</figcaption>
+  </figure>
+</section>
+
+<section class="sta-sec">
+  <div class="sta-head">
+    <span class="idx">03</span>
+    <h2>数值校验</h2>
+  </div>
+  <table class="sta-checks">
+    <thead>
+      <tr><th>检查项</th><th>结果</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>signature</td><td>diag(1, −1, −1, −1)</td></tr>
+      <tr><td>R R̃</td><td>1</td></tr>
+      <tr><td>R_W 正交误差</td><td>8.9 × 10⁻¹⁶</td></tr>
+      <tr><td>det R_W</td><td>1</td></tr>
+      <tr><td>S 对称误差</td><td>5.3 × 10⁻¹⁵</td></tr>
+      <tr><td>Wigner 角（φ = 3）</td><td>78.66°</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<p class="sta-note">
+  计算与渲染分离：<code>sta.wl</code> 用 WL 的 <code>CliffordAlgebra</code> 计算 rotor、
+  reversion、夹心变换和极分解，导出 JSON；<code>sta_scene.py</code> 只插值数值并绘制，
+  Python 侧不实现 Clifford 代数。
+</p>
+
+<p class="sta-back"><a href="/research/">← 研究索引</a></p>
+</SubpageLayout>

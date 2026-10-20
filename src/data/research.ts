@@ -14,6 +14,16 @@ export interface ResearchEntry {
 
 export const research: ResearchEntry[] = [
   {
+    slug: "sta",
+    title: "时空代数动画：旋量与 Wigner 旋转",
+    summary:
+      "用 Wolfram 计算 Cl(1,3) 的 boost 转子、reversion 与极分解，manimgl 渲染两条 1080p 动画：Lorentz 收缩与 Wigner 旋转。",
+    date: "2026-10-20",
+    status: "已完成",
+    tags: ["时空代数", "Wolfram", "manim"],
+    href: "/research/sta/",
+  },
+  {
     slug: "ga-finetuning",
     title: "几何代数微调：模式迁移的边界",
     summary:
