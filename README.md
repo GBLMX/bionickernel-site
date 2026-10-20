@@ -12,6 +12,7 @@ Static site served by nginx on Alibaba Cloud ECS (116.62.81.128) over the
 
 ## Assets
 
+- `assets/books.js` — books page filter: topic chips + live search, progressive enhancement (all entries stay visible without JS).
 - `assets/fluid.js` — hero art: WebGL2 domain-warped noise, palette from `--art-1..4`; still frame under reduced motion, CSS gradient without WebGL2.
 - `assets/site.css` — shared shell: design tokens, sidebar layout (collapses to a top bar at ≤900px), typography, buttons, cards.
 - `assets/skins/*.png` — cropped static previews (fallback when WebGL is off).
