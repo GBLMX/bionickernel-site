@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1e2233" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eff0f1" media="(prefers-color-scheme: light)" />
     <title>bionickernel.com</title>
     <meta name="description" content="bionickernel.com — 个人技术站点。" />
     <meta property="og:title" content="bionickernel.com" />
@@ -14,34 +14,38 @@
     <link rel="canonical" href="https://bionickernel.com/" />
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2358a6ff'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%230d1117'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2347add6'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%230a0b0c'/%3E%3C/svg%3E"
     />
     <style>
       :root {
         color-scheme: dark light;
-        --bg: #0d1117;
-        --bg-elev: #12181f;
-        --border: #30363d;
-        --border-soft: rgba(240, 246, 252, 0.08);
-        --fg: #e6edf3;
-        --dim: #8b949e;
-        --accent: #58a6ff;
-        --accent-contrast: #0d1117;
-        --glow: rgba(88, 166, 255, 0.16);
+        /* CachyOS Nord (active KDE scheme): Window/View/Selection colors */
+        --bg: #1e2233;
+        --bg-elev: #161925;
+        --border: #404552;
+        --border-soft: rgba(102, 194, 242, 0.14);
+        --fg: #66c2f2;
+        --dim: #81a1c1;
+        --accent: #47add6;
+        --accent-contrast: #0a0b0c;
+        --focus: #6dbccd;
+        --glow: rgba(71, 173, 214, 0.16);
         --radius: 16px;
         --maxw: 44rem;
       }
       @media (prefers-color-scheme: light) {
         :root {
-          --bg: #f6f8fa;
+          /* Breeze Light */
+          --bg: #eff0f1;
           --bg-elev: #ffffff;
-          --border: #d0d7de;
-          --border-soft: rgba(27, 31, 36, 0.08);
-          --fg: #1f2328;
-          --dim: #59636e;
-          --accent: #0969da;
-          --accent-contrast: #ffffff;
-          --glow: rgba(9, 105, 218, 0.1);
+          --border: #c9cdd1;
+          --border-soft: rgba(35, 38, 41, 0.1);
+          --fg: #232629;
+          --dim: #5c6b78;
+          --accent: #3daee9;
+          --accent-contrast: #0b1c26;
+          --focus: #1b6a97;
+          --glow: rgba(61, 174, 233, 0.12);
         }
       }
       * {
@@ -98,6 +102,14 @@
         width: 22px;
         height: 22px;
         display: block;
+      }
+      .mark .core {
+        fill: var(--accent-contrast);
+      }
+      .mark .orbit {
+        fill: none;
+        stroke: var(--accent-contrast);
+        stroke-width: 1.5;
       }
       .eyebrow {
         margin-top: 1.5rem;
@@ -161,13 +173,13 @@
       }
       .btn:hover {
         border-color: var(--accent);
-        color: var(--accent);
+        color: var(--fg);
         transform: translateY(-1px);
         box-shadow: 0 6px 18px -12px var(--accent);
       }
       .btn:focus-visible,
       a:focus-visible {
-        outline: 2px solid var(--accent);
+        outline: 2px solid var(--focus);
         outline-offset: 3px;
         border-radius: 8px;
       }
@@ -204,7 +216,7 @@
           border-color 0.16s ease;
       }
       footer a:hover {
-        color: var(--accent);
+        color: var(--fg);
         border-color: currentColor;
       }
       @media (prefers-reduced-motion: reduce) {
@@ -222,25 +234,23 @@
     <main class="shell">
       <div class="mark" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="3" fill="#fff" />
-          <ellipse cx="12" cy="12" rx="9.5" ry="4.5" stroke="#fff" stroke-width="1.5" opacity="0.9" />
+          <circle class="core" cx="12" cy="12" r="3" />
+          <ellipse class="orbit" cx="12" cy="12" rx="9.5" ry="4.5" opacity="0.9" />
           <ellipse
+            class="orbit"
             cx="12"
             cy="12"
             rx="9.5"
             ry="4.5"
-            stroke="#fff"
-            stroke-width="1.5"
             opacity="0.55"
             transform="rotate(60 12 12)"
           />
           <ellipse
+            class="orbit"
             cx="12"
             cy="12"
             rx="9.5"
             ry="4.5"
-            stroke="#fff"
-            stroke-width="1.5"
             opacity="0.55"
             transform="rotate(120 12 12)"
           />
