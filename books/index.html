@@ -123,6 +123,14 @@
         color: var(--fg);
         font-weight: 600;
       }
+      .book dd a {
+        color: var(--fg);
+        text-decoration: none;
+        border-bottom: 1px solid currentColor;
+      }
+      .book dd a:hover {
+        color: var(--accent-text);
+      }
       @media (max-width: 640px) {
         .book dl div {
           grid-template-columns: minmax(0, 1fr);
@@ -145,6 +153,7 @@
           <li><a href="/#picks">推荐<span class="idx">02</span></a></li>
           <li><a href="/books/" aria-current="page">书籍<span class="idx">↗</span></a></li>
           <li><a href="/skins/">皮肤<span class="idx">↗</span></a></li>
+          <li><a href="/essays/history-and-math.html">观点<span class="idx">↗</span></a></li>
           <li><a href="/#contact">联系<span class="idx">04</span></a></li>
         </ul>
       </nav>
@@ -215,6 +224,103 @@
                 <dt>Note</dt>
                 <dd>
                   读的时候拿身边的门把手、水龙头、遥控器逐条对照；再回头看聊天框与生成按钮，会发现许多「AI 不听话」其实缺的是可预期的反馈与可回退的操作。
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="book">
+            <h3>
+              生命科学史
+              <span>A History of the Life Sciences</span>
+            </h3>
+            <p class="by">
+              洛伊斯·N. 玛格纳 著 · 刘学礼 译 · 上海人民出版社 · 第 3 版，2012 · 447 页 · ISBN 9787208108752
+            </p>
+            <dl>
+              <div>
+                <dt>Why</dt>
+                <dd>
+                  把「生命如何被认识」按问题串起来的历史：从美索不达米亚与希腊自然哲学，到维萨里的解剖、巴斯德与病菌说、达尔文与进化论、孟德尔与摩尔根，再到沃森—克里克的双螺旋、人类基因组与蛋白质组。
+                  每个概念都带着它要解决的困境出现——细胞学说不是一条定义，而是显微镜与争论的产物。这与
+                  <a href="/essays/history-and-math.html">「学一个领域先读其史」</a>的观点互为印证。
+                </dd>
+              </div>
+              <div>
+                <dt>Note</dt>
+                <dd>
+                  中文版译文在读者中有争议，关键段落建议对照英文原版；每章后附参考书目与延伸阅读，适合按图索骥，而不是从头背到尾。
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="book">
+            <h3>
+              The Princeton Companion to Mathematics
+              <span>普林斯顿数学指南</span>
+            </h3>
+            <p class="by">
+              Timothy Gowers 主编 · June Barrow-Green、Imre Leader 副主编 · Princeton University Press，2008/2009 · 1056 页 · ISBN 9780691118802
+            </p>
+            <dl>
+              <div>
+                <dt>Why</dt>
+                <dd>
+                  不是教科书，而是一张数学的地形图：近 200 个专题条目，由当代数学家分头撰写，覆盖现代数学的由来、核心概念、主要分支、定理与未解问题、数学家小传，以及数学对生物、金融、音乐等领域的影响。
+                  历史告诉你<strong>为什么</strong>，这本书告诉你<strong>在哪里</strong>——读完一个分支的来路，再到这张图上找它的位置和邻居。
+                </dd>
+              </div>
+              <div>
+                <dt>Note</dt>
+                <dd>
+                  按条目跳读即可，每条都附延伸文献；以纯数学为主，应用与计算方向着墨较少。
+                  适合当作长期工具书，配合具体领域精读，而不是从头顺序通读。中译本由科学出版社分三册出版。
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="book">
+            <h3>Linear and Geometric Algebra</h3>
+            <p class="by">
+              Alan Macdonald · 2010 · ISBN-10 1453854932
+            </p>
+            <dl>
+              <div>
+                <dt>Why</dt>
+                <dd>
+                  把线性代数与几何代数合在一起讲：向量空间、矩阵、内积之后直接进入三维与 n 维几何代数，用几何积统一旋转、反射与投影，
+                  并把复数、四元数、外代数收进同一套语言。图形学、机器人、物理里那些「各写一套」的表示，在这里是同一件事的不同侧面。
+                </dd>
+              </div>
+              <div>
+                <dt>Note</dt>
+                <dd>
+                  前置只需本科线性代数，不要求几何代数基础；作者主页提供六个配套视频（约 72 分钟）与 GAlgebra 习题。
+                  续篇是 <em>Vector and Geometric Calculus</em>。
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="book">
+            <h3>Vector and Geometric Calculus</h3>
+            <p class="by">
+              Alan Macdonald · 2012 · ISBN-10 1480132454
+            </p>
+            <dl>
+              <div>
+                <dt>Why</dt>
+                <dd>
+                  把多元微积分重写成几何微积分：微分、梯度、曲线与曲面积分，以及统一形式的微积分基本定理。
+                  传统向量微积分的章节都在，方便与旧教材逐条对照，也能看清「为什么换一套语言之后，定理会变简单」。
+                </dd>
+              </div>
+              <div>
+                <dt>Note</dt>
+                <dd>
+                  作者明确要求先读 <em>Linear and Geometric Algebra</em>。定理—证明风格，适合自学；有五集配套视频（约 53 分钟）。
                 </dd>
               </div>
             </dl>

@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e2233" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eff0f1" media="(prefers-color-scheme: light)" />
+    <title>历史与数学 — bionickernel.com</title>
+    <meta
+      name="description"
+      content="观点：学一个领域绕不开两样东西——它的发展史与它依赖的数学。历史给出坐标，数学给出边界。"
+    />
+    <meta name="author" content="隔壁老木箱" />
+    <meta property="og:title" content="历史与数学 | bionickernel.com" />
+    <meta property="og:description" content="历史给出坐标，数学给出边界；缺一项，理解停在「会用」。" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://bionickernel.com/essays/history-and-math.html" />
+    <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
+    <link rel="canonical" href="https://bionickernel.com/essays/history-and-math.html" />
+    <link rel="icon" type="image/png" href="/assets/avatar.png" />
+    <link rel="stylesheet" href="/assets/site.css" />
+    <style>
+      .prose {
+        margin-top: 0.5rem;
+        max-width: 42rem;
+      }
+      .prose p {
+        margin-top: 0.95rem;
+        color: var(--dim);
+        font-size: 0.97rem;
+        line-height: 1.9;
+        text-wrap: pretty;
+      }
+      .prose strong {
+        color: var(--fg);
+        font-weight: 600;
+      }
+      .prose em {
+        color: var(--fg);
+        font-style: normal;
+        border-bottom: 1px solid var(--line-strong);
+      }
+      .prose a {
+        color: var(--fg);
+        text-decoration: none;
+        border-bottom: 1px solid currentColor;
+      }
+      .prose a:hover {
+        color: var(--accent-text);
+      }
+      .prose code {
+        padding: 0.1rem 0.35rem;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        background: var(--bg-elev);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.86em;
+        color: var(--fg);
+      }
+      .prose ul,
+      .prose ol {
+        margin-top: 0.9rem;
+        padding-left: 1.15rem;
+        color: var(--dim);
+        font-size: 0.97rem;
+        line-height: 1.9;
+      }
+      .prose li + li {
+        margin-top: 0.45rem;
+      }
+      .prose li::marker {
+        color: var(--accent-text);
+      }
+      .prose blockquote {
+        margin: 1.35rem 0 0;
+        padding: 0.9rem 1.1rem;
+        border-left: 2px solid var(--accent);
+        border-radius: 0 10px 10px 0;
+        background: var(--bg-elev);
+        color: var(--fg);
+        font-size: 0.97rem;
+        line-height: 1.75;
+      }
+      .byline {
+        margin-top: 0.9rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 0.9rem;
+        font-size: 0.8rem;
+        color: var(--faint);
+      }
+      .byline span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+      .byline span + span::before {
+        content: "";
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: var(--faint);
+      }
+      .essay-body section {
+        margin-top: 2.2rem;
+      }
+      .essay-body .sec-head {
+        margin-bottom: 0.35rem;
+      }
+      .essay-body h2 {
+        font-size: 1.16rem;
+      }
+      .next {
+        margin-top: 2.6rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--line);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="sb-brand" href="/">
+        <img src="/assets/avatar.png" alt="" width="34" height="34" />
+        <div>bionickernel.com<span>隔壁老木箱</span></div>
+      </a>
+
+      <nav aria-label="站内导航">
+        <p class="sb-label">Navigation</p>
+        <ul class="sb-nav">
+          <li><a href="/">首页<span class="idx">00</span></a></li>
+          <li><a href="/#picks">推荐<span class="idx">02</span></a></li>
+          <li><a href="/books/">书籍<span class="idx">↗</span></a></li>
+          <li><a href="/skins/">皮肤<span class="idx">↗</span></a></li>
+          <li><a href="/essays/history-and-math.html" aria-current="page">观点<span class="idx">↗</span></a></li>
+          <li><a href="/#contact">联系<span class="idx">04</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="sb-foot">
+        <span class="sb-status">静态页面 · HTTP/3</span>
+        <a href="mailto:gblmx@bionickernel.com">gblmx@bionickernel.com</a>
+        <a href="https://github.com/GBLMX" target="_blank" rel="noopener">GitHub</a>
+        <span>阿里云 ECS</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="content">
+        <p class="mono">Essay</p>
+        <h1>历史与数学</h1>
+        <p class="byline">
+          <span>隔壁老木箱</span>
+          <span>2026-10-20</span>
+          <span>约 5 分钟</span>
+        </p>
+
+        <div class="prose essay-body">
+          <p>
+            学会一个领域，通常被描述成掌握它的概念和工具。但真正决定理解深度的，是两样更靠后的东西：
+            <strong>它为什么长成现在这样</strong>，以及<strong>它对什么给出保证</strong>。前者是发展史，后者是数学。
+          </p>
+
+          <section>
+            <div class="sec-head">
+              <span class="num" aria-hidden="true">01</span>
+              <h2>历史不是背景，是坐标</h2>
+            </div>
+            <p>
+              每个概念都是某个具体困境的产物。微积分的记号之争留在了今天的书写里：牛顿的流数法与莱布尼茨的微分记号，
+              分别演化成物理教材里的 <code>ẋ</code> 和数学分析里的 <code>dy/dx</code>；同一件事，两套语言。
+              关系模型与随后的规范化理论，出发点之一是对数据冗余和更新异常的厌恶，而不是「表应该长这样」的审美。
+              Transformer 去掉循环结构，是为了消除序列计算对顺序的依赖，让注意力在整段上下文上并行。
+            </p>
+            <p>
+              不知道问题，概念就只剩定义。定义可以背，但背下来无法判断它何时失效、何时该换一种工具。
+              历史还顺带保存了失败路径：符号主义的几次起落、第五代计算机的承诺、围绕 WS-* 那一代规范的复杂度反噬。
+              这些不是轶事，而是约束条件——它们解释了今天的工具为什么规避某些设计，也标出了哪些坑已经被踩过。
+            </p>
+          </section>
+
+          <section>
+            <div class="sec-head">
+              <span class="num" aria-hidden="true">02</span>
+              <h2>数学不是工具，是边界</h2>
+            </div>
+            <p>
+              工程直觉能告诉你「大概能跑」，数学告诉你「在什么条件下一定成立、在什么条件下必然不行」。
+              前者是概率语言，后者是可证伪的陈述。
+            </p>
+            <ul>
+              <li>
+                <strong>线性代数</strong>：从最小二乘到 PCA，再到注意力里的投影，本质都是换一组基看同一件事。
+                矩阵的秩、特征值、条件数，决定了信息在这组变换里留下多少。
+              </li>
+              <li>
+                <strong>概率与信息论</strong>：Shannon 在 1948 年把「信息」定义成熵，压缩极限才第一次成为可以陈述、可以证明的命题；
+                今天训练里的交叉熵，正是这套定义的直接后代。
+              </li>
+              <li>
+                <strong>可计算性与复杂度</strong>：停机问题划出「算法能做什么」的上界；NP 完全性说明某些承诺不能给。
+                CAP 定理则说明，网络分区发生时一致性与可用性只能取其一——这是定理，不是架构偏好。
+              </li>
+              <li>
+                <strong>数值分析</strong>：浮点、条件数、稳定性，决定了「公式正确」与「算得对」之间的距离。
+                很多线上事故不是想错了，而是数值上不成立。
+              </li>
+            </ul>
+            <p>
+              数学的另一半价值在反例。一个构造出来的反例可以终结一整类猜想，它比十个成功案例更省时间，
+              因为它直接告诉你边界在哪里。
+            </p>
+          </section>
+
+          <section>
+            <div class="sec-head">
+              <span class="num" aria-hidden="true">03</span>
+              <h2>只靠经验，会缺两块拼图</h2>
+            </div>
+            <p>
+              经验当然不可替代，但它只覆盖你遇到过的分布。没有历史，容易把当下的工具当成领域的本质：
+              以为 REST 就是 HTTP 的全部，以为某种框架的抽象是「正确」的抽象。
+              没有数学，容易把「跑通了」当成「正确」：过拟合、不可复现、边界输入下的崩溃，都属于这一类。
+            </p>
+            <p>
+              三者的分工其实很清楚：<em>历史告诉你别人试过什么，数学告诉你为什么不行，经验告诉你这一台上行不行。</em>
+              缺了前两项，经验会退化成对偶然性的记忆。
+            </p>
+          </section>
+
+          <section>
+            <div class="sec-head">
+              <span class="num" aria-hidden="true">04</span>
+              <h2>具体怎么做</h2>
+            </div>
+            <p>不必先读完整部学科史，也不必从实分析开始补课。四件事就够开始：</p>
+            <ol>
+              <li><strong>读原始文献</strong>：每个领域至少读一篇奠基论文，而不是只读二手总结。Shannon 1948、Codd 1970、Vaswani 等 2017，都是能直接读的。</li>
+              <li><strong>把定义写成形式</strong>：能写清输入、输出、不变量和失败条件，才算真的懂；写不出来，说明还停在类比。</li>
+              <li><strong>复现最小例子</strong>：十行能跑通的例子，比十篇博客更可靠，也最容易暴露边界条件。</li>
+              <li><strong>记一条时间线</strong>：每个概念记下「谁、哪一年、解决什么问题」，概念之间就开始互相定位。</li>
+            </ol>
+          </section>
+
+          <section>
+            <div class="sec-head">
+              <span class="num" aria-hidden="true">05</span>
+              <h2>结论</h2>
+            </div>
+            <p>
+              历史防重复发明和重复踩坑，数学防自欺。两者都不保证成功，但都能在动手之前把错误变便宜。
+              学习的顺序可以不同，缺一项，理解就会停在「会用」。
+            </p>
+            <blockquote>
+              以史定坐标，以数定边界；剩下的，才是工程。
+            </blockquote>
+          </section>
+        </div>
+
+        <div class="next">
+          <a class="btn" href="/books/">推荐书籍</a>
+          <a class="btn" href="/#contact">讨论这个观点</a>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <span>© 2026 隔壁老木箱 · bionickernel.com</span>
+        <span>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026079470号</a>
+        </span>
+        <span>Hosted on Alibaba Cloud ECS</span>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -8,6 +8,7 @@ Static site served by nginx on Alibaba Cloud ECS (116.62.81.128) over the
 - `/index.html` — landing page (KDE palette: CachyOS Nord dark, Breeze Light light); hero backdrop is a WebGL2 fluid-noise canvas with pointer influence.
 - `/books/` — recommended-books page: inclusion criteria, topics, entry format.
 - `/skins/` — interactive Minecraft skin renders, 3D via vendored `skinview3d`.
+- `/essays/history-and-math.html` — essay: history and mathematics as the two axes of learning a field.
 
 ## Assets
 
