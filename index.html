@@ -4,12 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>bionickernel.com</title>
+    <meta name="description" content="bionickernel.com — 个人技术站点。" />
+    <meta property="og:title" content="bionickernel.com" />
+    <meta property="og:description" content="个人技术站点。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bionickernel.com/" />
+    <link rel="canonical" href="https://bionickernel.com/" />
     <style>
       :root {
         --bg: #0d1117;
+        --panel: #12181f;
+        --border: #30363d;
         --fg: #e6edf3;
-        --accent: #58a6ff;
         --dim: #8b949e;
+        --accent: #58a6ff;
       }
       * {
         margin: 0;
@@ -19,17 +27,20 @@
       body {
         min-height: 100vh;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        gap: 2rem;
+        padding: 2rem;
         background: var(--bg);
         color: var(--fg);
         font-family:
           -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
           "Microsoft YaHei", sans-serif;
+        -webkit-font-smoothing: antialiased;
       }
       main {
         text-align: center;
-        padding: 2rem;
       }
       .domain {
         font-size: clamp(2rem, 6vw, 4rem);
@@ -41,15 +52,20 @@
         margin-top: 1rem;
         color: var(--dim);
         font-size: 1.05rem;
+        line-height: 1.7;
+      }
+      .tagline .en {
+        display: block;
+        font-size: 0.9rem;
+        margin-top: 0.35rem;
       }
       .links {
         margin-top: 2.5rem;
       }
       .links a {
         display: inline-block;
-        margin: 0 0.5rem;
-        padding: 0.5rem 1.2rem;
-        border: 1px solid #30363d;
+        padding: 0.55rem 1.25rem;
+        border: 1px solid var(--border);
         border-radius: 8px;
         color: var(--fg);
         text-decoration: none;
@@ -70,16 +86,23 @@
         color: var(--dim);
         font-size: 0.85rem;
       }
+      @media (max-width: 620px) {
+        footer {
+          position: static;
+          margin-top: 1rem;
+        }
+      }
     </style>
   </head>
   <body>
     <main>
       <div class="domain">bionickernel.com</div>
-      <p class="tagline">网站建设中 · Site under construction</p>
+      <p class="tagline">
+        个人技术站点，正在完善中。
+        <span class="en">A personal tech site. Work in progress.</span>
+      </p>
       <div class="links">
-        <a href="https://github.com/GBLMX" target="_blank" rel="noopener"
-          >GitHub</a
-        >
+        <a href="https://github.com/GBLMX" target="_blank" rel="noopener">GitHub</a>
       </div>
     </main>
     <footer>Hosted on Alibaba Cloud ECS</footer>
