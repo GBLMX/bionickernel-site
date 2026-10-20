@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { essays } from "../../data/essays";
+import { readingMinutes } from "../../lib/reading-time";
+---
+
+<BaseLayout
+  title="观点 — bionickernel.com"
+  description="隔壁老木箱的观点与笔记：历史、数学与工程经验如何互相校准。"
+  canonical="https://bionickernel.com/essays/"
+  active="essay"
+>
+  <style>
+    .lede {
+      margin-top: 0.6rem;
+      color: var(--dim);
+      font-size: 0.95rem;
+    }
+    .essay-list {
+      margin-top: 1.8rem;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+    .essay-list li {
+      border-bottom: 1px solid var(--line);
+    }
+    .essay-list a {
+      display: block;
+      padding: 1.15rem 0.15rem;
+      text-decoration: none;
+    }
+    .essay-list a:hover h2 {
+      color: var(--accent-text);
+    }
+    .essay-list h2 {
+      font-size: 1.12rem;
+      transition: color 0.15s ease;
+    }
+    .essay-list p {
+      margin-top: 0.35rem;
+      color: var(--dim);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .essay-meta {
+      margin-top: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      color: var(--faint);
+    }
+  </style>
+
+  <p class="mono">Essays</p>
+  <h1>观点</h1>
+  <p class="lede">把读到的、做过的整理成可复查的论证。</p>
+
+  <ul class="essay-list">
+    {
+      essays.map((essay) => (
+        <li>
+          <a href={`/essays/${essay.slug}.html`}>
+            <h2>{essay.title}</h2>
+            <p>{essay.description}</p>
+            <p class="essay-meta">
+              {essay.date} · 约 {readingMinutes(essay.body)} 分钟
+            </p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

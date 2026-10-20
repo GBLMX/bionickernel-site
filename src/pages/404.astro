@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="页面不存在 — bionickernel.com"
+  description="这个地址没有内容，可能已移动或从未存在。"
+  canonical="https://bionickernel.com/404.html"
+  active=""
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+  <style>
+    .not-found {
+      min-height: 55vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 32rem;
+    }
+    .not-found .code {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      color: var(--faint);
+    }
+    .not-found h1 {
+      margin-top: 0.5rem;
+      font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+    }
+    .not-found p {
+      margin-top: 0.8rem;
+      color: var(--dim);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .not-found .links {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+  </style>
+
+  <div class="not-found">
+    <span class="code">404</span>
+    <h1>这里没有内容</h1>
+    <p>地址可能写错、已移动，或者从未存在。可以回首页，或直接去看书单。</p>
+    <div class="links">
+      <a class="btn primary" href="/">返回首页</a>
+      <a class="btn" href="/books/">推荐书籍</a>
+      <a class="btn" href="/essays/">观点</a>
+    </div>
+  </div>
+</BaseLayout>

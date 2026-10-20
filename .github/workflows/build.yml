@@ -1,0 +1,54 @@
+name: build-and-deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run check
+
+      - name: Deploy
+        if: github.event_name != 'pull_request'
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          rsync -az --delete -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes" \
+            dist/ "$DEPLOY_USER@$DEPLOY_HOST:/var/www/bionickernel.com/"
+
+      - name: Verify live bytes
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          for file in index.html books/index.html assets/site.css; do
+            expected=$(sha256sum "dist/$file" | cut -d' ' -f1)
+            path="${file/index.html/}"
+            actual=$(curl -fsS "https://bionickernel.com/$path" | sha256sum | cut -d' ' -f1)
+            if [ "$expected" != "$actual" ]; then
+              echo "::error::$file differs from the live site"
+              exit 1
+            fi
+          done
