@@ -68,6 +68,19 @@ for (const rel of pages.filter((rel) => rel !== "404.html")) {
 }
 if (!robots.includes(`Sitemap: ${ORIGIN}/sitemap.xml`)) errors.push("robots.txt missing sitemap line");
 
+for (const match of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+  const { pathname } = new URL(match[1]);
+  const target = resolveLocal(pathname);
+  if (!fs.existsSync(target)) errors.push(`sitemap target missing: ${match[1]}`);
+}
+
+const rss = fs.readFileSync(path.join(DIST, "rss.xml"), "utf8");
+for (const match of rss.matchAll(/<link>(https:\/\/bionickernel\.com[^<]*)<\/link>/g)) {
+  const { pathname } = new URL(match[1]);
+  const target = resolveLocal(pathname);
+  if (!fs.existsSync(target)) errors.push(`rss target missing: ${match[1]}`);
+}
+
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exit(1);

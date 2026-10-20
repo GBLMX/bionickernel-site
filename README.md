@@ -34,7 +34,7 @@ Manual deploy (same target, requires root or `deployer` access):
 
 ```sh
 npm run build
-rsync -az --delete dist/ aliyun:/var/www/bionickernel.com/
+rsync -az --delete --exclude=.well-known/ dist/ aliyun:/var/www/bionickernel.com/
 ssh aliyun 'chown -R deployer:deployer /var/www/bionickernel.com'
 ```
 
