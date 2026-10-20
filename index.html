@@ -13,10 +13,9 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://bionickernel.com/" />
     <link rel="canonical" href="https://bionickernel.com/" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2347add6'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%230a0b0c'/%3E%3C/svg%3E"
-    />
+    <link rel="icon" type="image/png" href="/assets/avatar.png" />
+    <link rel="apple-touch-icon" href="/assets/avatar.png" />
+    <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
     <style>
       :root {
         color-scheme: dark light;
@@ -134,25 +133,19 @@
       .brand .mark {
         width: 28px;
         height: 28px;
-        border-radius: 9px;
+        border-radius: 8px;
         display: grid;
         place-items: center;
-        background: var(--accent);
-        background: linear-gradient(145deg, var(--accent), color-mix(in oklab, var(--accent) 55%, #000));
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--bg-elev);
         flex: none;
       }
-      .brand .mark svg {
-        width: 16px;
-        height: 16px;
+      .brand .mark img {
+        width: 100%;
+        height: 100%;
         display: block;
-      }
-      .brand .mark .core {
-        fill: var(--accent-contrast);
-      }
-      .brand .mark .orbit {
-        fill: none;
-        stroke: var(--accent-contrast);
-        stroke-width: 1.5;
+        image-rendering: auto;
       }
       .site-nav {
         display: flex;
@@ -481,18 +474,18 @@
       .foot-brand .mark {
         width: 22px;
         height: 22px;
-        border-radius: 7px;
-        background: var(--accent);
+        border-radius: 6px;
         display: grid;
         place-items: center;
+        overflow: hidden;
+        border: 1px solid var(--border);
         flex: none;
       }
-      .foot-brand .mark::after {
-        content: "";
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--accent-contrast);
+      .foot-brand .mark img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        image-rendering: auto;
       }
       .foot-col .mono {
         display: block;
@@ -599,12 +592,7 @@
       <div class="wrap">
         <a class="brand" href="/" aria-label="bionickernel.com 首页">
           <span class="mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <circle class="core" cx="12" cy="12" r="3" />
-              <ellipse class="orbit" cx="12" cy="12" rx="9.5" ry="4.5" opacity="0.9" />
-              <ellipse class="orbit" cx="12" cy="12" rx="9.5" ry="4.5" opacity="0.55" transform="rotate(60 12 12)" />
-              <ellipse class="orbit" cx="12" cy="12" rx="9.5" ry="4.5" opacity="0.55" transform="rotate(120 12 12)" />
-            </svg>
+            <img src="/assets/avatar.png" alt="" width="28" height="28" />
           </span>
           bionickernel.com
         </a>
@@ -740,7 +728,9 @@
       <div class="foot-grid">
         <div>
           <div class="foot-brand">
-            <span class="mark" aria-hidden="true"></span>
+            <span class="mark" aria-hidden="true">
+              <img src="/assets/avatar.png" alt="" width="22" height="22" />
+            </span>
             bionickernel.com
           </div>
         </div>
