@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)" />
     <title>bionickernel.com</title>
     <meta name="description" content="bionickernel.com — 个人技术站点。" />
     <meta property="og:title" content="bionickernel.com" />
@@ -10,101 +12,272 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://bionickernel.com/" />
     <link rel="canonical" href="https://bionickernel.com/" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2358a6ff'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%230d1117'/%3E%3C/svg%3E"
+    />
     <style>
       :root {
+        color-scheme: dark light;
         --bg: #0d1117;
-        --panel: #12181f;
+        --bg-elev: #12181f;
         --border: #30363d;
+        --border-soft: rgba(240, 246, 252, 0.08);
         --fg: #e6edf3;
         --dim: #8b949e;
         --accent: #58a6ff;
+        --accent-contrast: #0d1117;
+        --glow: rgba(88, 166, 255, 0.16);
+        --radius: 16px;
+        --maxw: 44rem;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f6f8fa;
+          --bg-elev: #ffffff;
+          --border: #d0d7de;
+          --border-soft: rgba(27, 31, 36, 0.08);
+          --fg: #1f2328;
+          --dim: #59636e;
+          --accent: #0969da;
+          --accent-contrast: #ffffff;
+          --glow: rgba(9, 105, 218, 0.1);
+        }
       }
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
       body {
         min-height: 100vh;
+        min-height: 100svh;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-        padding: 2rem;
         background: var(--bg);
+        background:
+          radial-gradient(60rem 30rem at 50% -12rem, var(--glow), transparent 70%),
+          var(--bg);
         color: var(--fg);
         font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-          "Microsoft YaHei", sans-serif;
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+        line-height: 1.7;
         -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
       }
-      main {
-        text-align: center;
+      ::selection {
+        background: var(--accent);
+        color: var(--accent-contrast);
       }
-      .domain {
-        font-size: clamp(2rem, 6vw, 4rem);
+      .shell {
+        flex: 1;
+        width: 100%;
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 2rem) 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2.25rem;
+      }
+      .mark {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: var(--accent);
+        background: linear-gradient(145deg, var(--accent), color-mix(in oklab, var(--accent) 55%, #000));
+        box-shadow: 0 8px 24px -12px var(--accent);
+      }
+      .mark svg {
+        width: 22px;
+        height: 22px;
+        display: block;
+      }
+      .eyebrow {
+        margin-top: 1.5rem;
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--dim);
+      }
+      h1 {
+        margin-top: 0.75rem;
+        font-size: clamp(2.1rem, 7vw, 3.75rem);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
         font-weight: 700;
-        letter-spacing: -0.02em;
+        text-wrap: balance;
+      }
+      h1 .dot {
         color: var(--accent);
       }
-      .tagline {
-        margin-top: 1rem;
+      .lede {
+        margin-top: 1.25rem;
+        max-width: 34rem;
         color: var(--dim);
-        font-size: 1.05rem;
-        line-height: 1.7;
+        font-size: clamp(1rem, 2.4vw, 1.12rem);
+        text-wrap: pretty;
       }
-      .tagline .en {
+      .lede .en {
         display: block;
-        font-size: 0.9rem;
-        margin-top: 0.35rem;
+        margin-top: 0.4rem;
+        font-size: 0.92rem;
+        opacity: 0.85;
       }
-      .links {
-        margin-top: 2.5rem;
+      .actions {
+        margin-top: 2.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
       }
-      .links a {
-        display: inline-block;
-        padding: 0.55rem 1.25rem;
+      .btn {
+        --btn-bg: var(--bg-elev);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.15rem;
+        border-radius: 10px;
         border: 1px solid var(--border);
-        border-radius: 8px;
+        background: var(--btn-bg);
         color: var(--fg);
+        font-size: 0.93rem;
         text-decoration: none;
-        font-size: 0.95rem;
         transition:
-          border-color 0.15s,
-          color 0.15s;
+          border-color 0.16s ease,
+          color 0.16s ease,
+          transform 0.16s ease,
+          box-shadow 0.16s ease;
       }
-      .links a:hover {
+      .btn svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+      .btn:hover {
         border-color: var(--accent);
         color: var(--accent);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px -12px var(--accent);
+      }
+      .btn:focus-visible,
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 8px;
+      }
+      .btn.primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--accent-contrast);
+      }
+      .btn.primary:hover {
+        color: var(--accent-contrast);
+        filter: brightness(1.06);
       }
       footer {
-        position: fixed;
-        bottom: 1.5rem;
-        width: 100%;
-        text-align: center;
-        color: var(--dim);
-        font-size: 0.85rem;
+        border-top: 1px solid var(--border-soft);
+        padding: 1.25rem clamp(1.25rem, 5vw, 2rem) 1.75rem;
       }
-      @media (max-width: 620px) {
-        footer {
-          position: static;
-          margin-top: 1rem;
+      .foot-inner {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.4rem 1.1rem;
+        justify-content: space-between;
+        color: var(--dim);
+        font-size: 0.82rem;
+      }
+      footer a {
+        color: var(--dim);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition:
+          color 0.16s ease,
+          border-color 0.16s ease;
+      }
+      footer a:hover {
+        color: var(--accent);
+        border-color: currentColor;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .btn,
+        footer a {
+          transition: none;
+        }
+        .btn:hover {
+          transform: none;
         }
       }
     </style>
   </head>
   <body>
-    <main>
-      <div class="domain">bionickernel.com</div>
-      <p class="tagline">
-        个人技术站点，正在完善中。
-        <span class="en">A personal tech site. Work in progress.</span>
-      </p>
-      <div class="links">
-        <a href="https://github.com/GBLMX" target="_blank" rel="noopener">GitHub</a>
+    <main class="shell">
+      <div class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="3" fill="#fff" />
+          <ellipse cx="12" cy="12" rx="9.5" ry="4.5" stroke="#fff" stroke-width="1.5" opacity="0.9" />
+          <ellipse
+            cx="12"
+            cy="12"
+            rx="9.5"
+            ry="4.5"
+            stroke="#fff"
+            stroke-width="1.5"
+            opacity="0.55"
+            transform="rotate(60 12 12)"
+          />
+          <ellipse
+            cx="12"
+            cy="12"
+            rx="9.5"
+            ry="4.5"
+            stroke="#fff"
+            stroke-width="1.5"
+            opacity="0.55"
+            transform="rotate(120 12 12)"
+          />
+        </svg>
+      </div>
+
+      <div>
+        <p class="eyebrow">Personal Site</p>
+        <h1>bionickernel<span class="dot">.</span>com</h1>
+        <p class="lede">
+          个人技术站点，正在完善中。
+          <span class="en">A personal tech site. Work in progress.</span>
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="https://github.com/GBLMX" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            GitHub
+          </a>
+          <a class="btn" href="https://github.com/GBLMX?tab=repositories" target="_blank" rel="noopener">
+            全部仓库
+          </a>
+        </div>
       </div>
     </main>
-    <footer>Hosted on Alibaba Cloud ECS</footer>
+
+    <footer>
+      <div class="foot-inner">
+        <span>© 2026 bionickernel.com</span>
+        <span>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026079470号</a>
+        </span>
+        <span>Hosted on Alibaba Cloud ECS</span>
+      </div>
+    </footer>
   </body>
 </html>
