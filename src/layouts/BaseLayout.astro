@@ -1,0 +1,65 @@
+---
+import Footer from "../components/Footer.astro";
+import Sidebar from "../components/Sidebar.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: string;
+  active?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogTitle = title,
+  ogDescription = description,
+  ogType = "website",
+  active = "",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e2233" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eff0f1" media="(prefers-color-scheme: light)" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="隔壁老木箱" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/assets/avatar.png" />
+    <link rel="apple-touch-icon" href="/assets/avatar.png" />
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          if (localStorage.getItem("bn-sidebar") === "collapsed") d.classList.add("sb-collapsed");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/site.css" />
+    <slot name="head" />
+  </head>
+  <body>
+    <Sidebar active={active} />
+    <main class="main">
+      <div class="content"><slot /></div>
+      <Footer />
+    </main>
+    <slot name="scripts" />
+    <script src="/assets/sidebar.js" defer is:inline></script>
+  </body>
+</html>

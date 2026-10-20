@@ -66,9 +66,13 @@
     sections.forEach(function (section) {
       if (section.getBoundingClientRect().top + window.scrollY <= limit) active = section.id;
     });
+    var last = sections[sections.length - 1];
+    var lastBox = last.getBoundingClientRect();
     var atBottom =
       window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
-    if (atBottom) active = sections[sections.length - 1].id;
+    if (atBottom || lastBox.top < window.innerHeight * 0.85) {
+      active = last.id;
+    }
     if (window.scrollY < 80) active = null;
     setActive(active);
   }

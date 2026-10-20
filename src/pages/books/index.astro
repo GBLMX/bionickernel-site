@@ -1,28 +1,10 @@
-<!doctype html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1e2233" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#eff0f1" media="(prefers-color-scheme: light)" />
-    <title>推荐书籍 — bionickernel.com</title>
-    <meta name="description" content="bionickernel.com 的推荐书籍页：收录标准、主题分类与条目格式。" />
-    <meta name="author" content="隔壁老木箱" />
-    <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
-    <link rel="canonical" href="https://bionickernel.com/books/" />
-    <link rel="icon" type="image/png" href="/assets/avatar.png" />
-    <script>
-      (function () {
-        var d = document.documentElement;
-        d.classList.add("js");
-        try {
-          if (localStorage.getItem("bn-sidebar") === "collapsed") d.classList.add("sb-collapsed");
-        } catch (e) {}
-      })();
-    </script>
-    <link rel="stylesheet" href="/assets/site.css" />
-    <style>
-      .lede {
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="推荐书籍 — bionickernel.com" description="bionickernel.com 的推荐书籍页：收录标准、主题分类与条目格式。" canonical="https://bionickernel.com/books/" active="books">
+<style is:global>
+.lede {
         margin-top: 0.9rem;
         max-width: 40rem;
         color: var(--dim);
@@ -198,39 +180,9 @@
           gap: 0.15rem;
         }
       }
-    </style>
-  </head>
-  <body>
-    <aside class="sidebar" id="sidebar">
-      <a class="sb-brand" href="/">
-        <img src="/assets/avatar.png" alt="" width="34" height="34" />
-        <div>bionickernel.com<span>隔壁老木箱</span></div>
-      </a>
-        <button class="sb-toggle" type="button" data-sidebar-toggle aria-controls="sidebar" aria-expanded="true" aria-label="收起侧栏"><span class="sb-toggle-icon" aria-hidden="true"></span></button>
+</style>
 
-      <nav aria-label="站内导航">
-        <p class="sb-label">Navigation</p>
-        <ul class="sb-nav">
-          <li><a href="/" data-short="首"><span class="short" aria-hidden="true">首</span><span class="txt">首页</span><span class="idx" aria-hidden="true">00</span></a></li>
-          <li><a href="/#picks" data-short="荐"><span class="short" aria-hidden="true">荐</span><span class="txt">推荐</span><span class="idx" aria-hidden="true">02</span></a></li>
-          <li><a href="/books/" aria-current="page" data-short="书"><span class="short" aria-hidden="true">书</span><span class="txt">书籍</span><span class="idx" aria-hidden="true">↗</span></a></li>
-          <li><a href="/skins/" data-short="肤"><span class="short" aria-hidden="true">肤</span><span class="txt">皮肤</span><span class="idx" aria-hidden="true">↗</span></a></li>
-          <li><a href="/essays/history-and-math.html" data-short="观"><span class="short" aria-hidden="true">观</span><span class="txt">观点</span><span class="idx" aria-hidden="true">↗</span></a></li>
-          <li><a href="/#contact" data-short="联"><span class="short" aria-hidden="true">联</span><span class="txt">联系</span><span class="idx" aria-hidden="true">04</span></a></li>
-        </ul>
-      </nav>
-
-      <div class="sb-foot">
-        <span class="sb-status">静态页面 · HTTP/3</span>
-        <a href="mailto:gblmx@bionickernel.com">gblmx@bionickernel.com</a>
-        <a href="https://github.com/GBLMX" target="_blank" rel="noopener">GitHub</a>
-        <span>阿里云 ECS</span>
-      </div>
-    </aside>
-
-    <main class="main">
-      <div class="content">
-        <p class="mono">Books</p>
+<p class="mono">Books</p>
         <h1>推荐书籍</h1>
         <p class="lede">
           这里放的是我读过之后仍会回头查阅的书。每条只回答两个问题：它解决什么问题，以及为什么值得花时间读完。
@@ -418,17 +370,8 @@
             </div>
           </dl>
         </section>
-      </div>
 
-      <footer class="footer">
-        <span>© 2026 隔壁老木箱 · bionickernel.com</span>
-        <span>
-          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026079470号</a>
-        </span>
-        <span>Hosted on Alibaba Cloud ECS</span>
-      </footer>
-    </main>
-    <script src="/assets/books.js" defer></script>
-    <script src="/assets/sidebar.js" defer></script>
-  </body>
-</html>
+<Fragment slot="scripts">
+  <script src="/assets/books.js" defer is:inline></script>
+</Fragment>
+</BaseLayout>

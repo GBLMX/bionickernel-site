@@ -1,0 +1,59 @@
+---
+interface Props {
+  active?: string;
+}
+
+const { active = "" } = Astro.props;
+const prefix = active === "home" ? "" : "/";
+
+const nav = [
+  { key: "home", label: "首页", short: "首", href: "/", idx: "00" },
+  { key: "picks", label: "推荐", short: "荐", href: `${prefix}#picks`, idx: "02" },
+  { key: "books", label: "书籍", short: "书", href: "/books/", idx: "↗" },
+  { key: "skins", label: "皮肤", short: "肤", href: "/skins/", idx: "↗" },
+  { key: "essay", label: "观点", short: "观", href: "/essays/history-and-math.html", idx: "↗" },
+  { key: "contact", label: "联系", short: "联", href: `${prefix}#contact`, idx: "04" },
+];
+---
+
+<aside class="sidebar" id="sidebar">
+  <a class="sb-brand" href="/">
+    <img src="/assets/avatar.png" alt="" width="34" height="34" />
+    <div>bionickernel.com<span>隔壁老木箱</span></div>
+  </a>
+  <button
+    class="sb-toggle"
+    type="button"
+    data-sidebar-toggle
+    aria-controls="sidebar"
+    aria-expanded="true"
+    aria-label="收起侧栏"><span class="sb-toggle-icon" aria-hidden="true"></span></button>
+
+  <nav aria-label="站内导航">
+    <p class="sb-label">Navigation</p>
+    <ul class="sb-nav">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              data-short={item.short}
+              aria-current={active === item.key ? "page" : undefined}
+            >
+              <span class="short" aria-hidden="true">{item.short}</span>
+              <span class="txt">{item.label}</span>
+              <span class="idx" aria-hidden="true">{item.idx}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <div class="sb-foot">
+    <span class="sb-status">静态页面 · HTTP/3</span>
+    <a href="mailto:gblmx@bionickernel.com">gblmx@bionickernel.com</a>
+    <a href="https://github.com/GBLMX" target="_blank" rel="noopener">GitHub</a>
+    <span>阿里云 ECS</span>
+  </div>
+</aside>
