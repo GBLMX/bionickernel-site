@@ -11,6 +11,15 @@
     <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
     <link rel="canonical" href="https://bionickernel.com/skins/" />
     <link rel="icon" type="image/png" href="/assets/avatar.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          if (localStorage.getItem("bn-sidebar") === "collapsed") d.classList.add("sb-collapsed");
+        } catch (e) {}
+      })();
+    </script>
     <link rel="stylesheet" href="/assets/site.css" />
     <style>
       .lede {
@@ -94,21 +103,22 @@
     </style>
   </head>
   <body>
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <a class="sb-brand" href="/">
         <img src="/assets/avatar.png" alt="" width="34" height="34" />
         <div>bionickernel.com<span>隔壁老木箱</span></div>
       </a>
+        <button class="sb-toggle" type="button" data-sidebar-toggle aria-controls="sidebar" aria-expanded="true" aria-label="收起侧栏"><span class="sb-toggle-icon" aria-hidden="true"></span></button>
 
       <nav aria-label="站内导航">
         <p class="sb-label">Navigation</p>
         <ul class="sb-nav">
-          <li><a href="/">首页<span class="idx">00</span></a></li>
-          <li><a href="/#picks">推荐<span class="idx">02</span></a></li>
-          <li><a href="/books/">书籍<span class="idx">↗</span></a></li>
-          <li><a href="/skins/" aria-current="page">皮肤<span class="idx">↗</span></a></li>
-          <li><a href="/essays/history-and-math.html">观点<span class="idx">↗</span></a></li>
-          <li><a href="/#contact">联系<span class="idx">04</span></a></li>
+          <li><a href="/" data-short="首"><span class="short" aria-hidden="true">首</span><span class="txt">首页</span><span class="idx" aria-hidden="true">00</span></a></li>
+          <li><a href="/#picks" data-short="荐"><span class="short" aria-hidden="true">荐</span><span class="txt">推荐</span><span class="idx" aria-hidden="true">02</span></a></li>
+          <li><a href="/books/" data-short="书"><span class="short" aria-hidden="true">书</span><span class="txt">书籍</span><span class="idx" aria-hidden="true">↗</span></a></li>
+          <li><a href="/skins/" aria-current="page" data-short="肤"><span class="short" aria-hidden="true">肤</span><span class="txt">皮肤</span><span class="idx" aria-hidden="true">↗</span></a></li>
+          <li><a href="/essays/history-and-math.html" data-short="观"><span class="short" aria-hidden="true">观</span><span class="txt">观点</span><span class="idx" aria-hidden="true">↗</span></a></li>
+          <li><a href="/#contact" data-short="联"><span class="short" aria-hidden="true">联</span><span class="txt">联系</span><span class="idx" aria-hidden="true">04</span></a></li>
         </ul>
       </nav>
 
@@ -222,5 +232,6 @@
         });
       })();
     </script>
+    <script src="/assets/sidebar.js" defer></script>
   </body>
 </html>
