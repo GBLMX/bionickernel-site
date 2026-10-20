@@ -1,0 +1,379 @@
+---
+import SubpageLayout from "../../../layouts/SubpageLayout.astro";
+---
+
+<SubpageLayout
+  title="几何代数微调实验 — bionickernel.com"
+  description="Qwen3-4B-Base 在 6GB 显卡上的几何代数微调：记忆 47.3%、泛化 33.6%、迁移 50.0%。模型学到的是可迁移的模式，而不是数学理解。"
+  canonical="https://bionickernel.com/research/ga/"
+  active="research"
+  eyebrow="Research · v1 · 2026-09-26"
+  heading="几何代数微调：实验结论"
+  lede="在 6GB 笔记本显卡上完成 4B 领域微调。三项指标显著高于随机基线；模型学到的是可迁移的模式，而不是可组合的数学理解。"
+  ogTitle="几何代数微调实验 | bionickernel.com"
+  ogDescription="6GB 显存 QLoRA 微调 Qwen3-4B：记忆 47.3%、泛化 33.6%、迁移 50.0%，以及「模式而非理解」的机理证据。"
+  ogType="article"
+>
+<style is:global>
+  .ga-page {
+    --ga-mem: #6aa6e0;
+    --ga-gen: #d97b73;
+    --ga-tran: #63b58a;
+    --ga-good: #63b58a;
+    --ga-mid: #d6a24f;
+    --ga-bad: #db7a74;
+  }
+  @media (prefers-color-scheme: light) {
+    .ga-page {
+      --ga-mem: #3d6fa5;
+      --ga-gen: #b8564f;
+      --ga-tran: #3c8a62;
+      --ga-good: #2f8f5b;
+      --ga-mid: #b07a24;
+      --ga-bad: #c25550;
+    }
+  }
+
+  .ga-byline {
+    margin-top: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.9rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    color: var(--faint);
+  }
+  .ga-byline span + span::before {
+    content: "·";
+    margin-right: 0.9rem;
+    color: var(--faint);
+  }
+
+  .ga-stats {
+    margin-top: 1.9rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .ga-stat {
+    padding: 1rem 1.1rem 0.95rem;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: var(--bg-elev);
+  }
+  .ga-stat .n {
+    display: block;
+    font-size: clamp(1.55rem, 3.6vw, 2.05rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    font-variant-numeric: tabular-nums;
+  }
+  .ga-stat.mem .n { color: var(--ga-mem); }
+  .ga-stat.gen .n { color: var(--ga-gen); }
+  .ga-stat.tran .n { color: var(--ga-tran); }
+  .ga-stat .l {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--dim);
+  }
+  .ga-stat .c {
+    display: block;
+    margin-top: 0.12rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.68rem;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ga-sec {
+    padding: 1.75rem 0 0.35rem;
+  }
+  .ga-sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  .ga-sec h2 {
+    font-size: 1.12rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    color: var(--fg);
+  }
+  .ga-sec-head span {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+    color: var(--faint);
+    letter-spacing: 0.02em;
+    text-align: right;
+  }
+  .ga-card {
+    padding: 0.9rem 1rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--bg-elev);
+  }
+  .ga-chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .ga-chart text {
+    font-family: inherit;
+  }
+
+  .ga-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.55rem;
+  }
+  .ga-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    padding: 0.28rem 0.65rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.74rem;
+    color: var(--dim);
+    white-space: nowrap;
+  }
+  .ga-chip b {
+    color: var(--fg);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .ga-chip .star { color: var(--ga-tran); font-size: 0.66rem; }
+  .ga-chip .ns { color: var(--faint); font-size: 0.66rem; }
+
+  .ga-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.45rem;
+  }
+  .ga-tabs {
+    display: inline-flex;
+    padding: 3px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--bg);
+  }
+  .ga-tab {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--faint);
+    font: inherit;
+    font-size: 0.78rem;
+    padding: 0.34rem 0.72rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .ga-tab:hover { color: var(--fg); }
+  .ga-tab[aria-pressed="true"] {
+    background: var(--bg-elev);
+    color: var(--fg);
+    box-shadow: inset 0 0 0 1px var(--line-strong);
+  }
+  .ga-legend {
+    display: flex;
+    gap: 0.85rem;
+    font-size: 0.7rem;
+    color: var(--faint);
+  }
+  .ga-legend i {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 0.32rem;
+    border-radius: 2px;
+  }
+  .ga-note {
+    margin: 0.4rem 0.15rem 0;
+    font-size: 0.8rem;
+    color: var(--faint);
+  }
+
+  .ga-concl {
+    margin: 0.6rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: ga;
+  }
+  .ga-concl li {
+    counter-increment: ga;
+    position: relative;
+    padding: 0.8rem 0 0.8rem 2.25rem;
+    border-top: 1px solid var(--line);
+    color: var(--dim);
+    font-size: 0.93rem;
+    line-height: 1.75;
+  }
+  .ga-concl li:first-child { border-top: 0; }
+  .ga-concl li::before {
+    content: counter(ga, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.95rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.68rem;
+    color: var(--faint);
+  }
+  .ga-concl b { color: var(--fg); font-weight: 600; }
+
+  .ga-limits {
+    margin-top: 0.9rem;
+    padding: 0.8rem 1rem;
+    border-left: 2px solid var(--ga-mid);
+    background: color-mix(in srgb, var(--bg-elev) 72%, transparent);
+    color: var(--dim);
+    font-size: 0.84rem;
+    line-height: 1.75;
+  }
+  .ga-limits b { color: var(--fg); font-weight: 600; }
+
+  .ga-source {
+    margin-top: 1.6rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+    line-height: 1.8;
+    color: var(--faint);
+  }
+
+  .ga-tip {
+    position: fixed;
+    z-index: 40;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+    max-width: 270px;
+    padding: 0.45rem 0.65rem;
+    border-radius: 8px;
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 0.76rem;
+    line-height: 1.55;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.22);
+  }
+  .ga-tip.show { opacity: 1; transform: none; }
+  .ga-tip .dim { opacity: 0.7; font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 680px) {
+    .ga-stats { gap: 0.5rem; }
+    .ga-stat { padding: 0.8rem 0.7rem; }
+    .ga-stat .c { display: none; }
+    .ga-stat .l { font-size: 0.73rem; }
+    .ga-card { padding: 0.65rem 0.5rem 0.6rem; border-radius: 11px; }
+    .ga-sec-head { align-items: flex-start; flex-direction: column; gap: 0.2rem; }
+    .ga-sec-head span { text-align: left; }
+    .ga-legend { display: none; }
+    .ga-chip { white-space: normal; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ga-page * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<p slot="meta" class="ga-byline">
+  <span>Qwen3-4B-Base</span>
+  <span>Unsloth QLoRA · 2359 条</span>
+  <span>RTX 3060 Laptop 6GB</span>
+</p>
+
+<div class="ga-page">
+  <div class="ga-stats">
+    <div class="ga-stat mem">
+      <span class="n">47.3%</span>
+      <span class="l">记忆 · 训练集 150</span>
+      <span class="c">95% CI 39.1–55.6%</span>
+    </div>
+    <div class="ga-stat gen">
+      <span class="n">33.6%</span>
+      <span class="l">泛化 · GA 留出 146</span>
+      <span class="c">95% CI 26.0–41.8%</span>
+    </div>
+    <div class="ga-stat tran">
+      <span class="n">50.0%</span>
+      <span class="l">迁移 · 张量形式 80</span>
+      <span class="c">95% CI 38.6–61.4%</span>
+    </div>
+  </div>
+
+  <section class="ga-sec" aria-labelledby="ga-overall-heading">
+    <div class="ga-sec-head">
+      <h2 id="ga-overall-heading">三项核心结果</h2>
+      <span>准确率 · 95% CI · 25% 随机基线</span>
+    </div>
+    <div class="ga-card">
+      <div class="ga-chart" id="overall" role="img" aria-label="记忆、泛化、迁移三项准确率柱状图及置信区间"></div>
+      <div class="ga-chips">
+        <span class="ga-chip">记忆 vs 泛化 <b>p=0.022</b> <span class="star">★</span></span>
+        <span class="ga-chip">泛化 vs 迁移 <b>p=0.023</b> <span class="star">★ 迁移更高</span></span>
+        <span class="ga-chip">记忆 vs 迁移 <b>p=0.805</b> <span class="ns">n.s.</span></span>
+        <span class="ga-chip">均高于随机 <b>p&lt;0.05</b></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="ga-sec" aria-labelledby="ga-cats-heading">
+    <div class="ga-sec-head">
+      <h2 id="ga-cats-heading">能力分布</h2>
+      <span>按题型拆分 · 悬停查看计数与 CI</span>
+    </div>
+    <div class="ga-card">
+      <div class="ga-toolbar">
+        <div class="ga-tabs" role="tablist" aria-label="选择测试集">
+          <button class="ga-tab" id="tab-ga" role="tab" aria-controls="cats" aria-pressed="true">GA 留出 146</button>
+          <button class="ga-tab" id="tab-tensor" role="tab" aria-controls="cats" aria-pressed="false">张量迁移 80</button>
+        </div>
+        <div class="ga-legend" aria-hidden="true">
+          <span><i style="background:var(--ga-good)"></i>≥60%</span>
+          <span><i style="background:var(--ga-mid)"></i>30–59%</span>
+          <span><i style="background:var(--ga-bad)"></i>&lt;30%</span>
+        </div>
+      </div>
+      <div class="ga-chart" id="cats" role="tabpanel" aria-label="分类别准确率横向柱状图"></div>
+      <p class="ga-note" id="cat-note"></p>
+    </div>
+  </section>
+
+  <section class="ga-sec" aria-labelledby="ga-concl-heading">
+    <div class="ga-sec-head">
+      <h2 id="ga-concl-heading">结论</h2>
+      <span>训练有效，但能力高度不均衡</span>
+    </div>
+    <ol class="ga-concl">
+      <li><b>小算力可行。</b>4B 模型、2359 条数据、峰值显存 3.42&nbsp;GB；三项指标全部显著高于随机猜测。</li>
+      <li><b>迁移 ≈ 记忆 &gt; 泛化。</b>新记法迁移（50.0%）与记忆（47.3%）统计上无差异（p=0.805），但显著高于域内泛化（33.6%，p=0.023）。</li>
+      <li><b>能力高度不均衡。</b>同构任务可达 83–87%，新运算（对称分解、缩并）仅 0–25%；类别间差异 p&lt;0.0001。</li>
+      <li><b>机理：模式映射，而非理解。</b>同构的输入→输出模式可以迁移；需要组合新运算时失效。</li>
+    </ol>
+    <p class="ga-limits"><b>局限：</b>长符号乘积仍会换位变号；投影分解存在明显过拟合（记忆 100% → 泛化 8%）；分类样本仅 10–52 题，部分置信区间较宽。</p>
+  </section>
+
+  <p class="ga-source">
+    v1 基线 · 2026-09-26 · 固定测试集<br />
+    数字重算自逐题评估结果，与 R 统计一致；图表由浏览器实时绘制。
+  </p>
+</div>
+
+<div id="ga-tip" class="ga-tip" role="status" aria-live="polite"></div>
+
+<Fragment slot="scripts">
+  <script is:inline src="/assets/ga-charts.js" defer></script>
+</Fragment>
+</SubpageLayout>

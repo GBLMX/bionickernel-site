@@ -8,8 +8,8 @@ HTTP/2 + HTTP/3 (QUIC).
 
 [Astro](https://astro.build) with static output. `build.format: "preserve"` keeps the
 existing URLs (`/books/`, `/skins/`, `/essays/history-and-math.html`). No UI framework:
-four small vanilla scripts in `public/assets` handle the hero shader, sidebar, and
-books filter. `scripts/postbuild.mjs` writes `robots.txt` and `sitemap.xml`;
+five small vanilla scripts in `public/assets` handle the hero shader, sidebar,
+books filter, and research charts. `scripts/postbuild.mjs` writes `robots.txt` and `sitemap.xml`;
 `scripts/check-dist.mjs` validates links, head tags, and generated files.
 
 ## Commands
@@ -70,6 +70,8 @@ the `www` redirect, HSTS, CSP and the other security headers, a one-hour cache f
 - `src/pages/skins/index.astro` — interactive Minecraft skin renders.
 - `src/pages/essays/index.astro` — essay list and reading times.
 - `src/pages/essays/history-and-math.astro` — essay shell; body comes from content.
+- `src/pages/research/ga/index.astro` — geometric-algebra fine-tuning results
+  (condensed conclusions, interactive SVG charts).
 - `src/pages/404.astro` — branded not-found page.
 - `src/pages/rss.xml.ts` — RSS 2.0 feed.
 - `public/assets/site.css` — shared shell: tokens, sidebar layout (top bar at ≤900px,
@@ -78,6 +80,8 @@ the `www` redirect, HSTS, CSP and the other security headers, a one-hour cache f
   scrollspy for `#picks` / `#contact`.
 - `public/assets/books.js` — books filter: topic chips + live search, progressive
   enhancement.
+- `public/assets/ga-charts.js` — research charts: responsive SVG bars, CI whiskers,
+  tooltips, dataset tabs.
 - `public/assets/fluid.js` — hero art: WebGL2 domain-warped noise; still frame under
   reduced motion, CSS gradient without WebGL2, and recovers after WebGL context loss.
 - `public/assets/skinview3d.bundle.js` — skinview3d 3.4.2 bundle (MIT).
