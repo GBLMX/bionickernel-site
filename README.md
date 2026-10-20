@@ -5,12 +5,13 @@ Static site served by nginx on Alibaba Cloud ECS (116.62.81.128) over the
 
 ## Pages
 
-- `/index.html` — landing page (KDE palette: CachyOS Nord dark, Breeze Light light).
+- `/index.html` — landing page (KDE palette: CachyOS Nord dark, Breeze Light light); hero backdrop is a WebGL2 fluid-noise canvas with pointer influence.
 - `/books/` — recommended-books page: inclusion criteria, topics, entry format.
 - `/skins/` — interactive Minecraft skin renders, 3D via vendored `skinview3d`.
 
 ## Assets
 
+- `assets/fluid.js` — hero art: WebGL2 domain-warped noise, palette from `--art-1..4`; still frame under reduced motion, CSS gradient without WebGL2.
 - `assets/site.css` — shared shell: design tokens, sidebar layout (collapses to a top bar at ≤900px), typography, buttons, cards.
 - `assets/skins/*.png` — cropped static previews (fallback when WebGL is off).
 - `assets/skins/tex/*.png` — 64×64 skin textures used by the 3D viewer.
