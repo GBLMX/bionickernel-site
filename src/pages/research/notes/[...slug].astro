@@ -1,0 +1,181 @@
+---
+import { render } from "astro:content";
+import SubpageLayout from "../../../layouts/SubpageLayout.astro";
+import { getPublishedNotes, noteHref } from "../../../lib/research";
+
+export async function getStaticPaths() {
+  const notes = await getPublishedNotes();
+  return notes.map((note) => ({ params: { slug: note.id }, props: { note } }));
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+const href = noteHref(note);
+const canonical = `https://bionickernel.com${href}`;
+---
+
+<SubpageLayout
+  title={`${note.data.title} — bionickernel.com`}
+  description={note.data.summary}
+  canonical={canonical}
+  active="research"
+  eyebrow={`Research · ${note.data.date}`}
+  heading={note.data.title}
+  lede={note.data.summary}
+  ogTitle={`${note.data.title} | bionickernel.com`}
+  ogDescription={note.data.summary}
+  ogType="article"
+>
+<style is:global>
+  .note-meta {
+    margin-top: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.75rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+    color: var(--faint);
+  }
+  .note-meta .tag {
+    padding: 0.08rem 0.5rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+  }
+  .note-meta .status {
+    color: var(--accent-text);
+  }
+
+  .note-prose {
+    margin-top: 0.6rem;
+    max-width: 42rem;
+    color: var(--dim);
+    font-size: 0.96rem;
+    line-height: 1.9;
+    text-wrap: pretty;
+  }
+  .note-prose h2 {
+    margin-top: 2rem;
+    font-size: 1.14rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    color: var(--fg);
+  }
+  .note-prose h3 {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: var(--fg);
+  }
+  .note-prose p,
+  .note-prose li {
+    margin-top: 0.85rem;
+  }
+  .note-prose ul,
+  .note-prose ol {
+    padding-left: 1.15rem;
+  }
+  .note-prose li + li {
+    margin-top: 0.35rem;
+  }
+  .note-prose li::marker {
+    color: var(--accent-text);
+  }
+  .note-prose a {
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .note-prose a:hover {
+    color: var(--accent-text);
+  }
+  .note-prose strong {
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .note-prose code {
+    padding: 0.1rem 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--bg-elev);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.86em;
+    color: var(--fg);
+  }
+  .note-prose pre {
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-elev);
+    overflow-x: auto;
+  }
+  .note-prose pre code {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-size: 0.84rem;
+    line-height: 1.7;
+  }
+  .note-prose blockquote {
+    margin-top: 1rem;
+    padding: 0.2rem 0 0.2rem 1rem;
+    border-left: 2px solid var(--accent);
+    color: var(--dim);
+  }
+  .note-prose table {
+    margin-top: 1rem;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+  }
+  .note-prose th,
+  .note-prose td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+  .note-prose th {
+    color: var(--faint);
+    font-weight: 500;
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+  }
+  .note-prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .note-back {
+    margin-top: 2.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  .note-back a {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+    color: var(--faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .note-back a:hover {
+    color: var(--fg);
+    border-color: currentColor;
+  }
+</style>
+
+<p slot="meta" class="note-meta">
+  <span>{note.data.date}</span>
+  {note.data.updated && <span>更新 {note.data.updated}</span>}
+  <span class="status">{note.data.status}</span>
+  {note.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+</p>
+
+<article class="note-prose">
+  <Content />
+</article>
+
+<p class="note-back"><a href="/research/">← 研究索引</a></p>
+</SubpageLayout>

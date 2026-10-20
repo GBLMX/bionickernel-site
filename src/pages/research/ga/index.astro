@@ -243,6 +243,21 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
   }
   .ga-limits b { color: var(--fg); font-weight: 600; }
 
+  .ga-back {
+    margin-top: 1.4rem;
+  }
+  .ga-back a {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+    color: var(--faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .ga-back a:hover {
+    color: var(--fg);
+    border-color: currentColor;
+  }
+
   .ga-source {
     margin-top: 1.6rem;
     padding-top: 0.9rem;
@@ -364,6 +379,8 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
     </ol>
     <p class="ga-limits"><b>局限：</b>长符号乘积仍会换位变号；投影分解存在明显过拟合（记忆 100% → 泛化 8%）；分类样本仅 10–52 题，部分置信区间较宽。</p>
   </section>
+
+  <p class="ga-back"><a href="/research/">← 研究索引</a></p>
 
   <p class="ga-source">
     v1 基线 · 2026-09-26 · 固定测试集<br />

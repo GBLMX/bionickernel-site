@@ -48,6 +48,34 @@ the `www` redirect, HSTS, CSP and the other security headers, a one-hour cache f
 
 ## Content
 
+### Research notes (Obsidian)
+
+Open `src/content/research/` as an Obsidian vault. Each note is a Markdown file with
+frontmatter; `draft: true` hides it from the timeline and its route.
+
+```yaml
+---
+title: "v1 基线：数据、训练与一次评估修正"
+summary: "一句用于时间线和 meta description 的摘要。"
+date: 2026-09-26
+updated: 2026-10-20        # optional
+status: 归档                # 进行中 | 已完成 | 归档
+tags: ["数据", "QLoRA"]
+draft: false
+---
+```
+
+- `[[note-slug]]` / `[[note-slug|显示文字]]` becomes a link to
+  `/research/notes/<note-slug>.html`. Chinese link targets are rendered as plain
+  text because titles are not unique; use note slugs for internal links.
+- `![[image.png]]` embeds an image stored next to the note; Astro optimizes it.
+- Timeline order, year grouping, counts, and meta tags are generated from the
+  frontmatter. No index edits are needed for a new note.
+- Notes that need charts or custom interactivity stay as Astro pages and are
+  registered in `src/data/research.ts`.
+
+### Essays
+
 - Essays live as HTML bodies in `src/content/essays/` and are registered in
   `src/data/essays.ts` (slug, title, description, date). Read time is computed from the
   body by `src/lib/reading-time.ts`; the index at `/essays/` and the RSS feed at
@@ -65,11 +93,22 @@ the `www` redirect, HSTS, CSP and the other security headers, a one-hour cache f
   (prop or `lede` slot for rich text) and `meta` slot for bylines; wraps BaseLayout.
 - `src/components/Sidebar.astro` — navigation, collapse toggle, `aria-current` state.
 - `src/components/Footer.astro` — copyright, ICP, hosting line.
+- `src/content.config.ts` — `research` collection schema (date, summary, status,
+  tags, draft).
+- `src/content/research/` — Obsidian-compatible Markdown vault for research notes.
+- `src/data/research.ts` — registry for standalone research pages (e.g. the GA
+  experiment) that do not fit a plain note.
+- `src/lib/research.ts` — merges notes and standalone projects for the timeline.
+- `src/lib/obsidian-links.mjs` — Sätteri plugin: `[[note-slug|label]]` links and
+  `![[image.png]]` embeds.
 - `src/pages/index.astro` — landing page: hero art, sections, contact.
 - `src/pages/books/index.astro` — recommended books: criteria, topics, entries.
 - `src/pages/skins/index.astro` — interactive Minecraft skin renders.
 - `src/pages/essays/index.astro` — essay list and reading times.
 - `src/pages/essays/history-and-math.astro` — essay shell; body comes from content.
+- `src/pages/research/index.astro` — research timeline, merged from notes and
+  standalone projects.
+- `src/pages/research/notes/[...slug].astro` — Markdown note renderer.
 - `src/pages/research/ga/index.astro` — geometric-algebra fine-tuning results
   (condensed conclusions, interactive SVG charts).
 - `src/pages/404.astro` — branded not-found page.

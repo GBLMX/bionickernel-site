@@ -1,0 +1,337 @@
+---
+import SubpageLayout from "../../layouts/SubpageLayout.astro";
+import { getResearchEntries } from "../../lib/research";
+
+const entries = await getResearchEntries();
+const years = [...new Set(entries.map((entry) => entry.date.slice(0, 4)))];
+const groups = years.map((year) => ({
+  year,
+  items: entries.filter((entry) => entry.date.startsWith(year)),
+}));
+const span =
+  years.length > 1 ? `${years[years.length - 1]}–${years[0]}` : (years[0] ?? "—");
+const statusClass = (status: string) =>
+  status === "进行中" ? "live" : status === "已完成" ? "done" : "arch";
+---
+
+<SubpageLayout
+  title="研究 — bionickernel.com"
+  description="按时间保存的研究记录：假设、实验、结论与后续修订。长期更新，条目保留原貌。"
+  canonical="https://bionickernel.com/research/"
+  active="research"
+  eyebrow="Research · Index"
+  heading="研究"
+  lede="一个问题、一组实验、一段可复查的时间线。记录保留当时的判断，后续修订单独标注。"
+  ogTitle="研究记录 | bionickernel.com"
+  ogDescription="按时间保存的研究记录：假设、实验、结论与后续修订。"
+>
+<style is:global>
+  .research-meta {
+    margin-top: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.9rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    color: var(--faint);
+  }
+  .research-meta span + span::before {
+    content: "·";
+    margin-right: 0.9rem;
+    color: var(--faint);
+  }
+
+  .research-intro {
+    margin-top: 1.7rem;
+    max-width: 42rem;
+    color: var(--dim);
+    font-size: 0.92rem;
+    line-height: 1.85;
+    text-wrap: pretty;
+  }
+
+  .year-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+  }
+  .year-jump a {
+    padding: 0.16rem 0.55rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+    color: var(--faint);
+    text-decoration: none;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .year-jump a:hover {
+    color: var(--fg);
+    border-color: var(--accent);
+  }
+
+  .timeline {
+    margin: 1.9rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .tl-year {
+    display: grid;
+    grid-template-columns: 4.6rem minmax(0, 1fr);
+    gap: 1.5rem;
+    padding: 1.7rem 0 0;
+    border-top: 1px solid var(--line);
+  }
+  .tl-year:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .tl-year-label {
+    position: sticky;
+    top: 1.6rem;
+    align-self: start;
+    display: grid;
+    gap: 0.15rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .tl-year-label span {
+    font-size: 1.32rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+  .tl-year-label small {
+    font-size: 0.68rem;
+    color: var(--faint);
+  }
+
+  .tl-items {
+    margin: 0;
+    padding: 0 0 0 1.35rem;
+    list-style: none;
+    border-left: 1px solid var(--line);
+    display: grid;
+    gap: 1rem;
+  }
+  .tl-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3.2rem minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: calc(-1.35rem - 3.5px);
+    top: 1.12rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--bg);
+  }
+  .tl-item time {
+    padding-top: 0.88rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.71rem;
+    letter-spacing: 0.02em;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tl-card {
+    padding: 0.85rem 1rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-elev);
+    transition: border-color 0.16s ease, transform 0.16s ease;
+  }
+  .tl-item:hover .tl-card {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .tl-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.8rem;
+  }
+  .tl-card h2 {
+    font-size: 1.04rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: var(--fg);
+    line-height: 1.45;
+  }
+  .tl-card h2 a {
+    text-decoration: none;
+  }
+  .tl-card h2 a:hover {
+    color: var(--accent-text);
+  }
+  .tl-card p {
+    margin-top: 0.35rem;
+    max-width: 40rem;
+    color: var(--dim);
+    font-size: 0.87rem;
+    line-height: 1.75;
+  }
+
+  .tl-status {
+    flex: none;
+    padding: 0.08rem 0.5rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-size: 0.67rem;
+    line-height: 1.6;
+    color: var(--faint);
+    white-space: nowrap;
+  }
+  .tl-status.live {
+    color: var(--accent-text);
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+  .tl-status.done {
+    color: var(--fg);
+    border-color: var(--line-strong);
+  }
+
+  .tl-meta {
+    margin-top: 0.65rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.4rem;
+    font-size: 0.7rem;
+    color: var(--faint);
+  }
+  .tl-tag {
+    padding: 0.08rem 0.48rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .tl-updated {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .tl-go {
+    margin-left: auto;
+    color: var(--accent-text);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .tl-go:hover {
+    color: var(--fg);
+  }
+
+  .research-foot {
+    margin-top: 1.6rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+    line-height: 1.8;
+    color: var(--faint);
+  }
+
+  @media (max-width: 640px) {
+    .tl-year {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.6rem;
+      padding-top: 1.25rem;
+    }
+    .tl-year-label {
+      position: static;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .tl-year-label span {
+      font-size: 1.08rem;
+    }
+    .tl-items {
+      padding-left: 1rem;
+    }
+    .tl-item {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.1rem;
+    }
+    .tl-item::before {
+      top: 0.42rem;
+      left: calc(-1rem - 3px);
+    }
+    .tl-item time {
+      padding-top: 0;
+      font-size: 0.68rem;
+    }
+    .tl-go {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<p slot="meta" class="research-meta">
+  <span>{entries.length} 条记录</span>
+  <span>{span}</span>
+  <span>按时间倒序</span>
+</p>
+
+<p class="research-intro">
+  这是长期研究的时间索引。每条记录保留发布时的假设、实验条件与结论；如果后来修正，只在条目上标注更新日期，不覆盖原文。
+</p>
+
+{
+  years.length > 1 && (
+    <nav class="year-jump" aria-label="按年份跳转">
+      {years.map((year) => (
+        <a href={`#y${year}`}>{year}</a>
+      ))}
+    </nav>
+  )
+}
+
+<ol class="timeline">
+  {
+    groups.map((group) => (
+      <li class="tl-year" id={`y${group.year}`}>
+        <div class="tl-year-label">
+          <span>{group.year}</span>
+          <small>{group.items.length} 条</small>
+        </div>
+        <ol class="tl-items">
+          {group.items.map((entry) => (
+            <li class="tl-item" id={entry.slug}>
+              <time datetime={entry.date}>{entry.date.slice(5).replace("-", ".")}</time>
+              <article class="tl-card">
+                <div class="tl-top">
+                  <h2>
+                    <a href={entry.href}>{entry.title}</a>
+                  </h2>
+                  <span class={`tl-status ${statusClass(entry.status)}`}>{entry.status}</span>
+                </div>
+                <p>{entry.summary}</p>
+                <div class="tl-meta">
+                  {entry.tags.map((tag) => (
+                    <span class="tl-tag">{tag}</span>
+                  ))}
+                  {entry.updated && <span class="tl-updated">更新 {entry.updated}</span>}
+                  <a class="tl-go" href={entry.href}>
+                    阅读 <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ol>
+      </li>
+    ))
+  }
+</ol>
+
+<p class="research-foot">
+  按时间倒序 · 修订以 <code>updated</code> 标注而不覆盖原文 · 固定测试集留在归档中
+</p>
+</SubpageLayout>
