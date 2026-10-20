@@ -58,6 +58,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         margin-top: 0.9rem;
         font-size: clamp(2.2rem, 5.4vw, 3.6rem);
         line-height: 1.04;
+        overflow-wrap: anywhere;
       }
       .hero h1 .dot {
         color: var(--accent-text);
@@ -97,9 +98,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         gap: 0.65rem;
       }
       .panel div {
-        display: flex;
+        display: grid;
+        grid-template-columns: max-content minmax(0, 1fr);
         align-items: baseline;
-        justify-content: space-between;
         gap: 1rem;
         padding-bottom: 0.65rem;
         border-bottom: 1px dashed var(--line);
@@ -130,7 +131,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         font-size: 0.78rem;
         color: var(--faint);
       }
-      @media (max-width: 900px) {
+      @media (max-width: 1240px) {
         .hero {
           grid-template-columns: minmax(0, 1fr);
           align-items: start;

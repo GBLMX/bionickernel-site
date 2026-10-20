@@ -52,6 +52,7 @@ html {
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
   grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
   background: var(--bg);
@@ -88,6 +89,7 @@ a {
   top: 0;
   align-self: start;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -214,6 +216,7 @@ a {
 
 .sb-foot {
   margin-top: auto;
+  overflow-wrap: anywhere;
   display: grid;
   gap: 0.45rem;
   padding-top: 1rem;
@@ -253,6 +256,7 @@ a {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
 }
 
 .content {
@@ -319,6 +323,8 @@ section {
 .btn {
   display: inline-flex;
   align-items: center;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   gap: 0.5rem;
   padding: 0.58rem 1.1rem;
   border-radius: 9px;
@@ -643,11 +649,20 @@ section {
   .sb-foot {
     display: none;
   }
+  .sidebar > nav {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .sidebar > nav::-webkit-scrollbar {
+    display: none;
+  }
   .sb-nav {
     display: flex;
+    width: max-content;
     gap: 0.1rem;
     margin: 0 0 0 auto;
-    overflow-x: auto;
   }
   .sb-nav a {
     padding: 0.35rem 0.4rem;
