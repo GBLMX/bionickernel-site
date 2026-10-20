@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e2233" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eff0f1" media="(prefers-color-scheme: light)" />
+    <title>推荐书籍 — bionickernel.com</title>
+    <meta name="description" content="bionickernel.com 的推荐书籍页：收录标准、主题分类与条目格式。" />
+    <link rel="canonical" href="https://bionickernel.com/books/" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2347add6'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%230a0b0c'/%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        color-scheme: dark light;
+        --bg: #1e2233;
+        --bg-elev: #161925;
+        --border: #404552;
+        --border-soft: rgba(102, 194, 242, 0.14);
+        --fg: #66c2f2;
+        --dim: #81a1c1;
+        --accent: #47add6;
+        --focus: #6dbccd;
+        --glow: rgba(71, 173, 214, 0.16);
+        --maxw: 48rem;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #eff0f1;
+          --bg-elev: #ffffff;
+          --border: #c9cdd1;
+          --border-soft: rgba(35, 38, 41, 0.1);
+          --fg: #232629;
+          --dim: #5c6b78;
+          --accent: #3daee9;
+          --focus: #1b6a97;
+          --glow: rgba(61, 174, 233, 0.12);
+        }
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg);
+        background:
+          radial-gradient(60rem 30rem at 50% -12rem, var(--glow), transparent 70%),
+          var(--bg);
+        color: var(--fg);
+        font-family:
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+      .bar {
+        border-bottom: 1px solid var(--border-soft);
+      }
+      .bar-in,
+      main,
+      .foot-in {
+        width: min(var(--maxw), 100% - 2.5rem);
+        margin: 0 auto;
+      }
+      .bar-in {
+        min-height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        font-size: 0.86rem;
+      }
+      .bar-in a {
+        text-decoration: none;
+        color: var(--dim);
+        border-bottom: 1px solid transparent;
+      }
+      .bar-in a:hover {
+        color: var(--fg);
+        border-color: currentColor;
+      }
+      .bar-nav {
+        display: flex;
+        align-items: center;
+        gap: 1.15rem;
+      }
+      .bar-nav a[aria-current="page"] {
+        color: var(--fg);
+        border-color: currentColor;
+      }
+      main {
+        flex: 1;
+        padding: clamp(2rem, 6vw, 3.5rem) 0 3rem;
+      }
+      h1 {
+        font-size: clamp(1.6rem, 4.4vw, 2.5rem);
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+        text-wrap: balance;
+      }
+      h1 span {
+        display: block;
+        margin-top: 0.3rem;
+        font-size: 0.9rem;
+        font-weight: 400;
+        letter-spacing: 0;
+        color: var(--dim);
+      }
+      .lede {
+        margin-top: 1rem;
+        max-width: 40rem;
+        color: var(--dim);
+        font-size: 0.97rem;
+      }
+      section {
+        margin-top: 2.5rem;
+        padding-top: 1.75rem;
+        border-top: 1px solid var(--border-soft);
+      }
+      h2 {
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--dim);
+      }
+      ul {
+        margin-top: 1rem;
+        padding-left: 1.1rem;
+        color: var(--dim);
+      }
+      li + li {
+        margin-top: 0.5rem;
+      }
+      li strong {
+        color: var(--fg);
+        font-weight: 600;
+      }
+      li::marker {
+        color: var(--accent);
+      }
+      .chips {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+      .chips span {
+        padding: 0.4rem 0.85rem;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-elev);
+        font-size: 0.85rem;
+        color: var(--dim);
+      }
+      .format {
+        margin-top: 1rem;
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .format div {
+        padding: 0.9rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--bg-elev);
+      }
+      .format dt {
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .format dd {
+        margin: 0.35rem 0 0;
+        color: var(--dim);
+        font-size: 0.88rem;
+      }
+      footer {
+        border-top: 1px solid var(--border-soft);
+        padding: 1.1rem 0 1.5rem;
+      }
+      .foot-in {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1.1rem;
+        justify-content: space-between;
+        color: var(--dim);
+        font-size: 0.8rem;
+      }
+      .foot-in a {
+        color: var(--dim);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+      }
+      .foot-in a:hover {
+        color: var(--fg);
+        border-color: currentColor;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <div class="bar-in">
+        <a href="/">← bionickernel.com</a>
+        <nav class="bar-nav" aria-label="站内导航">
+          <a href="/books/" aria-current="page">书籍</a>
+          <a href="/skins/">皮肤</a>
+          <a href="/#contact">联系</a>
+        </nav>
+      </div>
+    </div>
+
+    <main>
+      <h1>推荐书籍<span>Recommended books · 收录标准与条目格式</span></h1>
+      <p class="lede">
+        这里放的是我读过之后仍会回头查阅的书。每条只回答两个问题：它解决什么问题，以及为什么值得花时间读完。
+      </p>
+
+      <section>
+        <h2>收录标准</h2>
+        <ul>
+          <li><strong>通读过</strong>：从头到尾读完，不是翻过目录就算。</li>
+          <li><strong>讲原理</strong>：解释为什么这样设计，而不是罗列结论和 API。</li>
+          <li><strong>可核对</strong>：给出作者、版本与出处，避免道听途说的二手转述。</li>
+          <li><strong>事后还会查</strong>：能被当作参考资料反复打开。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>主题分类</h2>
+        <div class="chips">
+          <span>系统与工程</span>
+          <span>数学与形式化</span>
+          <span>语言与工具</span>
+          <span>思维与写作</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>条目格式</h2>
+        <dl class="format">
+          <div>
+            <dt>Book</dt>
+            <dd>书名、作者、版本或年份。</dd>
+          </div>
+          <div>
+            <dt>Why</dt>
+            <dd>一句到三句：它解决的问题，以及适合谁读。</dd>
+          </div>
+          <div>
+            <dt>Note</dt>
+            <dd>阅读时记下的要点，或与其他书的对照关系。</dd>
+          </div>
+        </dl>
+      </section>
+    </main>
+
+    <footer>
+      <div class="foot-in">
+        <span>© 2026 bionickernel.com</span>
+        <span>
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026079470号</a>
+        </span>
+        <span>Hosted on Alibaba Cloud ECS</span>
+      </div>
+    </footer>
+  </body>
+</html>
