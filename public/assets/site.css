@@ -286,6 +286,13 @@ h1 {
   text-wrap: balance;
 }
 
+.page-head .lede {
+  margin-top: 0.9rem;
+  max-width: 42rem;
+  color: var(--dim);
+  font-size: 0.97rem;
+}
+
 h2 {
   font-size: 0.82rem;
   font-weight: 600;

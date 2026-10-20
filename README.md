@@ -61,6 +61,8 @@ the `www` redirect, HSTS, CSP and the other security headers, a one-hour cache f
 
 - `src/layouts/BaseLayout.astro` — head metadata (OG/Twitter/JSON-LD), RSS link,
   sidebar/footer, global scripts.
+- `src/layouts/SubpageLayout.astro` — subpage shell: eyebrow, title, optional lede
+  (prop or `lede` slot for rich text) and `meta` slot for bylines; wraps BaseLayout.
 - `src/components/Sidebar.astro` — navigation, collapse toggle, `aria-current` state.
 - `src/components/Footer.astro` — copyright, ICP, hosting line.
 - `src/pages/index.astro` — landing page: hero art, sections, contact.

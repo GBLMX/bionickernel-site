@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import SubpageLayout from "../../layouts/SubpageLayout.astro";
 import { essays } from "../../data/essays";
 import { readingMinutes } from "../../lib/reading-time";
 
@@ -7,8 +7,13 @@ const essay = essays.find((item) => item.slug === "history-and-math")!;
 const readMinutes = readingMinutes(essay.body);
 ---
 
-<BaseLayout
-  title="历史与数学 — bionickernel.com" description="观点：学一个领域绕不开两样东西——它的发展史与它依赖的数学。历史给出坐标，数学给出边界。" canonical="https://bionickernel.com/essays/history-and-math.html" active="essay"
+<SubpageLayout
+  title="历史与数学 — bionickernel.com"
+  description="观点：学一个领域绕不开两样东西——它的发展史与它依赖的数学。历史给出坐标，数学给出边界。"
+  canonical="https://bionickernel.com/essays/history-and-math.html"
+  active="essay"
+  eyebrow="Essay"
+  heading={essay.title}
   ogTitle="历史与数学 | bionickernel.com"
   ogDescription="历史给出坐标，数学给出边界；缺一项，理解停在「会用」。"
   ogType="article"
@@ -104,9 +109,7 @@ const readMinutes = readingMinutes(essay.body);
       }
 </style>
 
-<p class="mono">Essay</p>
-        <h1>{essay.title}</h1>
-        <p class="byline">
+<p slot="meta" class="byline">
           <span>隔壁老木箱</span>
           <span>{essay.date}</span>
           <span>约 {readMinutes} 分钟</span>
@@ -120,4 +123,4 @@ const readMinutes = readingMinutes(essay.body);
           <a class="btn" href="/books/">推荐书籍</a>
           <a class="btn" href="/#contact">讨论这个观点</a>
         </div>
-</BaseLayout>
+</SubpageLayout>

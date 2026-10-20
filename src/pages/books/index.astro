@@ -1,16 +1,18 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import SubpageLayout from "../../layouts/SubpageLayout.astro";
 ---
 
-<BaseLayout title="推荐书籍 — bionickernel.com" description="bionickernel.com 的推荐书籍页：收录标准、主题分类与条目格式。" canonical="https://bionickernel.com/books/" active="books">
+<SubpageLayout
+  title="推荐书籍 — bionickernel.com"
+  description="bionickernel.com 的推荐书籍页：收录标准、主题分类与条目格式。"
+  canonical="https://bionickernel.com/books/"
+  active="books"
+  eyebrow="Books"
+  heading="推荐书籍"
+  lede="这里是我读过、还会回头查的书。每条写清它讲什么，以及为什么值得看完。"
+>
 <style is:global>
-.lede {
-        margin-top: 0.9rem;
-        max-width: 40rem;
-        color: var(--dim);
-        font-size: 0.97rem;
-      }
-      .chips {
+.chips {
         margin-top: 1rem;
         display: flex;
         flex-wrap: wrap;
@@ -182,13 +184,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       }
 </style>
 
-<p class="mono">Books</p>
-        <h1>推荐书籍</h1>
-        <p class="lede">
-          这里是我读过、还会回头查的书。每条写清它讲什么，以及为什么值得看完。
-        </p>
-
-        <section>
+<section>
           <div class="sec-head">
             <span class="num" aria-hidden="true">01</span>
             <h2>收录标准</h2>
@@ -366,4 +362,4 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 <Fragment slot="scripts">
   <script src="/assets/books.js" defer is:inline></script>
 </Fragment>
-</BaseLayout>
+</SubpageLayout>

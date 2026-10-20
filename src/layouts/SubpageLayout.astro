@@ -1,0 +1,48 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  eyebrow: string;
+  heading: string;
+  lede?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: string;
+  active?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  eyebrow,
+  heading,
+  lede,
+  ogTitle = title,
+  ogDescription = description,
+  ogType = "website",
+  active = "",
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogTitle={ogTitle}
+  ogDescription={ogDescription}
+  ogType={ogType}
+  active={active}
+>
+  <header class="page-head">
+    <p class="mono">{eyebrow}</p>
+    <h1>{heading}</h1>
+    {lede && <p class="lede">{lede}</p>}
+    <slot name="lede" />
+    <slot name="meta" />
+  </header>
+  <slot />
+</BaseLayout>
