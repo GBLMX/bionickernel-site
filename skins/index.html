@@ -9,10 +9,8 @@
     <meta name="description" content="本人原创绘制的 Minecraft 皮肤：死灵法师 v5.3 三配色与幽匿（sculk）系列的实时 3D 渲染。" />
     <meta name="author" content="隔壁老木箱" />
     <link rel="canonical" href="https://bionickernel.com/skins/" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2347add6'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%230a0b0c'/%3E%3C/svg%3E"
-    />
+    <link rel="icon" type="image/png" href="/assets/avatar.png" />
+    <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
     <style>
       :root {
         color-scheme: dark light;
@@ -99,6 +97,15 @@
         text-decoration: underline;
         text-decoration-thickness: 1px;
         text-underline-offset: 4px;
+      }
+      .bar-in .avatar {
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        border: 1px solid var(--border);
+        image-rendering: auto;
+        margin-right: 0.4rem;
+        vertical-align: -5px;
       }
       .bar-nav {
         display: flex;
@@ -244,7 +251,7 @@
   <body>
     <div class="bar">
       <div class="bar-in">
-        <a href="/">← bionickernel.com</a>
+        <a href="/"><img class="avatar" src="/assets/avatar.png" alt="" width="20" height="20" />bionickernel.com</a>
         <nav class="bar-nav" aria-label="站内导航">
           <a href="/books/">书籍</a>
           <a href="/skins/" aria-current="page">皮肤</a>
