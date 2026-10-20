@@ -9,10 +9,8 @@
     <meta name="description" content="bionickernel.com 的推荐书籍页：收录标准、主题分类与条目格式。" />
     <meta name="author" content="隔壁老木箱" />
     <link rel="canonical" href="https://bionickernel.com/books/" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2347add6'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%230a0b0c'/%3E%3C/svg%3E"
-    />
+    <link rel="icon" type="image/png" href="/assets/avatar.png" />
+    <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
     <style>
       :root {
         color-scheme: dark light;
@@ -97,6 +95,15 @@
         text-decoration: underline;
         text-decoration-thickness: 1px;
         text-underline-offset: 4px;
+      }
+      .bar-in .avatar {
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        border: 1px solid var(--border);
+        image-rendering: auto;
+        margin-right: 0.4rem;
+        vertical-align: -5px;
       }
       .bar-nav {
         display: flex;
@@ -203,6 +210,59 @@
         color: var(--dim);
         font-size: 0.88rem;
       }
+      .book {
+        margin-top: 1.25rem;
+        padding: 1.1rem 1.15rem 1.2rem;
+        border: 1px solid var(--border);
+        border-left: 2px solid var(--accent);
+        border-radius: 12px;
+        background: var(--bg-elev);
+      }
+      .book h3 {
+        font-size: 1.02rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .book h3 span {
+        display: block;
+        margin-top: 0.15rem;
+        font-size: 0.84rem;
+        font-weight: 400;
+        color: var(--dim);
+      }
+      .book .by {
+        margin-top: 0.3rem;
+        font-size: 0.8rem;
+        color: var(--dim);
+        opacity: 0.85;
+      }
+      .book dl {
+        margin-top: 0.85rem;
+        display: grid;
+        gap: 0.55rem;
+      }
+      .book dl div {
+        display: grid;
+        grid-template-columns: 4.2rem minmax(0, 1fr);
+        gap: 0.75rem;
+      }
+      .book dt {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        padding-top: 0.15rem;
+      }
+      .book dd {
+        margin: 0;
+        font-size: 0.88rem;
+        color: var(--dim);
+      }
+      .book dd strong {
+        color: var(--fg);
+        font-weight: 600;
+      }
       footer {
         border-top: 1px solid var(--border-soft);
         padding: 1.1rem 0 1.5rem;
@@ -229,7 +289,7 @@
   <body>
     <div class="bar">
       <div class="bar-in">
-        <a href="/">← bionickernel.com</a>
+        <a href="/"><img class="avatar" src="/assets/avatar.png" alt="" width="20" height="20" />bionickernel.com</a>
         <nav class="bar-nav" aria-label="站内导航">
           <a href="/books/" aria-current="page">书籍</a>
           <a href="/skins/">皮肤</a>
@@ -261,7 +321,34 @@
           <span>数学与形式化</span>
           <span>语言与工具</span>
           <span>思维与写作</span>
+          <span>设计与交互</span>
         </div>
+      </section>
+
+      <section>
+        <h2>书目</h2>
+        <article class="book">
+          <h3>
+            设计心理学
+            <span>The Design of Everyday Things</span>
+          </h3>
+          <p class="by">Donald A. Norman · 2013 修订版</p>
+          <dl>
+            <div>
+              <dt>Why</dt>
+              <dd>
+                把人「用错东西」从个人失误还原为设计问题：<strong>示能、意符、映射、反馈、概念模型</strong>
+                五组概念贯穿全书。AI 时代交互正从「人机交互」转向「人与 AI 交互」，这套框架仍然成立——提示词是意符，模型输出与可撤销的操作是反馈，出错时该改的是界面，而不是先怪使用者。
+              </dd>
+            </div>
+            <div>
+              <dt>Note</dt>
+              <dd>
+                读的时候拿身边的门把手、水龙头、遥控器逐条对照；再回头看聊天框与生成按钮，会发现许多「AI 不听话」其实缺的是可预期的反馈与可回退的操作。
+              </dd>
+            </div>
+          </dl>
+        </article>
       </section>
 
       <section>
