@@ -8,172 +8,16 @@
     <title>推荐书籍 — bionickernel.com</title>
     <meta name="description" content="bionickernel.com 的推荐书籍页：收录标准、主题分类与条目格式。" />
     <meta name="author" content="隔壁老木箱" />
+    <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
     <link rel="canonical" href="https://bionickernel.com/books/" />
     <link rel="icon" type="image/png" href="/assets/avatar.png" />
-    <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
+    <link rel="stylesheet" href="/assets/site.css" />
     <style>
-      :root {
-        color-scheme: dark light;
-        --bg: #1e2233;
-        --bg-elev: #161925;
-        --border: #404552;
-        --border-soft: rgba(102, 194, 242, 0.14);
-        --fg: #66c2f2;
-        --dim: #81a1c1;
-        --accent: #47add6;
-        --accent-text: #63b9e4;
-        --focus: #6dbccd;
-        --glow: rgba(71, 173, 214, 0.16);
-        --maxw: 48rem;
-      }
-      @media (prefers-color-scheme: light) {
-        :root {
-          --bg: #eff0f1;
-          --bg-elev: #ffffff;
-          --border: #c9cdd1;
-          --border-soft: rgba(35, 38, 41, 0.1);
-          --fg: #232629;
-          --dim: #5c6b78;
-          --accent: #3daee9;
-          --accent-text: #1b6a97;
-          --focus: #1b6a97;
-          --glow: rgba(61, 174, 233, 0.12);
-        }
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        background: var(--bg);
-        background:
-          radial-gradient(60rem 30rem at 50% -12rem, var(--glow), transparent 70%),
-          var(--bg);
-        color: var(--fg);
-        font-family:
-          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-          "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-        line-height: 1.75;
-        -webkit-font-smoothing: antialiased;
-      }
-      a {
-        color: inherit;
-      }
-      :focus-visible {
-        outline: 2px solid var(--focus);
-        outline-offset: 3px;
-        border-radius: 6px;
-      }
-      .bar {
-        border-bottom: 1px solid var(--border-soft);
-      }
-      .bar-in,
-      main,
-      .foot-in {
-        width: min(var(--maxw), 100% - 2.5rem);
-        margin: 0 auto;
-      }
-      .bar-in {
-        min-height: 56px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        font-size: 0.86rem;
-      }
-      .bar-in a {
-        text-decoration: none;
-        color: var(--dim);
-        padding: 0.5rem 0.1rem;
-        margin: -0.5rem -0.1rem;
-      }
-      .bar-in a:hover,
-      .bar-nav a:hover {
-        color: var(--fg);
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 4px;
-      }
-      .bar-in .avatar {
-        width: 20px;
-        height: 20px;
-        border-radius: 5px;
-        border: 1px solid var(--border);
-        image-rendering: auto;
-        margin-right: 0.4rem;
-        vertical-align: -5px;
-      }
-      .bar-nav {
-        display: flex;
-        align-items: center;
-        gap: 1.15rem;
-      }
-      .bar-nav a {
-        color: var(--dim);
-        text-decoration: none;
-        padding: 0.5rem 0.1rem;
-        margin: -0.5rem -0.1rem;
-      }
-      .bar-nav a[aria-current="page"] {
-        color: var(--fg);
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 4px;
-      }
-      main {
-        flex: 1;
-        padding: clamp(2rem, 6vw, 3.5rem) 0 3rem;
-      }
-      h1 {
-        font-size: clamp(1.6rem, 4.4vw, 2.5rem);
-        line-height: 1.15;
-        letter-spacing: -0.025em;
-        text-wrap: balance;
-      }
-      h1 span {
-        display: block;
-        margin-top: 0.3rem;
-        font-size: 0.9rem;
-        font-weight: 400;
-        letter-spacing: 0;
-        color: var(--dim);
-      }
       .lede {
-        margin-top: 1rem;
+        margin-top: 0.9rem;
         max-width: 40rem;
         color: var(--dim);
         font-size: 0.97rem;
-      }
-      section {
-        margin-top: 2.5rem;
-        padding-top: 1.75rem;
-        border-top: 1px solid var(--border-soft);
-      }
-      h2 {
-        font-size: 0.78rem;
-        font-weight: 600;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--dim);
-      }
-      ul {
-        margin-top: 1rem;
-        padding-left: 1.1rem;
-        color: var(--dim);
-      }
-      li + li {
-        margin-top: 0.5rem;
-      }
-      li strong {
-        color: var(--fg);
-        font-weight: 600;
-      }
-      li::marker {
-        color: var(--accent-text);
       }
       .chips {
         margin-top: 1rem;
@@ -189,11 +33,26 @@
         font-size: 0.85rem;
         color: var(--dim);
       }
+      ul.rules {
+        margin-top: 1rem;
+        padding-left: 1.1rem;
+        color: var(--dim);
+      }
+      ul.rules li + li {
+        margin-top: 0.5rem;
+      }
+      ul.rules li strong {
+        color: var(--fg);
+        font-weight: 600;
+      }
+      ul.rules li::marker {
+        color: var(--accent-text);
+      }
       .format {
         margin-top: 1rem;
         display: grid;
         gap: 0.75rem;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       }
       .format div {
         padding: 0.9rem 1rem;
@@ -264,121 +123,133 @@
         color: var(--fg);
         font-weight: 600;
       }
-      footer {
-        border-top: 1px solid var(--border-soft);
-        padding: 1.1rem 0 1.5rem;
-      }
-      .foot-in {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem 1.1rem;
-        justify-content: space-between;
-        color: var(--dim);
-        font-size: 0.8rem;
-      }
-      .foot-in a {
-        color: var(--dim);
-        text-decoration: none;
-        border-bottom: 1px solid transparent;
-      }
-      .foot-in a:hover {
-        color: var(--fg);
-        border-color: currentColor;
+      @media (max-width: 640px) {
+        .book dl div {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 0.15rem;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="bar">
-      <div class="bar-in">
-        <a href="/"><img class="avatar" src="/assets/avatar.png" alt="" width="20" height="20" />bionickernel.com</a>
-        <nav class="bar-nav" aria-label="站内导航">
-          <a href="/books/" aria-current="page">书籍</a>
-          <a href="/skins/">皮肤</a>
-          <a href="/#contact">联系</a>
-        </nav>
-      </div>
-    </div>
+    <aside class="sidebar">
+      <a class="sb-brand" href="/">
+        <img src="/assets/avatar.png" alt="" width="34" height="34" />
+        <div>bionickernel.com<span>隔壁老木箱</span></div>
+      </a>
 
-    <main>
-      <h1>推荐书籍<span>Recommended books · 收录标准与条目格式</span></h1>
-      <p class="lede">
-        这里放的是我读过之后仍会回头查阅的书。每条只回答两个问题：它解决什么问题，以及为什么值得花时间读完。
-      </p>
-
-      <section>
-        <h2>收录标准</h2>
-        <ul>
-          <li><strong>通读过</strong>：从头到尾读完，不是翻过目录就算。</li>
-          <li><strong>讲原理</strong>：解释为什么这样设计，而不是罗列结论和 API。</li>
-          <li><strong>可核对</strong>：给出作者、版本与出处，避免道听途说的二手转述。</li>
-          <li><strong>事后还会查</strong>：能被当作参考资料反复打开。</li>
+      <nav aria-label="站内导航">
+        <p class="sb-label">Navigation</p>
+        <ul class="sb-nav">
+          <li><a href="/">首页<span class="idx">00</span></a></li>
+          <li><a href="/#picks">推荐<span class="idx">02</span></a></li>
+          <li><a href="/books/" aria-current="page">书籍<span class="idx">↗</span></a></li>
+          <li><a href="/skins/">皮肤<span class="idx">↗</span></a></li>
+          <li><a href="/#contact">联系<span class="idx">04</span></a></li>
         </ul>
-      </section>
+      </nav>
 
-      <section>
-        <h2>主题分类</h2>
-        <div class="chips">
-          <span>系统与工程</span>
-          <span>数学与形式化</span>
-          <span>语言与工具</span>
-          <span>思维与写作</span>
-          <span>设计与交互</span>
-        </div>
-      </section>
+      <div class="sb-foot">
+        <span class="sb-status">静态页面 · HTTP/3</span>
+        <a href="mailto:gblmx@bionickernel.com">gblmx@bionickernel.com</a>
+        <a href="https://github.com/GBLMX" target="_blank" rel="noopener">GitHub</a>
+        <span>阿里云 ECS</span>
+      </div>
+    </aside>
 
-      <section>
-        <h2>书目</h2>
-        <article class="book">
-          <h3>
-            设计心理学
-            <span>The Design of Everyday Things</span>
-          </h3>
-          <p class="by">Donald A. Norman · 2013 修订版</p>
-          <dl>
+    <main class="main">
+      <div class="content">
+        <p class="mono">Books</p>
+        <h1>推荐书籍</h1>
+        <p class="lede">
+          这里放的是我读过之后仍会回头查阅的书。每条只回答两个问题：它解决什么问题，以及为什么值得花时间读完。
+        </p>
+
+        <section>
+          <div class="sec-head">
+            <span class="num" aria-hidden="true">01</span>
+            <h2>收录标准</h2>
+          </div>
+          <ul class="rules">
+            <li><strong>通读过</strong>：从头到尾读完，不是翻过目录就算。</li>
+            <li><strong>讲原理</strong>：解释为什么这样设计，而不是罗列结论和 API。</li>
+            <li><strong>可核对</strong>：给出作者、版本与出处，避免道听途说的二手转述。</li>
+            <li><strong>事后还会查</strong>：能被当作参考资料反复打开。</li>
+          </ul>
+        </section>
+
+        <section>
+          <div class="sec-head">
+            <span class="num" aria-hidden="true">02</span>
+            <h2>主题分类</h2>
+          </div>
+          <div class="chips">
+            <span>系统与工程</span>
+            <span>数学与形式化</span>
+            <span>语言与工具</span>
+            <span>思维与写作</span>
+            <span>设计与交互</span>
+          </div>
+        </section>
+
+        <section>
+          <div class="sec-head">
+            <span class="num" aria-hidden="true">03</span>
+            <h2>书目</h2>
+          </div>
+          <article class="book">
+            <h3>
+              设计心理学
+              <span>The Design of Everyday Things</span>
+            </h3>
+            <p class="by">Donald A. Norman · 2013 修订版</p>
+            <dl>
+              <div>
+                <dt>Why</dt>
+                <dd>
+                  把人「用错东西」从个人失误还原为设计问题：<strong>示能、意符、映射、反馈、概念模型</strong>
+                  五组概念贯穿全书。AI 时代交互正从「人机交互」转向「人与 AI 交互」，这套框架仍然成立——提示词是意符，模型输出与可撤销的操作是反馈，出错时该改的是界面，而不是先怪使用者。
+                </dd>
+              </div>
+              <div>
+                <dt>Note</dt>
+                <dd>
+                  读的时候拿身边的门把手、水龙头、遥控器逐条对照；再回头看聊天框与生成按钮，会发现许多「AI 不听话」其实缺的是可预期的反馈与可回退的操作。
+                </dd>
+              </div>
+            </dl>
+          </article>
+        </section>
+
+        <section>
+          <div class="sec-head">
+            <span class="num" aria-hidden="true">04</span>
+            <h2>条目格式</h2>
+          </div>
+          <dl class="format">
+            <div>
+              <dt>Book</dt>
+              <dd>书名、作者、版本或年份。</dd>
+            </div>
             <div>
               <dt>Why</dt>
-              <dd>
-                把人「用错东西」从个人失误还原为设计问题：<strong>示能、意符、映射、反馈、概念模型</strong>
-                五组概念贯穿全书。AI 时代交互正从「人机交互」转向「人与 AI 交互」，这套框架仍然成立——提示词是意符，模型输出与可撤销的操作是反馈，出错时该改的是界面，而不是先怪使用者。
-              </dd>
+              <dd>一句到三句：它解决的问题，以及适合谁读。</dd>
             </div>
             <div>
               <dt>Note</dt>
-              <dd>
-                读的时候拿身边的门把手、水龙头、遥控器逐条对照；再回头看聊天框与生成按钮，会发现许多「AI 不听话」其实缺的是可预期的反馈与可回退的操作。
-              </dd>
+              <dd>阅读时记下的要点，或与其他书的对照关系。</dd>
             </div>
           </dl>
-        </article>
-      </section>
+        </section>
+      </div>
 
-      <section>
-        <h2>条目格式</h2>
-        <dl class="format">
-          <div>
-            <dt>Book</dt>
-            <dd>书名、作者、版本或年份。</dd>
-          </div>
-          <div>
-            <dt>Why</dt>
-            <dd>一句到三句：它解决的问题，以及适合谁读。</dd>
-          </div>
-          <div>
-            <dt>Note</dt>
-            <dd>阅读时记下的要点，或与其他书的对照关系。</dd>
-          </div>
-        </dl>
-      </section>
-    </main>
-
-    <footer>
-      <div class="foot-in">
+      <footer class="footer">
         <span>© 2026 隔壁老木箱 · bionickernel.com</span>
         <span>
           <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026079470号</a>
         </span>
         <span>Hosted on Alibaba Cloud ECS</span>
-      </div>
-    </footer>
+      </footer>
+    </main>
   </body>
 </html>

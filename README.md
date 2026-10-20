@@ -11,6 +11,7 @@ Static site served by nginx on Alibaba Cloud ECS (116.62.81.128) over the
 
 ## Assets
 
+- `assets/site.css` — shared shell: design tokens, sidebar layout (collapses to a top bar at ≤900px), typography, buttons, cards.
 - `assets/skins/*.png` — cropped static previews (fallback when WebGL is off).
 - `assets/skins/tex/*.png` — 64×64 skin textures used by the 3D viewer.
 - `assets/skinview3d.bundle.js` — skinview3d 3.4.2 bundle (MIT).

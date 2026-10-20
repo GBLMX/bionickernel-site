@@ -8,158 +8,29 @@
     <title>皮肤渲染 — bionickernel.com</title>
     <meta name="description" content="本人原创绘制的 Minecraft 皮肤：死灵法师 v5.3 三配色与幽匿（sculk）系列的实时 3D 渲染。" />
     <meta name="author" content="隔壁老木箱" />
+    <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
     <link rel="canonical" href="https://bionickernel.com/skins/" />
     <link rel="icon" type="image/png" href="/assets/avatar.png" />
-    <meta property="og:image" content="https://bionickernel.com/assets/avatar.png" />
+    <link rel="stylesheet" href="/assets/site.css" />
     <style>
-      :root {
-        color-scheme: dark light;
-        --bg: #1e2233;
-        --bg-elev: #161925;
-        --border: #404552;
-        --border-soft: rgba(102, 194, 242, 0.14);
-        --fg: #66c2f2;
-        --dim: #81a1c1;
-        --accent: #47add6;
-        --accent-text: #63b9e4;
-        --accent-contrast: #0a0b0c;
-        --focus: #6dbccd;
-        --glow: rgba(71, 173, 214, 0.16);
-        --maxw: 60rem;
-      }
-      @media (prefers-color-scheme: light) {
-        :root {
-          --bg: #eff0f1;
-          --bg-elev: #ffffff;
-          --border: #c9cdd1;
-          --border-soft: rgba(35, 38, 41, 0.1);
-          --fg: #232629;
-          --dim: #5c6b78;
-          --accent: #3daee9;
-          --accent-text: #1b6a97;
-          --accent-contrast: #0b1c26;
-          --focus: #1b6a97;
-          --glow: rgba(61, 174, 233, 0.12);
-        }
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        background: var(--bg);
-        background:
-          radial-gradient(60rem 30rem at 50% -12rem, var(--glow), transparent 70%),
-          var(--bg);
-        color: var(--fg);
-        font-family:
-          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-          "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-        line-height: 1.7;
-        -webkit-font-smoothing: antialiased;
-      }
-      a {
-        color: inherit;
-      }
-      :focus-visible {
-        outline: 2px solid var(--focus);
-        outline-offset: 3px;
-        border-radius: 6px;
-      }
-      .bar {
-        border-bottom: 1px solid var(--border-soft);
-      }
-      .bar-in,
-      main,
-      .foot-in {
-        width: min(var(--maxw), 100% - 2.5rem);
-        margin: 0 auto;
-      }
-      .bar-in {
-        min-height: 56px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        font-size: 0.86rem;
-      }
-      .bar-in a {
-        text-decoration: none;
-        color: var(--dim);
-        padding: 0.5rem 0.1rem;
-        margin: -0.5rem -0.1rem;
-      }
-      .bar-in a:hover,
-      .bar-nav a:hover {
-        color: var(--fg);
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 4px;
-      }
-      .bar-in .avatar {
-        width: 20px;
-        height: 20px;
-        border-radius: 5px;
-        border: 1px solid var(--border);
-        image-rendering: auto;
-        margin-right: 0.4rem;
-        vertical-align: -5px;
-      }
-      .bar-nav {
-        display: flex;
-        align-items: center;
-        gap: 1.15rem;
-      }
-      .bar-nav a {
-        color: var(--dim);
-        text-decoration: none;
-        padding: 0.5rem 0.1rem;
-        margin: -0.5rem -0.1rem;
-      }
-      .bar-nav a[aria-current="page"] {
-        color: var(--fg);
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 4px;
-      }
-      main {
-        flex: 1;
-        padding: clamp(2rem, 6vw, 3.5rem) 0 3rem;
-      }
-      h1 {
-        font-size: clamp(1.6rem, 4.4vw, 2.5rem);
-        line-height: 1.15;
-        letter-spacing: -0.025em;
-        text-wrap: balance;
-      }
-      h1 span {
-        display: block;
-        margin-top: 0.3rem;
-        font-size: 0.9rem;
-        font-weight: 400;
-        letter-spacing: 0;
-        color: var(--dim);
-      }
       .lede {
-        margin-top: 1rem;
-        max-width: 46rem;
+        margin-top: 0.9rem;
+        max-width: 42rem;
         color: var(--dim);
         font-size: 0.95rem;
       }
-      .lede a {
+      .lede a,
+      .credit a {
         color: var(--fg);
         text-decoration: none;
         border-bottom: 1px solid currentColor;
       }
-      .lede a:hover {
+      .lede a:hover,
+      .credit a:hover {
         color: var(--accent-text);
       }
       .credit {
-        margin-top: 1.25rem;
+        margin-top: 1.15rem;
         padding: 0.85rem 1rem;
         border: 1px solid var(--border);
         border-left: 2px solid var(--accent);
@@ -167,31 +38,24 @@
         background: var(--bg-elev);
         font-size: 0.88rem;
         color: var(--dim);
-      }
-      .credit a {
-        color: var(--fg);
-        text-decoration: none;
-        border-bottom: 1px solid currentColor;
-      }
-      .credit a:hover {
-        color: var(--accent-text);
+        max-width: 42rem;
       }
       .grid {
-        margin-top: 2rem;
+        margin-top: 1.4rem;
         display: grid;
         gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       }
       figure {
         margin: 0;
-        padding: 0.75rem;
+        padding: 0.7rem;
         border: 1px solid var(--border);
         border-radius: 14px;
         background: var(--bg-elev);
       }
       .stage {
         position: relative;
-        height: 270px;
+        aspect-ratio: 3 / 4;
         border-radius: 10px;
         overflow: hidden;
         background: linear-gradient(180deg, transparent, rgba(71, 173, 214, 0.06));
@@ -217,31 +81,10 @@
         cursor: grabbing;
       }
       figcaption {
-        margin-top: 0.65rem;
+        margin-top: 0.6rem;
         text-align: center;
-        font-size: 0.8rem;
+        font-size: 0.79rem;
         color: var(--dim);
-      }
-      footer {
-        border-top: 1px solid var(--border-soft);
-        padding: 1.1rem 0 1.5rem;
-      }
-      .foot-in {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem 1.1rem;
-        justify-content: space-between;
-        color: var(--dim);
-        font-size: 0.8rem;
-      }
-      .foot-in a {
-        color: var(--dim);
-        text-decoration: none;
-        border-bottom: 1px solid transparent;
-      }
-      .foot-in a:hover {
-        color: var(--fg);
-        border-color: currentColor;
       }
       @media (prefers-reduced-motion: reduce) {
         .stage canvas {
@@ -251,80 +94,95 @@
     </style>
   </head>
   <body>
-    <div class="bar">
-      <div class="bar-in">
-        <a href="/"><img class="avatar" src="/assets/avatar.png" alt="" width="20" height="20" />bionickernel.com</a>
-        <nav class="bar-nav" aria-label="站内导航">
-          <a href="/books/">书籍</a>
-          <a href="/skins/" aria-current="page">皮肤</a>
-          <a href="/#contact">联系</a>
-        </nav>
+    <aside class="sidebar">
+      <a class="sb-brand" href="/">
+        <img src="/assets/avatar.png" alt="" width="34" height="34" />
+        <div>bionickernel.com<span>隔壁老木箱</span></div>
+      </a>
+
+      <nav aria-label="站内导航">
+        <p class="sb-label">Navigation</p>
+        <ul class="sb-nav">
+          <li><a href="/">首页<span class="idx">00</span></a></li>
+          <li><a href="/#picks">推荐<span class="idx">02</span></a></li>
+          <li><a href="/books/">书籍<span class="idx">↗</span></a></li>
+          <li><a href="/skins/" aria-current="page">皮肤<span class="idx">↗</span></a></li>
+          <li><a href="/#contact">联系<span class="idx">04</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="sb-foot">
+        <span class="sb-status">静态页面 · HTTP/3</span>
+        <a href="mailto:gblmx@bionickernel.com">gblmx@bionickernel.com</a>
+        <a href="https://github.com/GBLMX" target="_blank" rel="noopener">GitHub</a>
+        <span>阿里云 ECS</span>
       </div>
-    </div>
+    </aside>
 
-    <main>
-      <h1>皮肤渲染<span>Skin renders · interactive 3D</span></h1>
-      <p class="lede">
-        死灵法师 v5.3 三配色与幽匿（sculk）系列。3D 由
-        <a href="https://github.com/bs-community/skinview3d" target="_blank" rel="noopener">skinview3d</a>
-        实时渲染，皮肤由
-        <a href="https://github.com/GBLMX/skin-skill" target="_blank" rel="noopener">skin-skill</a>
-        生成。拖拽旋转，滚轮缩放；未启用 WebGL 时显示静态预览。
-      </p>
+    <main class="main">
+      <div class="content">
+        <p class="mono">Renders</p>
+        <h1>皮肤渲染</h1>
+        <p class="lede">
+          死灵法师 v5.3 三配色与幽匿（sculk）系列。3D 由
+          <a href="https://github.com/bs-community/skinview3d" target="_blank" rel="noopener">skinview3d</a>
+          实时渲染，皮肤由
+          <a href="https://github.com/GBLMX/skin-skill" target="_blank" rel="noopener">skin-skill</a>
+          生成。拖拽旋转，滚轮缩放；未启用 WebGL 时显示静态预览。
+        </p>
 
-      <p class="credit">
-        本页面展示的皮肤均为本人原创绘制，源文件及生成工具已开源至
-        <a href="https://github.com/GBLMX/skin-skill" target="_blank" rel="noopener">GitHub 仓库</a>。
-      </p>
+        <p class="credit">
+          本页面展示的皮肤均为本人原创绘制，源文件及生成工具已开源至
+          <a href="https://github.com/GBLMX/skin-skill" target="_blank" rel="noopener">GitHub 仓库</a>。
+        </p>
 
-      <div class="grid">
-        <figure data-skin="/assets/skins/tex/v5_3.png">
-          <div class="stage">
-            <canvas aria-label="死灵法师 v5.3 原色配色 3D 模型"></canvas>
-            <img src="/assets/skins/v5_3.png" alt="死灵法师 v5.3 原色配色静态预览" width="90" height="204" loading="lazy" decoding="async" />
-          </div>
-          <figcaption>v5.3 原色</figcaption>
-        </figure>
-        <figure data-skin="/assets/skins/tex/v5_3_green.png">
-          <div class="stage">
-            <canvas aria-label="死灵法师 v5.3 绿色配色 3D 模型"></canvas>
-            <img src="/assets/skins/v5_3_green.png" alt="死灵法师 v5.3 绿色配色静态预览" width="90" height="204" loading="lazy" decoding="async" />
-          </div>
-          <figcaption>v5.3 绿</figcaption>
-        </figure>
-        <figure data-skin="/assets/skins/tex/v5_3_red.png">
-          <div class="stage">
-            <canvas aria-label="死灵法师 v5.3 红色配色 3D 模型"></canvas>
-            <img src="/assets/skins/v5_3_red.png" alt="死灵法师 v5.3 红色配色静态预览" width="90" height="204" loading="lazy" decoding="async" />
-          </div>
-          <figcaption>v5.3 红</figcaption>
-        </figure>
-        <figure data-skin="/assets/skins/tex/sculk.png">
-          <div class="stage">
-            <canvas aria-label="死灵法师幽匿配色 3D 模型"></canvas>
-            <img src="/assets/skins/sculk.png" alt="死灵法师幽匿配色静态预览" width="90" height="204" loading="lazy" decoding="async" />
-          </div>
-          <figcaption>sculk 幽匿</figcaption>
-        </figure>
-        <figure data-skin="/assets/skins/tex/sculk_light.png">
-          <div class="stage">
-            <canvas aria-label="死灵法师幽匿 light 档配色 3D 模型"></canvas>
-            <img src="/assets/skins/sculk_light.png" alt="死灵法师幽匿 light 档配色静态预览" width="90" height="204" loading="lazy" decoding="async" />
-          </div>
-          <figcaption>sculk light</figcaption>
-        </figure>
+        <div class="grid">
+          <figure data-skin="/assets/skins/tex/v5_3.png">
+            <div class="stage">
+              <canvas aria-label="死灵法师 v5.3 原色配色 3D 模型"></canvas>
+              <img src="/assets/skins/v5_3.png" alt="死灵法师 v5.3 原色配色静态预览" width="90" height="204" loading="lazy" decoding="async" />
+            </div>
+            <figcaption>v5.3 原色</figcaption>
+          </figure>
+          <figure data-skin="/assets/skins/tex/v5_3_green.png">
+            <div class="stage">
+              <canvas aria-label="死灵法师 v5.3 绿色配色 3D 模型"></canvas>
+              <img src="/assets/skins/v5_3_green.png" alt="死灵法师 v5.3 绿色配色静态预览" width="90" height="204" loading="lazy" decoding="async" />
+            </div>
+            <figcaption>v5.3 绿</figcaption>
+          </figure>
+          <figure data-skin="/assets/skins/tex/v5_3_red.png">
+            <div class="stage">
+              <canvas aria-label="死灵法师 v5.3 红色配色 3D 模型"></canvas>
+              <img src="/assets/skins/v5_3_red.png" alt="死灵法师 v5.3 红色配色静态预览" width="90" height="204" loading="lazy" decoding="async" />
+            </div>
+            <figcaption>v5.3 红</figcaption>
+          </figure>
+          <figure data-skin="/assets/skins/tex/sculk.png">
+            <div class="stage">
+              <canvas aria-label="死灵法师幽匿配色 3D 模型"></canvas>
+              <img src="/assets/skins/sculk.png" alt="死灵法师幽匿配色静态预览" width="90" height="204" loading="lazy" decoding="async" />
+            </div>
+            <figcaption>sculk 幽匿</figcaption>
+          </figure>
+          <figure data-skin="/assets/skins/tex/sculk_light.png">
+            <div class="stage">
+              <canvas aria-label="死灵法师幽匿 light 档配色 3D 模型"></canvas>
+              <img src="/assets/skins/sculk_light.png" alt="死灵法师幽匿 light 档配色静态预览" width="90" height="204" loading="lazy" decoding="async" />
+            </div>
+            <figcaption>sculk light</figcaption>
+          </figure>
+        </div>
       </div>
-    </main>
 
-    <footer>
-      <div class="foot-in">
+      <footer class="footer">
         <span>© 2026 隔壁老木箱 · bionickernel.com</span>
         <span>
           <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026079470号</a>
         </span>
         <span>Hosted on Alibaba Cloud ECS</span>
-      </div>
-    </footer>
+      </footer>
+    </main>
 
     <script src="/assets/skinview3d.bundle.js"></script>
     <script>
