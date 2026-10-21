@@ -385,7 +385,7 @@ section {
   margin-top: 1.4rem;
   display: grid;
   gap: 0.9rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .card {
