@@ -161,7 +161,7 @@ public final class GenWorks {
     private static StringBuilder header(String title, String desc, String eyebrow, String name, String meta) {
         return new StringBuilder()
                 .append("""
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
                     <title id="title">%s</title>
                     <desc id="desc">%s</desc>
                     <rect width="1000" height="640" fill="#161925"/>
