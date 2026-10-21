@@ -25,15 +25,26 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
     color: var(--faint);
   }
 
-  .sta-intro {
-    margin-top: 1.5rem;
+  .sta-top {
+    margin-top: 1.6rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    gap: 2rem;
+    align-items: center;
+  }
+  .sta-copy p {
+    margin-top: 1rem;
     max-width: 42rem;
     color: var(--dim);
-    font-size: 0.94rem;
+    font-size: 0.92rem;
     line-height: 1.85;
     text-wrap: pretty;
   }
-  .sta-intro code {
+  .sta-copy p strong {
+    color: var(--fg);
+    font-weight: 600;
+  }
+  .sta-copy code {
     padding: 0.1rem 0.35rem;
     border: 1px solid var(--border);
     border-radius: 5px;
@@ -41,6 +52,55 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.85em;
     color: var(--fg);
+  }
+
+  .sta-formulas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+  .sta-formulas div {
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: color-mix(in srgb, var(--bg-elev) 62%, transparent);
+  }
+  .sta-formulas dt {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .sta-formulas dd {
+    margin: 0.22rem 0 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.77rem;
+    line-height: 1.55;
+    color: var(--fg);
+    overflow-wrap: anywhere;
+  }
+
+  .sta-diagram {
+    margin: 0;
+    padding: 0.9rem 0.9rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background:
+      radial-gradient(120% 120% at 80% 0%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 60%),
+      var(--bg-elev);
+  }
+  .sta-diagram svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .sta-diagram figcaption {
+    margin-top: 0.35rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.66rem;
+    line-height: 1.6;
+    color: var(--faint);
   }
 
   .sta-sec {
@@ -80,6 +140,23 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
     background: #1b1b1b;
     overflow: hidden;
   }
+  .sta-figbar {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.48rem 0.85rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.66rem;
+    color: #8f989d;
+  }
+  .sta-figbar .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #e5b94f;
+    flex: none;
+  }
   .sta-fig video {
     display: block;
     width: 100%;
@@ -96,30 +173,30 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
     color: #9aa1a6;
   }
 
-  .sta-checks {
-    margin-top: 1rem;
-    width: 100%;
-    max-width: 42rem;
-    border-collapse: collapse;
-    font-size: 0.86rem;
+  .sta-facts {
+    margin: 1rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+    max-width: 46rem;
   }
-  .sta-checks th,
-  .sta-checks td {
-    padding: 0.5rem 0.65rem;
-    border-bottom: 1px solid var(--line);
-    text-align: left;
+  .sta-facts div {
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: color-mix(in srgb, var(--bg-elev) 55%, transparent);
   }
-  .sta-checks th {
+  .sta-facts dt {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-size: 0.64rem;
     letter-spacing: 0.04em;
     color: var(--faint);
   }
-  .sta-checks td:last-child {
+  .sta-facts dd {
+    margin: 0.2rem 0 0;
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.78rem;
-    color: var(--dim);
+    font-size: 0.8rem;
+    color: var(--fg);
     font-variant-numeric: tabular-nums;
   }
 
@@ -156,7 +233,13 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
     border-color: currentColor;
   }
 
+  @media (max-width: 900px) {
+    .sta-top { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+    .sta-diagram { max-width: 540px; }
+  }
   @media (max-width: 640px) {
+    .sta-formulas { grid-template-columns: minmax(0, 1fr); }
+    .sta-facts { grid-template-columns: minmax(0, 1fr); }
     .sta-fig { border-radius: 10px; }
     .sta-fig figcaption { padding: 0.5rem 0.7rem 0.6rem; }
   }
@@ -169,12 +252,67 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
   <span>manimgl 1.7.2</span>
 </p>
 
-<p class="sta-intro">
-  STA 取 <code>Cl(1,3)</code>，生成元满足 γ₀² = 1、γ₁² = γ₂² = γ₃² = −1。
-  boost 转子 <code>R = e^(−φ γ₀γ₁ / 2)</code> 通过夹心变换
-  <code>v′ = R v R̃</code> 作用在几何上；空间长度按 <code>1 / cosh φ</code> 收缩。
-  两个垂直 boost 的复合再做极分解，旋转部分即 Wigner/Thomas 旋转。
-</p>
+<div class="sta-top">
+  <div class="sta-copy">
+    <dl class="sta-formulas">
+      <div>
+        <dt>signature</dt>
+        <dd>γ₀² = 1, γ₁² = γ₂² = γ₃² = −1</dd>
+      </div>
+      <div>
+        <dt>rotor</dt>
+        <dd>R = e^(−φ γ₀γ₁ / 2)</dd>
+      </div>
+      <div>
+        <dt>sandwich</dt>
+        <dd>v′ = R v R̃</dd>
+      </div>
+      <div>
+        <dt>contraction</dt>
+        <dd>L = L₀ / cosh φ</dd>
+      </div>
+    </dl>
+    <p>
+      STA 取 <code>Cl(1,3)</code>，boost 转子通过夹心变换作用在几何上；空间长度按
+      <code>1 / cosh φ</code> 收缩。两个垂直 boost 复合后再做极分解，旋转部分即
+      Wigner/Thomas 旋转。
+    </p>
+  </div>
+
+  <figure class="sta-diagram">
+    <svg viewBox="0 0 360 300" role="img" aria-labelledby="sta-cone-title">
+      <title id="sta-cone-title">Minkowski diagram: gamma_1 boosted along the hyperbola x squared minus t squared equals 1</title>
+      <polygon points="170,170 82,82 258,82" style="fill:var(--accent);opacity:.05" />
+      <line x1="64" y1="170" x2="322" y2="170" style="stroke:var(--faint);stroke-width:1.2" />
+      <polygon points="322,166 332,170 322,174" style="fill:var(--faint)" />
+      <line x1="170" y1="286" x2="170" y2="58" style="stroke:var(--faint);stroke-width:1.2" />
+      <polygon points="166,58 170,48 174,58" style="fill:var(--faint)" />
+      <g style="stroke:var(--line-strong);stroke-width:1">
+        <line x1="115" y1="166" x2="115" y2="174" />
+        <line x1="225" y1="166" x2="225" y2="174" />
+        <line x1="166" y1="115" x2="174" y2="115" />
+        <line x1="166" y1="225" x2="174" y2="225" />
+      </g>
+      <g style="stroke:var(--line-strong);stroke-width:1;stroke-dasharray:4 5">
+        <line x1="82" y1="258" x2="258" y2="82" />
+        <line x1="82" y1="82" x2="258" y2="258" />
+      </g>
+      <path d="M170 115 L181.1 113.9 L192.6 110.5 L205 104.8 L218.8 96.4 L234.6 85.1 L253 70.4 L274.7 51.7 L300.7 28.2" fill="none" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round" />
+      <circle cx="170" cy="170" r="2.6" style="fill:var(--fg)" />
+      <line x1="170" y1="170" x2="253" y2="70.4" style="stroke:#e5b94f;stroke-width:7;stroke-linecap:round" marker-end="url(#sta-arrow)" />
+      <defs>
+        <marker id="sta-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#e5b94f" />
+        </marker>
+      </defs>
+      <text x="334" y="174" style="fill:var(--faint);font-size:13px;font-family:ui-monospace,monospace">t</text>
+      <text x="176" y="46" style="fill:var(--faint);font-size:13px;font-family:ui-monospace,monospace">x</text>
+      <text x="252" y="30" style="fill:var(--faint);font-size:10.5px;font-family:ui-monospace,monospace">x² − t² = 1</text>
+      <text x="214" y="112" style="fill:#e5b94f;font-size:11px;font-family:ui-monospace,monospace">γ₁</text>
+    </svg>
+    <figcaption>γ₁ 的像沿 x² − t² = 1 运动；箭头为 φ = 1.2 时的位置。</figcaption>
+  </figure>
+</div>
 
 <section class="sta-sec">
   <div class="sta-head">
@@ -183,6 +321,7 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
   </div>
   <p>黄色箭头是 γ₁ 的像，沿双曲线 x² − t² = 1 运动；绿色杆按 1 / cosh φ 实时收缩。</p>
   <figure class="sta-fig">
+    <div class="sta-figbar"><span class="dot"></span><span>1920×1080</span><span>30 fps</span><span>H.264</span><span>18.9 s</span></div>
     <video
       controls
       playsinline
@@ -192,7 +331,7 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
     >
       <source src="/assets/research/sta/STASpacetime.mp4" type="video/mp4" />
     </video>
-    <figcaption>Cl(1,3) boost · φ: 0 → 1.6 · cosh φ 最大 2.58 · 1920×1080 / 18.9 s</figcaption>
+    <figcaption>Cl(1,3) boost · φ: 0 → 1.6 · cosh φ 最大 2.58 · 双曲线 x² − t² = 1</figcaption>
   </figure>
 </section>
 
@@ -203,6 +342,7 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
   </div>
   <p>前段让立方体沿 γ₁ 收缩；后段显示 R₂R₁ 的空间旋转，轴为 z，角度从 0 到 78.7°。</p>
   <figure class="sta-fig">
+    <div class="sta-figbar"><span class="dot"></span><span>1920×1080</span><span>30 fps</span><span>H.264</span><span>18.9 s</span></div>
     <video
       controls
       playsinline
@@ -212,7 +352,7 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
     >
       <source src="/assets/research/sta/STAGraphics.mp4" type="video/mp4" />
     </video>
-    <figcaption>R₂R₁ = boost · rotation · R_W 轴为 z · 1920×1080 / 18.9 s</figcaption>
+    <figcaption>R₂R₁ = boost · rotation · R_W 轴为 z · 角度 0 → 78.7°</figcaption>
   </figure>
 </section>
 
@@ -221,19 +361,14 @@ import SubpageLayout from "../../../layouts/SubpageLayout.astro";
     <span class="idx">03</span>
     <h2>数值校验</h2>
   </div>
-  <table class="sta-checks">
-    <thead>
-      <tr><th>检查项</th><th>结果</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>signature</td><td>diag(1, −1, −1, −1)</td></tr>
-      <tr><td>R R̃</td><td>1</td></tr>
-      <tr><td>R_W 正交误差</td><td>8.9 × 10⁻¹⁶</td></tr>
-      <tr><td>det R_W</td><td>1</td></tr>
-      <tr><td>S 对称误差</td><td>5.3 × 10⁻¹⁵</td></tr>
-      <tr><td>Wigner 角（φ = 3）</td><td>78.66°</td></tr>
-    </tbody>
-  </table>
+  <dl class="sta-facts">
+    <div><dt>signature</dt><dd>diag(1, −1, −1, −1)</dd></div>
+    <div><dt>R R̃</dt><dd>1</dd></div>
+    <div><dt>R_W 正交误差</dt><dd>8.9 × 10⁻¹⁶</dd></div>
+    <div><dt>det R_W</dt><dd>1</dd></div>
+    <div><dt>S 对称误差</dt><dd>5.3 × 10⁻¹⁵</dd></div>
+    <div><dt>Wigner 角（φ = 3）</dt><dd>78.66°</dd></div>
+  </dl>
 </section>
 
 <p class="sta-note">
