@@ -247,7 +247,7 @@ import SubpageLayout from "../../layouts/SubpageLayout.astro";
   </div>
   <pre><code><span class="cm">// scripts/works/generate.sh</span>
 Multivector m = P3.motor(
-    P3.rotor(0, 0, 1, radians(155)),
+    P3.rotor(0, 0, 1, Math.toRadians(155)),
     P3.translator(1.15, 0.35, 0.75));
 double[] q = P3.pointCoords(
     P3.apply(m, P3.point(x, y, z)));
