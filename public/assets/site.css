@@ -1,5 +1,15 @@
 /* Shared shell for bionickernel.com: tokens, sidebar layout, common components. */
 
+/* Native cross-document transitions; ignored by browsers without support. */
+@view-transition {
+  navigation: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
 :root {
   color-scheme: dark light;
   /* CachyOS Nord (active KDE scheme) */
@@ -475,6 +485,15 @@ section {
   border: 1px solid var(--border);
   border-radius: 14px;
   background: var(--bg-elev);
+  transition:
+    border-color 0.16s ease,
+    transform 0.16s ease,
+    box-shadow 0.16s ease;
+}
+.pick:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px -26px var(--accent);
 }
 
 .pick .top {
@@ -720,12 +739,14 @@ section {
   }
   .btn,
   .card,
+  .pick,
   .card .arrow,
   .sb-nav a {
     transition: none;
   }
   .btn:hover,
-  .card:hover {
+  .card:hover,
+  .pick:hover {
     transform: none;
   }
   .card:hover .arrow {
