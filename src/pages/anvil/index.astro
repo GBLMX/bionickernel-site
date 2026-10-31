@@ -1,0 +1,169 @@
+---
+import SubpageLayout from "../../layouts/SubpageLayout.astro";
+---
+
+<SubpageLayout
+  title="Anvil — Rust 内核与 Go 网关的终端编辑器"
+  description="Anvil 是一个 Linux-first 终端编辑器：selection-first 的 Rust 内核、per-session Go 策略网关，以及隔离的插件宿主。"
+  canonical="https://bionickernel.com/anvil/"
+  active="anvil"
+  eyebrow="Project · Anvil"
+  heading="Anvil"
+  lede="一个把编辑内核、系统策略与不可信插件分开的终端编辑器。"
+  ogTitle="Anvil — a terminal editor with a Rust kernel and Go gateway"
+  ogDescription="Selection-first Rust kernel, per-session Go policy gateway, and an isolated plugin host."
+>
+  <style>
+    .anvil-status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1rem;
+    }
+    .anvil-status span {
+      padding: 0.22rem 0.6rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.03em;
+      color: var(--faint);
+    }
+    .anvil-intro {
+      max-width: 44rem;
+      margin-top: 2rem;
+      color: var(--dim);
+      font-size: 0.95rem;
+      line-height: 1.9;
+      text-wrap: pretty;
+    }
+    .anvil-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 2rem;
+    }
+    .anvil-card {
+      padding: 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface-2);
+    }
+    .anvil-card h2 {
+      margin: 0;
+      font-size: 0.96rem;
+    }
+    .anvil-card p {
+      margin-top: 0.55rem;
+      color: var(--dim);
+      font-size: 0.86rem;
+      line-height: 1.7;
+    }
+    .anvil-card code {
+      color: var(--accent-text);
+      font-family: var(--mono);
+      font-size: 0.78em;
+    }
+    .anvil-section {
+      margin-top: 2.5rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--line);
+    }
+    .anvil-section h2 {
+      font-size: 1.1rem;
+    }
+    .anvil-section p,
+    .anvil-section li {
+      color: var(--dim);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .anvil-section ul {
+      margin-top: 0.7rem;
+      padding-left: 1.2rem;
+    }
+    .anvil-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.2rem;
+    }
+    @media (max-width: 760px) {
+      .anvil-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="anvil-status">
+    <span>0.3.0</span>
+    <span>Phase 0.7</span>
+    <span>pre-alpha</span>
+    <span>Linux first</span>
+  </div>
+
+  <p class="anvil-intro">
+    Anvil 不是把编辑器、插件和系统权限塞进同一个进程。它把 selection-first
+    的编辑状态留在 Rust 内核，把文件、网络和进程策略交给 per-session Go
+    网关，把不可信插件放进独立宿主。目标是让标准版和第三方发行版可以共享内核，
+    而不是各自分叉一套编辑器。
+  </p>
+
+  <div class="anvil-grid">
+    <article class="anvil-card">
+      <h2>Rust kernel</h2>
+      <p>
+        PieceTable 文本模型、selection-first 编辑状态、快照与撤销。
+        第三方发行版可以通过源码级 crate 组合自己的 UI。
+      </p>
+    </article>
+    <article class="anvil-card">
+      <h2>Go gateway</h2>
+      <p>
+        每个会话一个策略网关：<code>openat2</code> 工作区边界、fetch 策略、
+        sandboxed exec runner 和 capability token。
+      </p>
+    </article>
+    <article class="anvil-card">
+      <h2>Plugin host</h2>
+      <p>
+        Lua/QuickJS 不运行在 editor 进程。插件宿主是可替换的隔离边界，
+        而不是内嵌的“可信插件”开关。
+      </p>
+    </article>
+  </div>
+
+  <section class="anvil-section">
+    <h2>现在做到哪里</h2>
+    <ul>
+      <li>selection-first 内核、PieceTable、多选区、undo/redo 和快照。</li>
+      <li>LSP 子集：diagnostics、completion、hover、definition、rename、code actions、formatting、symbols。</li>
+      <li>终端 TUI：多 buffer、垂直 split、文件树、模糊查找、搜索与基础 Vim-like 键位。</li>
+      <li>Go gateway 与 exec runner 的安全边界、权限和回归测试。</li>
+    </ul>
+  </section>
+
+  <section class="anvil-section">
+    <h2>还没有完成</h2>
+    <p>
+      Anvil 仍是 pre-alpha。用户 keymap/config、完整 selection-first UI、
+      Lua/TS 插件运行时、标准版 composition crate 和第三方发行版 SDK
+      都还没有冻结。插件 keymap 和长期兼容性不能提前承诺。
+    </p>
+  </section>
+
+  <section class="anvil-section">
+    <h2>边界</h2>
+    <p>
+      Rust 内核采用源码级组合，不承诺稳定 Rust ABI；运行时插件走 sandbox
+      协议；编译器级 PGO/BOLT 是后续发布选项，不是内核接口的一部分。
+    </p>
+    <div class="anvil-links">
+      <a class="btn primary" href="https://github.com/GBLMX/Anvil" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://github.com/GBLMX/Anvil/blob/main/README.md" target="_blank" rel="noopener">README</a>
+      <a class="btn" href="https://github.com/GBLMX/Anvil/blob/main/docs/architecture.md" target="_blank" rel="noopener">Architecture</a>
+      <a class="btn" href="https://github.com/GBLMX/Anvil/blob/main/docs/adr/0013-kernel-distribution-boundary.md" target="_blank" rel="noopener">Kernel boundary</a>
+      <a class="btn" href="https://github.com/GBLMX/Anvil/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
+    </div>
+  </section>
+</SubpageLayout>

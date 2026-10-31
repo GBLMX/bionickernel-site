@@ -136,3 +136,10 @@ draft: false
 Skins are original artwork by the site author; source files and the generation tool
 are open-sourced in [skin-skill](https://github.com/GBLMX/skin-skill).
 ICP: 苏ICP备2026079470号.
+
+## Anvil subdomain
+
+`anvil.bionickernel.com` serves the `/anvil/` project page from the same
+`/var/www/bionickernel.com` root through the nginx vhost. The subdomain uses the
+same certificate as the apex and links back to the canonical
+`https://bionickernel.com/anvil/` page.
