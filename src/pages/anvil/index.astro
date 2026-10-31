@@ -1,169 +1,405 @@
 ---
-import SubpageLayout from "../../layouts/SubpageLayout.astro";
+const canonical = "https://bionickernel.com/anvil/";
+const title = "Anvil — a terminal editor with a kernel you can build on";
+const description =
+  "Anvil is a Linux-first terminal editor: a selection-first Rust kernel, a per-session Go policy gateway, and an isolated plugin host.";
 ---
 
-<SubpageLayout
-  title="Anvil — Rust 内核与 Go 网关的终端编辑器"
-  description="Anvil 是一个 Linux-first 终端编辑器：selection-first 的 Rust 内核、per-session Go 策略网关，以及隔离的插件宿主。"
-  canonical="https://bionickernel.com/anvil/"
-  active="anvil"
-  eyebrow="Project · Anvil"
-  heading="Anvil"
-  lede="一个把编辑内核、系统策略与不可信插件分开的终端编辑器。"
-  ogTitle="Anvil — a terminal editor with a Rust kernel and Go gateway"
-  ogDescription="Selection-first Rust kernel, per-session Go policy gateway, and an isolated plugin host."
->
-  <style>
-    .anvil-status {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 1rem;
-    }
-    .anvil-status span {
-      padding: 0.22rem 0.6rem;
-      border: 1px solid var(--line-strong);
-      border-radius: 999px;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.03em;
-      color: var(--faint);
-    }
-    .anvil-intro {
-      max-width: 44rem;
-      margin-top: 2rem;
-      color: var(--dim);
-      font-size: 0.95rem;
-      line-height: 1.9;
-      text-wrap: pretty;
-    }
-    .anvil-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.9rem;
-      margin-top: 2rem;
-    }
-    .anvil-card {
-      padding: 1.1rem;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--surface-2);
-    }
-    .anvil-card h2 {
-      margin: 0;
-      font-size: 0.96rem;
-    }
-    .anvil-card p {
-      margin-top: 0.55rem;
-      color: var(--dim);
-      font-size: 0.86rem;
-      line-height: 1.7;
-    }
-    .anvil-card code {
-      color: var(--accent-text);
-      font-family: var(--mono);
-      font-size: 0.78em;
-    }
-    .anvil-section {
-      margin-top: 2.5rem;
-      padding-top: 1.6rem;
-      border-top: 1px solid var(--line);
-    }
-    .anvil-section h2 {
-      font-size: 1.1rem;
-    }
-    .anvil-section p,
-    .anvil-section li {
-      color: var(--dim);
-      font-size: 0.9rem;
-      line-height: 1.8;
-    }
-    .anvil-section ul {
-      margin-top: 0.7rem;
-      padding-left: 1.2rem;
-    }
-    .anvil-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-      margin-top: 1.2rem;
-    }
-    @media (max-width: 760px) {
-      .anvil-grid {
-        grid-template-columns: 1fr;
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0b0f" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="GBLMX" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Anvil" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:image" content="https://bionickernel.com/assets/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://bionickernel.com/assets/og.png" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="bionickernel.com — 观点" href="https://bionickernel.com/rss.xml" />
+    <link rel="icon" type="image/png" href="/assets/avatar.png" />
+    <style is:global>
+      :root {
+        color-scheme: dark;
+        --av-bg: #0a0b0f;
+        --av-panel: #11131a;
+        --av-panel-2: #171a23;
+        --av-line: #292d39;
+        --av-line-strong: #3c4252;
+        --av-fg: #f2f4f8;
+        --av-dim: #a3a9b8;
+        --av-faint: #6f7687;
+        --av-lime: #d7ff4f;
+        --av-cyan: #79e6d2;
+        --av-orange: #ff9e64;
+        --av-mono: "JetBrains Mono", "SFMono-Regular", "Cascadia Code", ui-monospace, monospace;
+        --av-sans: Inter, "SF Pro Display", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
       }
-    }
-  </style>
 
-  <div class="anvil-status">
-    <span>0.3.0</span>
-    <span>Phase 0.7</span>
-    <span>pre-alpha</span>
-    <span>Linux first</span>
-  </div>
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--av-bg);
+        color: var(--av-fg);
+        font-family: var(--av-sans);
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; }
+      .av-wrap { width: min(1180px, calc(100% - 2.5rem)); margin: 0 auto; }
 
-  <p class="anvil-intro">
-    Anvil 不是把编辑器、插件和系统权限塞进同一个进程。它把 selection-first
-    的编辑状态留在 Rust 内核，把文件、网络和进程策略交给 per-session Go
-    网关，把不可信插件放进独立宿主。目标是让标准版和第三方发行版可以共享内核，
-    而不是各自分叉一套编辑器。
-  </p>
+      .av-nav {
+        position: sticky; top: 0; z-index: 20;
+        border-bottom: 1px solid var(--av-line);
+        background: color-mix(in srgb, var(--av-bg) 88%, transparent);
+        backdrop-filter: blur(14px);
+      }
+      .av-nav-inner {
+        height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+      }
+      .av-brand {
+        display: inline-flex; align-items: center; gap: 0.65rem;
+        color: var(--av-fg); text-decoration: none;
+        font-family: var(--av-mono); font-size: 0.92rem; letter-spacing: 0.02em;
+      }
+      .av-mark {
+        width: 26px; height: 26px; display: grid; place-items: center;
+        border: 1px solid var(--av-line-strong); border-radius: 7px;
+        color: var(--av-lime); font-size: 0.95rem; font-weight: 700;
+        background: var(--av-panel);
+      }
+      .av-brand small { color: var(--av-faint); font-size: 0.68rem; }
+      .av-links { display: flex; align-items: center; gap: 1.2rem; }
+      .av-links a {
+        color: var(--av-dim); text-decoration: none;
+        font-family: var(--av-mono); font-size: 0.73rem;
+      }
+      .av-links a:hover { color: var(--av-fg); }
+      .av-links .av-github {
+        color: var(--av-bg); background: var(--av-lime); padding: 0.48rem 0.7rem;
+        border-radius: 6px; font-weight: 700;
+      }
 
-  <div class="anvil-grid">
-    <article class="anvil-card">
-      <h2>Rust kernel</h2>
-      <p>
-        PieceTable 文本模型、selection-first 编辑状态、快照与撤销。
-        第三方发行版可以通过源码级 crate 组合自己的 UI。
-      </p>
-    </article>
-    <article class="anvil-card">
-      <h2>Go gateway</h2>
-      <p>
-        每个会话一个策略网关：<code>openat2</code> 工作区边界、fetch 策略、
-        sandboxed exec runner 和 capability token。
-      </p>
-    </article>
-    <article class="anvil-card">
-      <h2>Plugin host</h2>
-      <p>
-        Lua/QuickJS 不运行在 editor 进程。插件宿主是可替换的隔离边界，
-        而不是内嵌的“可信插件”开关。
-      </p>
-    </article>
-  </div>
+      .av-hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--av-line); }
+      .av-hero::before {
+        content: ""; position: absolute; inset: -35% -10% auto 45%;
+        height: 560px; pointer-events: none;
+        background: radial-gradient(circle, color-mix(in srgb, var(--av-lime) 17%, transparent), transparent 66%);
+        filter: blur(20px);
+      }
+      .av-hero-grid {
+        position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        gap: 3.5rem; align-items: center; padding: 5.8rem 0 5rem;
+      }
+      .av-kicker {
+        display: inline-flex; align-items: center; gap: 0.55rem;
+        color: var(--av-lime); font-family: var(--av-mono); font-size: 0.72rem;
+        letter-spacing: 0.08em; text-transform: uppercase;
+      }
+      .av-kicker::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--av-lime); box-shadow: 0 0 18px var(--av-lime); }
+      .av-hero h1 {
+        margin: 1.2rem 0 1.3rem;
+        font-size: clamp(3.8rem, 8vw, 7rem); line-height: 0.91; letter-spacing: -0.07em;
+        font-weight: 650;
+      }
+      .av-hero h1 span { color: var(--av-lime); }
+      .av-lede { max-width: 33rem; color: var(--av-dim); font-size: 1.05rem; line-height: 1.75; }
+      .av-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.8rem; }
+      .av-btn {
+        display: inline-flex; align-items: center; gap: 0.45rem;
+        padding: 0.7rem 0.95rem; border-radius: 7px; text-decoration: none;
+        border: 1px solid var(--av-line-strong); color: var(--av-fg);
+        font-family: var(--av-mono); font-size: 0.76rem;
+      }
+      .av-btn:hover { border-color: var(--av-fg); }
+      .av-btn-primary { background: var(--av-lime); color: #0a0b0f; border-color: var(--av-lime); font-weight: 700; }
+      .av-btn-primary:hover { background: #e5ff86; border-color: #e5ff86; }
 
-  <section class="anvil-section">
-    <h2>现在做到哪里</h2>
-    <ul>
-      <li>selection-first 内核、PieceTable、多选区、undo/redo 和快照。</li>
-      <li>LSP 子集：diagnostics、completion、hover、definition、rename、code actions、formatting、symbols。</li>
-      <li>终端 TUI：多 buffer、垂直 split、文件树、模糊查找、搜索与基础 Vim-like 键位。</li>
-      <li>Go gateway 与 exec runner 的安全边界、权限和回归测试。</li>
-    </ul>
-  </section>
+      .av-term {
+        position: relative; border: 1px solid var(--av-line-strong); border-radius: 12px;
+        background: #0d0f15; box-shadow: 0 24px 80px rgba(0,0,0,0.45); overflow: hidden;
+      }
+      .av-term-bar {
+        display: flex; align-items: center; gap: 0.42rem; height: 34px; padding: 0 0.85rem;
+        border-bottom: 1px solid var(--av-line); background: #131620;
+      }
+      .av-term-bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--av-line-strong); }
+      .av-term-bar i:first-child { background: #ff6b6b; }
+      .av-term-bar i:nth-child(2) { background: #ffd166; }
+      .av-term-bar i:nth-child(3) { background: #6ee7a8; }
+      .av-term-file { margin-left: 0.5rem; color: var(--av-faint); font-family: var(--av-mono); font-size: 0.66rem; }
+      .av-term-body { padding: 1rem 1.1rem 1.2rem; font-family: var(--av-mono); font-size: 0.74rem; line-height: 1.85; }
+      .av-line { white-space: pre; }
+      .av-line b { color: var(--av-lime); font-weight: 500; }
+      .av-line em { color: var(--av-cyan); font-style: normal; }
+      .av-line s { color: var(--av-faint); text-decoration: none; }
+      .av-line u { color: var(--av-orange); text-decoration: none; }
+      .av-status { margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid var(--av-line); color: var(--av-faint); font-size: 0.67rem; }
+      .av-status b { color: var(--av-cyan); font-weight: 500; }
 
-  <section class="anvil-section">
-    <h2>还没有完成</h2>
-    <p>
-      Anvil 仍是 pre-alpha。用户 keymap/config、完整 selection-first UI、
-      Lua/TS 插件运行时、标准版 composition crate 和第三方发行版 SDK
-      都还没有冻结。插件 keymap 和长期兼容性不能提前承诺。
-    </p>
-  </section>
+      .av-strip { border-bottom: 1px solid var(--av-line); }
+      .av-strip-inner {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+        background: var(--av-line);
+      }
+      .av-strip-item { background: var(--av-bg); padding: 1.15rem 1.2rem; }
+      .av-strip-item small { display: block; color: var(--av-faint); font-family: var(--av-mono); font-size: 0.64rem; letter-spacing: 0.07em; text-transform: uppercase; }
+      .av-strip-item strong { display: block; margin-top: 0.25rem; font-size: 0.94rem; font-weight: 500; }
+      .av-strip-item strong em { color: var(--av-lime); font-style: normal; }
 
-  <section class="anvil-section">
-    <h2>边界</h2>
-    <p>
-      Rust 内核采用源码级组合，不承诺稳定 Rust ABI；运行时插件走 sandbox
-      协议；编译器级 PGO/BOLT 是后续发布选项，不是内核接口的一部分。
-    </p>
-    <div class="anvil-links">
-      <a class="btn primary" href="https://github.com/GBLMX/Anvil" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://github.com/GBLMX/Anvil/blob/main/README.md" target="_blank" rel="noopener">README</a>
-      <a class="btn" href="https://github.com/GBLMX/Anvil/blob/main/docs/architecture.md" target="_blank" rel="noopener">Architecture</a>
-      <a class="btn" href="https://github.com/GBLMX/Anvil/blob/main/docs/adr/0013-kernel-distribution-boundary.md" target="_blank" rel="noopener">Kernel boundary</a>
-      <a class="btn" href="https://github.com/GBLMX/Anvil/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
-    </div>
-  </section>
-</SubpageLayout>
+      .av-section { padding: 5rem 0; border-bottom: 1px solid var(--av-line); }
+      .av-section-head { display: flex; justify-content: space-between; gap: 2rem; align-items: baseline; margin-bottom: 2rem; }
+      .av-eyebrow { color: var(--av-faint); font-family: var(--av-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+      .av-section h2 { margin: 0.65rem 0 0; font-size: clamp(1.8rem, 4vw, 3.1rem); letter-spacing: -0.045em; line-height: 1.05; font-weight: 560; }
+      .av-section-head p { max-width: 28rem; margin: 0; color: var(--av-dim); font-size: 0.9rem; line-height: 1.7; }
+      .av-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--av-line); border: 1px solid var(--av-line); }
+      .av-card { background: var(--av-panel); padding: 1.6rem; min-height: 190px; }
+      .av-card:hover { background: var(--av-panel-2); }
+      .av-card .n { color: var(--av-lime); font-family: var(--av-mono); font-size: 0.67rem; }
+      .av-card h3 { margin: 1rem 0 0.55rem; font-size: 1.04rem; font-weight: 550; }
+      .av-card p { margin: 0; color: var(--av-dim); font-size: 0.86rem; line-height: 1.75; }
+      .av-card code { color: var(--av-cyan); font-family: var(--av-mono); font-size: 0.82em; }
+
+      .av-arch { display: grid; grid-template-columns: 1fr 48px 1fr 48px 1fr; align-items: center; gap: 0; margin-top: 2.4rem; }
+      .av-node { border: 1px solid var(--av-line-strong); border-radius: 9px; padding: 1.1rem; background: var(--av-panel); }
+      .av-node small { color: var(--av-faint); font-family: var(--av-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; }
+      .av-node strong { display: block; margin-top: 0.25rem; font-size: 0.92rem; font-weight: 550; }
+      .av-node p { margin: 0.45rem 0 0; color: var(--av-dim); font-size: 0.78rem; line-height: 1.6; }
+      .av-arrow { color: var(--av-lime); text-align: center; font-family: var(--av-mono); font-size: 1.2rem; }
+
+      .av-roadmap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; }
+      .av-roadmap h2 { margin-top: 0.5rem; }
+      .av-roadmap p { color: var(--av-dim); line-height: 1.8; font-size: 0.92rem; }
+      .av-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--av-line); }
+      .av-list li { display: grid; grid-template-columns: 72px 1fr; gap: 0.8rem; padding: 0.95rem 0; border-bottom: 1px solid var(--av-line); }
+      .av-list small { color: var(--av-faint); font-family: var(--av-mono); font-size: 0.65rem; padding-top: 0.18rem; }
+      .av-list span { color: var(--av-fg); font-size: 0.88rem; line-height: 1.6; }
+      .av-list span em { color: var(--av-faint); font-style: normal; }
+
+      .av-footer { padding: 2.2rem 0 2.8rem; color: var(--av-faint); font-family: var(--av-mono); font-size: 0.7rem; }
+      .av-footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+      .av-footer a { color: var(--av-dim); text-decoration: none; }
+      .av-footer a:hover { color: var(--av-lime); }
+
+      @media (max-width: 900px) {
+        .av-hero-grid, .av-roadmap { grid-template-columns: 1fr; gap: 2.5rem; }
+        .av-hero-grid { padding: 3.8rem 0; }
+        .av-cards { grid-template-columns: 1fr; }
+        .av-strip-inner { grid-template-columns: 1fr 1fr; }
+        .av-section-head { display: block; }
+        .av-section-head p { margin-top: 1rem; }
+        .av-arch { grid-template-columns: 1fr; gap: 0.7rem; }
+        .av-arrow { transform: rotate(90deg); }
+      }
+      @media (max-width: 620px) {
+        .av-links a:not(.av-github) { display: none; }
+        .av-hero h1 { font-size: 4rem; }
+        .av-term-body { font-size: 0.66rem; }
+        .av-wrap { width: min(100% - 1.6rem, 1180px); }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="av-nav">
+      <div class="av-wrap av-nav-inner">
+        <a class="av-brand" href="/" aria-label="Anvil home">
+          <span class="av-mark" aria-hidden="true">A</span>
+          <span>anvil <small>/ bionickernel</small></span>
+        </a>
+        <nav class="av-links" aria-label="Project navigation">
+          <a href="#architecture">Architecture</a>
+          <a href="#status">Status</a>
+          <a href="#boundary">Boundary</a>
+          <a class="av-github" href="https://github.com/GBLMX/Anvil" target="_blank" rel="noopener">GitHub ↗</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="av-hero">
+        <div class="av-wrap av-hero-grid">
+          <div>
+            <p class="av-kicker">Pre-alpha · Phase 0.7</p>
+            <h1>Anvil<span>.</span><br />Build on the editor.</h1>
+            <p class="av-lede">
+              A Linux-first terminal editor with a selection-first Rust kernel,
+              a per-session Go policy gateway, and a plugin host that is a real
+              process boundary. Pre-alpha, but the seams are deliberate.
+            </p>
+            <div class="av-actions">
+              <a class="av-btn av-btn-primary" href="https://github.com/GBLMX/Anvil" target="_blank" rel="noopener">Read the source ↗</a>
+              <a class="av-btn" href="https://github.com/GBLMX/Anvil/blob/main/docs/architecture.md" target="_blank" rel="noopener">Architecture</a>
+            </div>
+          </div>
+
+          <div class="av-term" aria-label="Anvil terminal preview">
+            <div class="av-term-bar" aria-hidden="true">
+              <i></i><i></i><i></i>
+              <span class="av-term-file">anvil — workspace</span>
+            </div>
+            <div class="av-term-body">
+              <div class="av-line"><s>01</s>  <b>fn</b> main() &#123;</div>
+              <div class="av-line"><s>02</s>      <b>let</b> kernel = <em>Anvil</em>::new();</div>
+              <div class="av-line"><s>03</s>      kernel.<b>open</b>(<u>"src/main.rs"</u>);</div>
+              <div class="av-line"><s>04</s>  &#125;</div>
+              <div class="av-line"> </div>
+              <div class="av-line"><s>~</s> <em>├─ src/main.rs</em>        <s>rust</s></div>
+              <div class="av-line"><s>~</s> <em>└─ src/session.rs</em>     <s>modified</s></div>
+              <div class="av-status">NORMAL  <b>LSP</b> ready · split: 2 panes · gateway: per-session</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="av-strip" aria-label="Project facts">
+        <div class="av-wrap av-strip-inner">
+          <div class="av-strip-item"><small>Kernel</small><strong>selection-first <em>Rust</em></strong></div>
+          <div class="av-strip-item"><small>Policy</small><strong>per-session <em>Go</em> gateway</strong></div>
+          <div class="av-strip-item"><small>Plugins</small><strong>untrusted <em>host</em></strong></div>
+          <div class="av-strip-item"><small>License</small><strong>MIT / Apache-2.0</strong></div>
+        </div>
+      </section>
+
+      <section class="av-section" id="architecture">
+        <div class="av-wrap">
+          <div class="av-section-head">
+            <div>
+              <p class="av-eyebrow">01 · Architecture</p>
+              <h2>Separate the editor<br />from the authority.</h2>
+            </div>
+            <p>
+              The gateway is not the sandbox. The plugin host is. The editor owns
+              text and selection; the gateway owns system policy; neither owns
+              the other's state.
+            </p>
+          </div>
+
+          <div class="av-arch" aria-label="Anvil process architecture">
+            <div class="av-node">
+              <small>Trusted</small>
+              <strong>Rust editor</strong>
+              <p>PieceTable · selection · view · snapshots · commands</p>
+            </div>
+            <div class="av-arrow" aria-hidden="true">→</div>
+            <div class="av-node">
+              <small>Per session</small>
+              <strong>Go gateway</strong>
+              <p>openat2 · fetch policy · exec policy · capability token</p>
+            </div>
+            <div class="av-arrow" aria-hidden="true">→</div>
+            <div class="av-node">
+              <small>Untrusted</small>
+              <strong>Plugin host</strong>
+              <p>Lua/QuickJS · Landlock · seccomp · no ambient authority</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="av-section">
+        <div class="av-wrap">
+          <div class="av-section-head">
+            <div>
+              <p class="av-eyebrow">02 · The pieces</p>
+              <h2>An editor kernel<br />with fewer assumptions.</h2>
+            </div>
+          </div>
+          <div class="av-cards">
+            <article class="av-card">
+              <span class="n">01</span>
+              <h3>Selection-first core</h3>
+              <p>Every action has an explicit target. Caret is an empty selection. Multi-cursor is not a separate mode.</p>
+            </article>
+            <article class="av-card">
+              <span class="n">02</span>
+              <h3>Go gateway</h3>
+              <p><code>openat2</code> workspace resolution, DNS-pinned fetch, sandboxed exec, and per-session capability grants.</p>
+            </article>
+            <article class="av-card">
+              <span class="n">03</span>
+              <h3>Process isolation</h3>
+              <p>Lua/QuickJS never run in the editor process. A compromised plugin is not the editor.</p>
+            </article>
+            <article class="av-card">
+              <span class="n">04</span>
+              <h3>LSP, not a monolith</h3>
+              <p>Diagnostics, completion, hover, definition, rename, actions, formatting, and symbols — as a replaceable layer.</p>
+            </article>
+            <article class="av-card">
+              <span class="n">05</span>
+              <h3>Terminal native</h3>
+              <p>Ratatui/crossterm, vertical splits, fuzzy file finding, file tree, and dirty-only redraws.</p>
+            </article>
+            <article class="av-card">
+              <span class="n">06</span>
+              <h3>Distro boundary</h3>
+              <p>The standard edition is one composition. Third parties can build their own UI on the kernel without forking it.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="av-section" id="status">
+        <div class="av-wrap av-roadmap">
+          <div>
+            <p class="av-eyebrow">03 · Current state</p>
+            <h2>Pre-alpha,<br />with explicit seams.</h2>
+            <p>
+              Anvil is not a drop-in Helix or Vim replacement yet. The kernel,
+              gateway, and sandbox are real; the standard-edition and third-party
+              distribution surface is still being extracted.
+            </p>
+            <a class="av-btn" href="https://github.com/GBLMX/Anvil/blob/main/ROADMAP.md" target="_blank" rel="noopener">Roadmap ↗</a>
+          </div>
+          <ul class="av-list">
+            <li><small>NOW</small><span>Selection-first kernel, PieceTable, multi-selection, undo, snapshots <em>· shipped</em></span></li>
+            <li><small>NOW</small><span>LSP subset and terminal UI <em>· shipped</em></span></li>
+            <li><small>NEXT</small><span>Extract <code>anvil-session</code> from the TUI <em>· in design</em></span></li>
+            <li><small>NEXT</small><span>Versioned gateway protocol and compatibility tests</span></li>
+            <li><small>LATER</small><span>Lua/TS plugin runtime and a third-party distribution example</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="av-section" id="boundary">
+        <div class="av-wrap">
+          <div class="av-section-head">
+            <div>
+              <p class="av-eyebrow">04 · Boundary</p>
+              <h2>No stable Rust ABI.<br />No fake zero trust.</h2>
+            </div>
+            <p>
+              Compiled Rust code in a distribution is trusted kernel code.
+              Lua/TS plugins are untrusted runtime code. PGO/BOLT is an optional
+              release step, not part of the interface.
+            </p>
+          </div>
+          <div class="av-actions">
+            <a class="av-btn" href="https://github.com/GBLMX/Anvil/blob/main/docs/adr/0013-kernel-distribution-boundary.md" target="_blank" rel="noopener">Kernel boundary ADR ↗</a>
+            <a class="av-btn" href="https://github.com/GBLMX/Anvil/blob/main/SECURITY.md" target="_blank" rel="noopener">Security policy ↗</a>
+            <a class="av-btn" href="https://github.com/GBLMX/Anvil/blob/main/GOVERNANCE.md" target="_blank" rel="noopener">Governance ↗</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="av-footer">
+      <div class="av-wrap av-footer-inner">
+        <span>Anvil · pre-alpha · 0.3.0 / Phase 0.7</span>
+        <span><a href="https://bionickernel.com/">bionickernel.com</a> · <a href="https://github.com/GBLMX/Anvil" target="_blank" rel="noopener">GitHub</a></span>
+      </div>
+    </footer>
+  </body>
+</html>
