@@ -231,12 +231,12 @@ const description =
       <section class="av-hero">
         <div class="av-wrap av-hero-grid">
           <div>
-            <p class="av-kicker">Pre-alpha · Phase 0.7</p>
+            <p class="av-kicker">Pre-alpha · 0.4.5 released · 0.4.6 in progress</p>
             <h1>Anvil<span>.</span><br />Build on the editor.</h1>
             <p class="av-lede">
               A Linux-first terminal editor with a selection-first Rust kernel,
-              a per-session Go policy gateway, and a plugin host that is a real
-              process boundary. Pre-alpha, but the seams are deliberate.
+              a per-session Go policy gateway, and an isolated Luau plugin
+              host. Pre-alpha, but the seams are deliberate.
             </p>
             <div class="av-actions">
               <a class="av-btn av-btn-primary" href="https://github.com/GBLMX/Anvil" target="_blank" rel="noopener">Read the source ↗</a>
@@ -247,7 +247,7 @@ const description =
           <div class="av-term" aria-label="Anvil terminal preview">
             <div class="av-term-bar" aria-hidden="true">
               <i></i><i></i><i></i>
-              <span class="av-term-file">anvil — workspace</span>
+              <span class="av-term-file">anvil 0.4.5 — workspace</span>
             </div>
             <div class="av-term-body">
               <div class="av-line"><s>01</s>  <b>fn</b> main() &#123;</div>
@@ -302,7 +302,7 @@ const description =
             <div class="av-node">
               <small>Untrusted</small>
               <strong>Plugin host</strong>
-              <p>Lua/QuickJS · Landlock · seccomp · no ambient authority</p>
+              <p>Luau host · Landlock · seccomp · cgroup · capability API pending</p>
             </div>
           </div>
         </div>
@@ -330,7 +330,7 @@ const description =
             <article class="av-card">
               <span class="n">03</span>
               <h3>Process isolation</h3>
-              <p>Lua/QuickJS never run in the editor process. A compromised plugin is not the editor.</p>
+              <p>Luau runs in a separate host; activation is explicit. Capability surface and seccomp signal hardening are still in progress.</p>
             </article>
             <article class="av-card">
               <span class="n">04</span>
@@ -345,7 +345,7 @@ const description =
             <article class="av-card">
               <span class="n">06</span>
               <h3>Distro boundary</h3>
-              <p>The standard edition is one composition. Third parties can build their own UI on the kernel without forking it.</p>
+              <p>The standard edition is the target composition. Third parties will build their own UI on the kernel without forking it.</p>
             </article>
           </div>
         </div>
@@ -365,10 +365,11 @@ const description =
           </div>
           <ul class="av-list">
             <li><small>NOW</small><span>Selection-first kernel, PieceTable, multi-selection, undo, snapshots <em>· shipped</em></span></li>
-            <li><small>NOW</small><span>LSP subset and terminal UI <em>· shipped</em></span></li>
-            <li><small>NEXT</small><span>Extract <code>anvil-session</code> from the TUI <em>· in design</em></span></li>
-            <li><small>NEXT</small><span>Versioned gateway protocol and compatibility tests</span></li>
-            <li><small>LATER</small><span>Lua/TS plugin runtime and a third-party distribution example</span></li>
+            <li><small>NOW</small><span>LSP, tree watcher, syntax highlighting, terminal UI <em>· 0.4.5</em></span></li>
+            <li><small>NEXT</small><span>Plugin activation matching and host lifecycle <em>· 0.4.6 in progress</em></span></li>
+            <li><small>NEXT</small><span>Seccomp/cgroup hardening and plugin I/O <em>· 0.4.7–0.4.8</em></span></li>
+            <li><small>NEXT</small><span><code>anvil-session</code> extraction and protocol boundary <em>· 0.4.9</em></span></li>
+            <li><small>LATER</small><span>Modern UI, signed distribution/marketplace, optional Rust modules <em>· 0.5–0.7</em></span></li>
           </ul>
         </div>
       </section>
@@ -382,8 +383,8 @@ const description =
             </div>
             <p>
               Compiled Rust code in a distribution is trusted kernel code.
-              Lua/TS plugins are untrusted runtime code. PGO/BOLT is an optional
-              release step, not part of the interface.
+              Luau runtime plugins are untrusted; the TS runtime is planned.
+              PGO/BOLT is an optional release step, not part of the interface.
             </p>
           </div>
           <div class="av-actions">
@@ -397,7 +398,7 @@ const description =
 
     <footer class="av-footer">
       <div class="av-wrap av-footer-inner">
-        <span>Anvil · pre-alpha · 0.3.0 / Phase 0.7</span>
+        <span>Anvil · pre-alpha · 0.4.5 · 0.4.x active</span>
         <span><a href="https://bionickernel.com/">bionickernel.com</a> · <a href="https://github.com/GBLMX/Anvil" target="_blank" rel="noopener">GitHub</a></span>
       </div>
     </footer>
