@@ -1,0 +1,140 @@
+---
+import SubpageLayout from "../../layouts/SubpageLayout.astro";
+---
+
+<SubpageLayout
+  title="本站说明 — bionickernel.com"
+  description="bionickernel.com 的实现方式：Astro 静态输出、原生脚本、nginx on 阿里云 ECS，以及内容与引用的取舍标准。"
+  canonical="https://bionickernel.com/colophon/"
+  active="colophon"
+  eyebrow="Colophon · 本站说明"
+  heading="本站说明"
+  lede="这一页写站点本身：内容怎么收、页面怎么生成、部署落在哪里、用了谁的代码。所有条目都能在仓库和服务器上核对。"
+  ogTitle="本站说明 | bionickernel.com"
+  ogDescription="Astro 静态输出、原生脚本、nginx on 阿里云 ECS：bionickernel.com 的实现与内容原则。"
+>
+<style is:global>
+  .colophon .block + .block {
+    margin-top: clamp(2rem, 4vw, 2.8rem);
+  }
+
+  .colophon .ledger dd code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.86em;
+    color: var(--fg);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border-radius: 5px;
+    padding: 0.08em 0.36em;
+  }
+
+  .colophon .ledger dd a {
+    color: var(--accent-text);
+  }
+</style>
+
+<div class="colophon">
+  <section class="block">
+    <div class="sec-head">
+      <span class="num" aria-hidden="true">01</span>
+      <h2>内容原则</h2>
+      <span class="hint">内容优先，尽量给出处</span>
+    </div>
+    <dl class="ledger">
+      <div>
+        <dt>收录标准</dt>
+        <dd>只写亲手做过、亲自读过的部分。书籍页只收通读过的书；研究记录保留当时的假设与错误，结论改了就整条重写，不覆盖旧判断。</dd>
+      </div>
+      <div>
+        <dt>出处</dt>
+        <dd>观点页给出处，数据页给版本与日期；引用外部图表时写明来源。找不到出处的段落宁可不写。</dd>
+      </div>
+      <div>
+        <dt>草稿</dt>
+        <dd>研究笔记在 frontmatter 里写 <code>draft: true</code> 即不进时间线、不生成路由，草稿不会以半成品形式被索引。</dd>
+      </div>
+      <div>
+        <dt>不做的事</dt>
+        <dd>没有统计脚本，没有 Cookie 横幅，没有需要 JavaScript 才能读的正文。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="block">
+    <div class="sec-head">
+      <span class="num" aria-hidden="true">02</span>
+      <h2>实现</h2>
+      <span class="hint">Astro 静态输出</span>
+    </div>
+    <dl class="ledger">
+      <div>
+        <dt>构建</dt>
+        <dd><a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> 静态输出，<code>build.format: "preserve"</code> 保持既有 URL（<code>/books/</code>、<code>/essays/history-and-math.html</code>）。构建后由脚本生成 <code>robots.txt</code> 与 <code>sitemap.xml</code>，再用另一个脚本校验本地链接、head 标签与生成文件。</dd>
+      </div>
+      <div>
+        <dt>前端</dt>
+        <dd>不引入 UI 框架。英雄区着色器、侧栏折叠与 scrollspy、书籍筛选、研究图表都是原生脚本，另加一份 skinview3d 3D 预览。</dd>
+      </div>
+      <div>
+        <dt>降级</dt>
+        <dd>关掉 WebGL 时英雄区退回 CSS 渐变；减少动态偏好的环境下渲染静态帧；皮肤页无 WebGL 时退回静态预览；书籍筛选在无 JS 时退化为完整列表。</dd>
+      </div>
+      <div>
+        <dt>内容源</dt>
+        <dd>研究笔记是 Obsidian 兼容的 Markdown 仓库，<code>[[note-slug|显示文字]]</code> 与 <code>![[image.png]]</code> 由构建期插件转换成链接和图片。</dd>
+      </div>
+      <div>
+        <dt>来源</dt>
+        <dd>站点源码在 <a href="https://github.com/GBLMX/bionickernel-site" target="_blank" rel="noopener noreferrer">GBLMX/bionickernel-site</a>，皮肤生成工具在 <a href="https://github.com/GBLMX/skin-skill" target="_blank" rel="noopener noreferrer">skin-skill</a>。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="block">
+    <div class="sec-head">
+      <span class="num" aria-hidden="true">03</span>
+      <h2>托管与部署</h2>
+      <span class="hint">阿里云 ECS · nginx</span>
+    </div>
+    <dl class="ledger">
+      <div>
+        <dt>托管</dt>
+        <dd>阿里云 ECS 上的 nginx，静态文件直接读取；证书由 Let's Encrypt 签发，开启 HTTP/2 与 HTTP/3（QUIC），<code>www</code> 跳转到裸域。</dd>
+      </div>
+      <div>
+        <dt>安全头</dt>
+        <dd>HSTS、CSP 与其他安全响应头写在 vhost 配置里，配置本身也进仓库，改完 <code>nginx -t</code> 再 reload。</dd>
+      </div>
+      <div>
+        <dt>发布</dt>
+        <dd>推送到 <code>main</code> 触发 GitHub Actions：安装依赖、构建、校验，然后 rsync 到服务器；发布后比对线上文件的 SHA-256。拉取请求只跑构建与校验。</dd>
+      </div>
+      <div>
+        <dt>发行包</dt>
+        <dd>桌面端更新包与校验和托管在 <a href="https://updates.bionickernel.com/" target="_blank" rel="noopener noreferrer">updates.bionickernel.com</a>，与站点同机不同目录。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="block">
+    <div class="sec-head">
+      <span class="num" aria-hidden="true">04</span>
+      <h2>来源与许可</h2>
+      <span class="hint">第三方代码照实列出</span>
+    </div>
+    <dl class="ledger">
+      <div>
+        <dt>第三方</dt>
+        <dd>Minecraft 皮肤预览使用 skinview3d 3.4.2（MIT）；几何代数作品由 versor-java 计算后导出 SVG。两者都以原许可证使用。</dd>
+      </div>
+      <div>
+        <dt>原创内容</dt>
+        <dd>文字、皮肤原画与 SVG 作品由站主创作；转载与引用请保留出处链接。</dd>
+      </div>
+      <div>
+        <dt>联系</dt>
+        <dd>纠错、补充出处或指出引用问题，请发到 <a href="mailto:gblmx@bionickernel.com">gblmx@bionickernel.com</a>；能改的会在页面上改，并注明更新时间。</dd>
+      </div>
+    </dl>
+  </section>
+</div>
+</SubpageLayout>

@@ -5,3 +5,6 @@ dist/
 # Obsidian authoring state
 src/content/research/.obsidian/
 src/content/research/.trash/
+
+# Editor state
+.idea/

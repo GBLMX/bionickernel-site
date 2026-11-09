@@ -116,6 +116,8 @@ draft: false
 - `src/pages/research/sta/index.astro` — spacetime-algebra animations (Wolfram
   computations, manimgl renders, verification table).
 - `src/pages/research/ga/index.astro` — geometric-algebra fine-tuning results
+- `src/pages/colophon/index.astro` — 本站说明: content policy, implementation, hosting
+  and deployment, third-party licences.
   (condensed conclusions, interactive SVG charts).
 - `scripts/works/GenWorks.java` — SVG generator using `vsr.P3` / `vsr.E3`.
 - `scripts/works/generate.sh` — compiles `versor-java` and regenerates the works.
