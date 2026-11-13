@@ -46,10 +46,6 @@ the `www` redirect, HSTS, CSP and the other security headers, a one-hour cache f
 `/etc/nginx/sites-available/`, symlink into `sites-enabled/`, then
 `nginx -t && systemctl reload nginx`.
 
-`deploy/nginx/anvilkernel.conf` is prepared for `anvilkernel.com` but is not
-enabled. Keep it out of `sites-enabled/` until the ICP filing is approved, DNS
-points at the ECS, and Certbot has issued
-`/etc/letsencrypt/live/anvilkernel.com/`.
 
 ## Content
 
@@ -144,9 +140,3 @@ Skins are original artwork by the site author; source files and the generation t
 are open-sourced in [skin-skill](https://github.com/GBLMX/skin-skill).
 ICP: 苏ICP备2026079470号.
 
-## Anvil subdomain
-
-`anvil.bionickernel.com` serves the `/anvil/` project page from the same
-`/var/www/bionickernel.com` root through the nginx vhost. The subdomain uses the
-same certificate as the apex and links back to the canonical
-`https://bionickernel.com/anvil/` page.
