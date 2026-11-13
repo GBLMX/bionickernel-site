@@ -10,7 +10,7 @@ const description =
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a0b0f" />
+    <meta name="theme-color" content="#0b0f16" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="GBLMX" />
@@ -20,30 +20,36 @@ const description =
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Anvil" />
     <meta property="og:locale" content="zh_CN" />
-    <meta property="og:image" content="https://bionickernel.com/assets/og.png" />
+    <meta property="og:image" content="https://bionickernel.com/assets/anvil-og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://bionickernel.com/assets/og.png" />
+    <meta name="twitter:image" content="https://bionickernel.com/assets/anvil-og.png" />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title="bionickernel.com — 观点" href="https://bionickernel.com/rss.xml" />
-    <link rel="icon" type="image/png" href="/assets/avatar.png" />
+    <link rel="icon" type="image/svg+xml" href="/assets/anvil-icon.svg" />
+    <link rel="icon" type="image/png" href="/assets/anvil-icon.png" />
+    <link rel="apple-touch-icon" href="/assets/anvil-icon.png" />
     <style is:global>
       :root {
         color-scheme: dark;
-        --av-bg: #0a0b0f;
-        --av-panel: #11131a;
-        --av-panel-2: #171a23;
-        --av-line: #292d39;
-        --av-line-strong: #3c4252;
-        --av-fg: #f2f4f8;
-        --av-dim: #a3a9b8;
-        --av-faint: #6f7687;
-        --av-lime: #d7ff4f;
-        --av-cyan: #79e6d2;
-        --av-orange: #ff9e64;
+        --av-bg: #0b0f16;
+        --av-panel: #111827;
+        --av-panel-2: #172033;
+        --av-line: #263244;
+        --av-line-strong: #3b4a63;
+        --av-fg: #f8fafc;
+        --av-dim: #b6c2d6;
+        --av-faint: #7f8ea6;
+        --av-blue: #60a5fa;
+        --av-violet: #a78bfa;
+        --av-blue-deep: #2563eb;
+        --av-violet-deep: #7c3aed;
+        --av-lime: #fbbf24;
+        --av-cyan: #aab8cc;
+        --av-orange: #f97316;
         --av-mono: "JetBrains Mono", "SFMono-Regular", "Cascadia Code", ui-monospace, monospace;
         --av-sans: Inter, "SF Pro Display", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
       }
@@ -75,10 +81,7 @@ const description =
         font-family: var(--av-mono); font-size: 0.92rem; letter-spacing: 0.02em;
       }
       .av-mark {
-        width: 26px; height: 26px; display: grid; place-items: center;
-        border: 1px solid var(--av-line-strong); border-radius: 7px;
-        color: var(--av-lime); font-size: 0.95rem; font-weight: 700;
-        background: var(--av-panel);
+        width: 30px; height: 30px; display: block; border-radius: 8px;
       }
       .av-brand small { color: var(--av-faint); font-size: 0.68rem; }
       .av-links { display: flex; align-items: center; gap: 1.2rem; }
@@ -96,7 +99,9 @@ const description =
       .av-hero::before {
         content: ""; position: absolute; inset: -35% -10% auto 45%;
         height: 560px; pointer-events: none;
-        background: radial-gradient(circle, color-mix(in srgb, var(--av-lime) 17%, transparent), transparent 66%);
+        background:
+          radial-gradient(circle at 28% 18%, color-mix(in srgb, var(--av-violet-deep) 22%, transparent), transparent 55%),
+          radial-gradient(circle, color-mix(in srgb, var(--av-blue-deep) 20%, transparent), transparent 66%);
         filter: blur(20px);
       }
       .av-hero-grid {
@@ -124,8 +129,11 @@ const description =
         font-family: var(--av-mono); font-size: 0.76rem;
       }
       .av-btn:hover { border-color: var(--av-fg); }
-      .av-btn-primary { background: var(--av-lime); color: #0a0b0f; border-color: var(--av-lime); font-weight: 700; }
-      .av-btn-primary:hover { background: #e5ff86; border-color: #e5ff86; }
+      .av-btn-primary {
+        background: linear-gradient(135deg, var(--av-blue-deep), var(--av-violet-deep));
+        color: #fff; border-color: transparent; font-weight: 700;
+      }
+      .av-btn-primary:hover { filter: brightness(1.08); border-color: var(--av-violet); }
 
       .av-term {
         position: relative; border: 1px solid var(--av-line-strong); border-radius: 12px;
@@ -142,8 +150,8 @@ const description =
       .av-term-file { margin-left: 0.5rem; color: var(--av-faint); font-family: var(--av-mono); font-size: 0.66rem; }
       .av-term-body { padding: 1rem 1.1rem 1.2rem; font-family: var(--av-mono); font-size: 0.74rem; line-height: 1.85; }
       .av-line { white-space: pre; }
-      .av-line b { color: var(--av-lime); font-weight: 500; }
-      .av-line em { color: var(--av-cyan); font-style: normal; }
+      .av-line b { color: var(--av-blue); font-weight: 500; }
+      .av-line em { color: var(--av-violet); font-style: normal; }
       .av-line s { color: var(--av-faint); text-decoration: none; }
       .av-line u { color: var(--av-orange); text-decoration: none; }
       .av-status { margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid var(--av-line); color: var(--av-faint); font-size: 0.67rem; }
@@ -215,7 +223,7 @@ const description =
     <header class="av-nav">
       <div class="av-wrap av-nav-inner">
         <a class="av-brand" href="/" aria-label="Anvil home">
-          <span class="av-mark" aria-hidden="true">A</span>
+          <img class="av-mark" src="/assets/anvil-icon.svg" width="30" height="30" alt="" />
           <span>anvil <small>/ bionickernel</small></span>
         </a>
         <nav class="av-links" aria-label="Project navigation">
@@ -231,7 +239,7 @@ const description =
       <section class="av-hero">
         <div class="av-wrap av-hero-grid">
           <div>
-            <p class="av-kicker">Pre-alpha · 0.6.0 API frozen · 0.6.1 in progress</p>
+            <p class="av-kicker">Pre-alpha · 0.6.0 base · 0.7.x modules in progress</p>
             <h1>Anvil<span>.</span><br />Build on the editor.</h1>
             <p class="av-lede">
               A Linux-first terminal editor with a selection-first Rust kernel,
@@ -247,7 +255,7 @@ const description =
           <div class="av-term" aria-label="Anvil terminal preview">
             <div class="av-term-bar" aria-hidden="true">
               <i></i><i></i><i></i>
-              <span class="av-term-file">anvil 0.6.0 — workspace</span>
+              <span class="av-term-file">anvil 0.7.4 — modules</span>
             </div>
             <div class="av-term-body">
               <div class="av-line"><s>01</s>  <b>fn</b> main() &#123;</div>
@@ -345,7 +353,7 @@ const description =
             <article class="av-card">
               <span class="n">06</span>
               <h3>Distro boundary</h3>
-              <p>The standard edition is the target composition. Third parties will build their own UI on the kernel without forking it.</p>
+              <p>The standard edition is one target composition. Contract v1 and <code>anvil-distro-minimal</code> prove third-party composition without forking the kernel.</p>
             </article>
           </div>
         </div>
@@ -367,9 +375,10 @@ const description =
             <li><small>NOW</small><span>Selection-first kernel, PieceTable, multi-selection, undo, snapshots <em>· shipped</em></span></li>
             <li><small>NOW</small><span>Session extraction, command palette, notifications, LSP, tree watcher <em>· 0.5.0</em></span></li>
             <li><small>NOW</small><span>Plugin API v1 frozen; HostSession editor RPC proxy wired <em>· 0.6.0</em></span></li>
-            <li><small>NEXT</small><span>Local signed package store, update/rollback, installed-plugin manager <em>· 0.6.1</em></span></li>
-            <li><small>NEXT</small><span>Built-in semantic themes and settings <em>· active</em></span></li>
-            <li><small>LATER</small><span>Marketplace, optional Rust modules, collaboration surfaces <em>· 0.6–0.7</em></span></li>
+            <li><small>NOW</small><span>Module contract, Git, workspace index, compatibility gate <em>· 0.7.1–0.7.3</em></span></li>
+            <li><small>NOW</small><span>Desktop URL opener and LaTeX provider/highlighting <em>· 0.7.4</em></span></li>
+            <li><small>NEXT</small><span>Additional opt-in modules and 0.8 release planning <em>· active</em></span></li>
+            <li><small>LATER</small><span>Marketplace, release signing/provenance, collaboration surfaces <em>· 0.8+</em></span></li>
           </ul>
         </div>
       </section>
@@ -398,7 +407,7 @@ const description =
 
     <footer class="av-footer">
       <div class="av-wrap av-footer-inner">
-        <span>Anvil · pre-alpha · 0.6.0 · 0.6.1 in progress</span>
+        <span>Anvil · pre-alpha · 0.6.0 base · 0.7.4 in progress</span>
         <span><a href="https://bionickernel.com/">bionickernel.com</a> · <a href="https://github.com/GBLMX/Anvil" target="_blank" rel="noopener">GitHub</a></span>
       </div>
     </footer>

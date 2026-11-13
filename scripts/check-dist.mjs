@@ -43,11 +43,17 @@ for (const file of htmlFiles) {
     ["title", /<title>[^<]+<\/title>/],
     ["description", /<meta name="description" content="[^"]+"/],
     ["canonical", new RegExp(`<link rel="canonical" href="${ORIGIN.replace(/[.]/g, "\\.")}${url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`)],
-    ["og:image", /<meta property="og:image" content="https:\/\/bionickernel\.com\/assets\/og\.png"/],
+    ["og:image", /<meta property="og:image" content="https:\/\/bionickernel\.com\/assets\/[^"]+"/],
     ["twitter card", /<meta name="twitter:card" content="summary_large_image"/],
     ["rss", /<link rel="alternate" type="application\/rss\+xml"/],
   ]) {
     if (!pattern.test(html)) errors.push(`${rel}: missing ${label}`);
+  }
+
+  const ogImage = html.match(/<meta property="og:image" content="https:\/\/bionickernel\.com(\/[^"]+)"/);
+  if (ogImage) {
+    const target = path.join(DIST, decodeURIComponent(ogImage[1]));
+    if (!fs.existsSync(target)) errors.push(`${rel}: missing og image ${ogImage[1]}`);
   }
 
   for (const match of html.matchAll(/(?:href|src)="(\/[^"#?]*)/g)) {
