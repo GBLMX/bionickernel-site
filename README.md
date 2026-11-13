@@ -46,6 +46,11 @@ the `www` redirect, HSTS, CSP and the other security headers, a one-hour cache f
 `/etc/nginx/sites-available/`, symlink into `sites-enabled/`, then
 `nginx -t && systemctl reload nginx`.
 
+`deploy/nginx/anvilkernel.conf` is prepared for `anvilkernel.com` but is not
+enabled. Keep it out of `sites-enabled/` until the ICP filing is approved, DNS
+points at the ECS, and Certbot has issued
+`/etc/letsencrypt/live/anvilkernel.com/`.
+
 ## Content
 
 ### Research notes (Obsidian)
